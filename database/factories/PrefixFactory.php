@@ -1,0 +1,34 @@
+<?php
+
+namespace Database\Factories;
+
+use App\Models\Prefix;
+use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+class PrefixFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Prefix::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array<string, mixed>
+     */
+    public function definition(): array
+    {
+        return [
+            'name' => $this->faker->name(),
+            'display' => $this->faker->text(255),
+            'description' => $this->faker->sentence(15),
+            'used_in' => 'invoice',
+            'star_number' => $this->faker->randomNumber(0),
+            'position' => $this->faker->randomNumber(0),
+        ];
+    }
+}

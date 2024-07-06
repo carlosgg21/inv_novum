@@ -1,0 +1,130 @@
+[
+{
+"id":21,
+"name":"PINAR DEL RÍO",
+"acronym":"PR",
+"color":"07510E",
+"created_at":"2021\/3\/24 19:15:00",
+"updated_at":null
+},
+{
+"id":22,
+"name":"ARTEMISA",
+"acronym":"ART",
+"color":"C43E30",
+"created_at":"2021\/3\/24 19:15:00",
+"updated_at":null
+},
+{
+"id":23,
+"name":"LA HABANA",
+"acronym":"LH",
+"color":"080DF3",
+"created_at":"2021\/3\/24 19:15:00",
+"updated_at":null
+},
+{
+"id":24,
+"name":"MAYABEQUE",
+"acronym":"MYQ",
+"color":"CD9E71",
+"created_at":"2021\/3\/24 19:15:00",
+"updated_at":null
+},
+{
+"id":25,
+"name":"MATANZAS",
+"acronym":"MTZ",
+"color":"DA4839",
+"created_at":"2021\/3\/24 19:15:00",
+"updated_at":null
+},
+{
+"id":26,
+"name":"VILLA CLARA",
+"acronym":"VC",
+"color":"ED8927",
+"created_at":"2021\/3\/24 19:15:00",
+"updated_at":null
+},
+{
+"id":27,
+"name":"CIENFUEGOS",
+"acronym":"CF",
+"color":"2B951A",
+"created_at":"2021\/3\/24 19:15:00",
+"updated_at":null
+},
+{
+"id":28,
+"name":"SANCTI SPÍRITUS",
+"acronym":"SS",
+"color":"D37D48",
+"created_at":"2021\/3\/24 19:15:00",
+"updated_at":null
+},
+{
+"id":29,
+"name":"CIEGO DE ÁVILA",
+"acronym":"CA",
+"color":"5778DC",
+"created_at":"2021\/3\/24 19:15:00",
+"updated_at":null
+},
+{
+"id":30,
+"name":"CAMAGÜEY",
+"acronym":"CMG",
+"color":"884F2C",
+"created_at":"2021\/3\/24 19:15:00",
+"updated_at":null
+},
+{
+"id":31,
+"name":"LAS TUNAS",
+"acronym":"LT",
+"color":"C3DA17",
+"created_at":"2021\/3\/24 19:15:00",
+"updated_at":null
+},
+{
+"id":32,
+"name":"HOLGUÍN",
+"acronym":"HLG",
+"color":"476F2F",
+"created_at":"2021\/3\/24 19:15:00",
+"updated_at":null
+},
+{
+"id":33,
+"name":"GRANMA",
+"acronym":"GRM",
+"color":"B53232",
+"created_at":"2021\/3\/24 19:15:00",
+"updated_at":null
+},
+{
+"id":34,
+"name":"SANTIAGO DE CUBA",
+"acronym":"SC",
+"color":"F31E08",
+"created_at":"2021\/3\/24 19:15:00",
+"updated_at":null
+},
+{
+"id":35,
+"name":"GUANTÁNAMO",
+"acronym":"GTM",
+"color":"403731",
+"created_at":"2021\/3\/24 19:15:00",
+"updated_at":null
+},
+{
+"id":40,
+"name":"ISLA DE LA JUVENTUD",
+"acronym":"IJ",
+"color":"5071BC",
+"created_at":"2021\/3\/24 19:15:00",
+"updated_at":null
+}
+]
