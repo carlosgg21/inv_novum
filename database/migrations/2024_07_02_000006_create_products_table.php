@@ -23,9 +23,7 @@ return new class extends Migration {
             $table->unsignedBigInteger('category_id')->nullable();
             $table->unsignedBigInteger('brand_id')->nullable();
             $table->unsignedBigInteger('supplier_id')->nullable();
-            $table->text('notes')->nullable();
-            $table->integer('qty_stock')->nullable();
-            $table->integer('qty_on_order')->nullable();
+            $table->text('notes')->nullable();        
 
             $table->timestamps();
         });

@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('product_id');
             $table->unsignedBigInteger('location_id');
-            $table->integer('quantity_stock')->nullable();
+            $table->integer('quantity')->nullable();
             $table->integer('min_qty')->nullable();
             $table->integer('max_qty')->nullable();
             $table->integer('quantity_on_order')->nullable();
