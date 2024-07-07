@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Models\Inventory;
-use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class InventoryFactory extends Factory
@@ -23,12 +22,12 @@ class InventoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'quantity_stock' => $this->faker->randomNumber(),
-            'min_qty' => $this->faker->randomNumber(0),
-            'max_qty' => $this->faker->randomNumber(0),
+            'quantity'          => $this->faker->randomNumber(),
+            'min_qty'           => $this->faker->randomNumber(0),
+            'max_qty'           => $this->faker->randomNumber(0),
             'quantity_on_order' => $this->faker->randomNumber(0),
-            'product_id' => \App\Models\Product::factory(),
-            'location_id' => \App\Models\Location::factory(),
+            'product_id'        => \App\Models\Product::factory(),
+            'location_id'       => \App\Models\Location::factory(),
         ];
     }
 }

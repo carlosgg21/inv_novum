@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Models\City;
-use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class CityFactory extends Factory
@@ -23,11 +22,10 @@ class CityFactory extends Factory
     public function definition(): array
     {
         return [
-            'code' => $this->faker->text(255),
-            'name' => $this->faker->name(),
-            'acronym' => $this->faker->text(255),
-            'zip_code' => $this->faker->text(255),
-            'country_id' => \App\Models\Country::factory(),
+            'code'       => $this->faker->text(255),
+            'name'       => $this->faker->name(),
+            'acronym'    => $this->faker->text(255),
+            'country_id' => $this->faker->randomElement([1, 247]),
         ];
     }
 }

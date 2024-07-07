@@ -7,15 +7,8 @@
             <div class="col-md-6">
                 <form>
                     <div class="input-group">
-                        <input
-                            id="indexSearch"
-                            type="text"
-                            name="search"
-                            placeholder="{{ __('crud.common.search') }}"
-                            value="{{ $search ?? '' }}"
-                            class="form-control"
-                            autocomplete="off"
-                        />
+                        <input id="indexSearch" type="text" name="search" placeholder="{{ __('crud.common.search') }}"
+                            value="{{ $search ?? '' }}" class="form-control" autocomplete="off" />
                         <div class="input-group-append">
                             <button type="submit" class="btn btn-primary">
                                 <i class="icon ion-md-search"></i>
@@ -62,47 +55,29 @@
                         @forelse($banks as $bank)
                         <tr>
                             <td>
-                                <x-partials.thumbnail
-                                    src="{{ $bank->logo ? \Storage::url($bank->logo) : '' }}"
-                                />
+                                <x-partials.thumbnail src="{{ $bank->logo ? \Storage::url($bank->logo) : '' }}" />
                             </td>
                             <td>{{ $bank->name ?? '-' }}</td>
                             <td>{{ $bank->description ?? '-' }}</td>
                             <td class="text-center" style="width: 134px;">
-                                <div
-                                    role="group"
-                                    aria-label="Row Actions"
-                                    class="btn-group"
-                                >
+                                <div role="group" aria-label="Row Actions" class="btn-group">
                                     @can('update', $bank)
                                     <a href="{{ route('banks.edit', $bank) }}">
-                                        <button
-                                            type="button"
-                                            class="btn btn-light"
-                                        >
+                                        <button type="button" class="btn btn-light">
                                             <i class="icon ion-md-create"></i>
                                         </button>
                                     </a>
                                     @endcan @can('view', $bank)
                                     <a href="{{ route('banks.show', $bank) }}">
-                                        <button
-                                            type="button"
-                                            class="btn btn-light"
-                                        >
+                                        <button type="button" class="btn btn-light">
                                             <i class="icon ion-md-eye"></i>
                                         </button>
                                     </a>
                                     @endcan @can('delete', $bank)
-                                    <form
-                                        action="{{ route('banks.destroy', $bank) }}"
-                                        method="POST"
-                                        onsubmit="return confirm('{{ __('crud.common.are_you_sure') }}')"
-                                    >
+                                    <form action="{{ route('banks.destroy', $bank) }}" method="POST"
+                                        onsubmit="return confirm('{{ __('crud.common.are_you_sure') }}')">
                                         @csrf @method('DELETE')
-                                        <button
-                                            type="submit"
-                                            class="btn btn-light text-danger"
-                                        >
+                                        <button type="submit" class="btn btn-light text-danger">
                                             <i class="icon ion-md-trash"></i>
                                         </button>
                                     </form>

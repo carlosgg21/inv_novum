@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Models\Contact;
-use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ContactFactory extends Factory
@@ -22,23 +21,26 @@ class ContactFactory extends Factory
      */
     public function definition(): array
     {
+        $contactableType = $this->faker->randomElement([
+                    \App\Models\Supplier::class,
+                    \App\Models\Customer::class,
+                ]);
+
+        $contactable = $contactableType::factory()->create();
+
         return [
-            'identication' => $this->faker->text(255),
-            'name' => $this->faker->name(),
-            'last_name' => $this->faker->lastName(),
-            'phone' => $this->faker->phoneNumber(),
-            'email' => $this->faker->email(),
-            'address' => $this->faker->text(),
-            'township_id' => \App\Models\Township::factory(),
-            'city_id' => \App\Models\City::factory(),
-            'country_id' => \App\Models\Country::factory(),
-            'contactable_type' => $this->faker->randomElement([
-                \App\Models\Supplier::class,
-                \App\Models\Customer::class,
-            ]),
-            'contactable_id' => function (array $item) {
-                return app($item['contactable_type'])->factory();
-            },
+          
+            'identification' => $this->faker->unique()->regexify('[0-9]{11}'),
+            'name'             => $this->faker->name(),
+            'last_name'        => $this->faker->lastName(),
+            'phone'            => $this->faker->phoneNumber(),
+            'email'            => $this->faker->email(),
+            'address'          => $this->faker->text(),
+            'township_id'      => null,
+            'city_id'          => null,        
+            'country_id'       => $this->faker->randomElement([1, 247]),
+            'contactable_type' => $contactableType,
+            'contactable_id'   => $contactable->id,
         ];
     }
 }

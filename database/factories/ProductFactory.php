@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Models\Product;
-use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ProductFactory extends Factory
@@ -22,20 +21,20 @@ class ProductFactory extends Factory
      */
     public function definition(): array
     {
+        $units = ['kg', 'liter', 'piece', 'pack', 'box'];
+
         return [
-            'code' => $this->faker->text(255),
-            'name' => $this->faker->name(),
-            'description' => $this->faker->sentence(15),
-            'unit' => $this->faker->text(255),
-            'unit_price' => $this->faker->randomNumber(2),
-            'cost_price' => $this->faker->randomNumber(2),
-            'size' => $this->faker->text(255),
-            'notes' => $this->faker->text(),
-            'qty_stock' => $this->faker->randomNumber(0),
-            'qty_on_order' => $this->faker->randomNumber(0),
-            'category_id' => \App\Models\Category::factory(),
-            'brand_id' => \App\Models\Brand::factory(),
-            'supplier_id' => \App\Models\Supplier::factory(),
+            'code'           => $this->faker->unique()->regexify('[0-9]{6}'),
+            'name'           => $this->faker->name(),
+            'description'    => $this->faker->sentence(15),
+            'unit'           => $this->faker->randomElement($units),
+            'unit_price'     => $this->faker->randomFloat(2, 1, 100),
+            'cost_price'     => $this->faker->randomFloat(2, 1, 100),
+            'size'           => $this->faker->randomElement(['small', 'medium', 'large']),
+            'notes'          => $this->faker->text(),
+            'category_id'    => $this->faker->randomElement([1, 10]),
+            'brand_id'       => $this->faker->randomElement([1, 10]),
+            'supplier_id'    => $this->faker->randomElement([1, 5]),
         ];
     }
 }

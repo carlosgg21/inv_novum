@@ -15,25 +15,34 @@ class DatabaseSeeder extends Seeder
         $user = \App\Models\User::factory()
             ->count(1)
             ->create([
-                'email' => 'admin@admin.com',
+                'email'    => 'admin@admin.com',
                 'password' => \Hash::make('admin'),
             ]);
         $this->call(PermissionsSeeder::class);
 
-        $this->call(AddressSeeder::class);
+        $this->call(CountrySeeder::class);
+
+        // $this->call(AddressSeeder::class);
         $this->call(AppDefaultSeeder::class);
         $this->call(BankSeeder::class);
-        $this->call(BankAccountSeeder::class);
+        // $this->call(BankAccountSeeder::class);
         $this->call(BrandSeeder::class);
         $this->call(CategorySeeder::class);
         $this->call(ChargeSeeder::class);
+
+        $this->call(CurrencySeeder::class);
+
         $this->call(CitySeeder::class);
         $this->call(CompanySeeder::class);
         $this->call(CompanyContactSeeder::class);
         $this->call(ConditionSeeder::class);
+
+        $this->call(TownshipSeeder::class);
+
         $this->call(ContactSeeder::class);
-        $this->call(CountrySeeder::class);
-        $this->call(CurrencySeeder::class);
+
+        $this->call(SupplierSeeder::class);
+
         $this->call(CustomerSeeder::class);
         $this->call(EmployeeSeeder::class);
         $this->call(InventorySeeder::class);
@@ -51,8 +60,7 @@ class DatabaseSeeder extends Seeder
         $this->call(SalesOrderSeeder::class);
         $this->call(SalesOrderItemSeeder::class);
         $this->call(SettingSeeder::class);
-        $this->call(SupplierSeeder::class);
-        $this->call(TownshipSeeder::class);
+
         $this->call(UserSeeder::class);
     }
 }

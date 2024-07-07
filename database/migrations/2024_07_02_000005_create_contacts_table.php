@@ -12,7 +12,7 @@ return new class extends Migration {
     {
         Schema::create('contacts', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('identication')->nullable();
+            $table->string('identification')->nullable();
             $table->string('name');
             $table->string('last_name');
             $table->string('phone')->nullable();
