@@ -26,7 +26,7 @@ class BankAccountFactory extends Factory
             'number' => $this->faker->text(255),
             'type' => $this->faker->word(),
             'bank_id' => \App\Models\Bank::factory(),
-            'currency_id' => \App\Models\Currency::factory(),
+            'currency_id' => $this->faker->randomElement([1, 22]),
             'bank_accountable_type' => $this->faker->randomElement([
                 \App\Models\Supplier::class,
                 \App\Models\Customer::class,

@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Models\Invoice;
-use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class InvoiceFactory extends Factory
@@ -23,16 +22,16 @@ class InvoiceFactory extends Factory
     public function definition(): array
     {
         return [
-            'number' => $this->faker->text(255),
-            'date' => $this->faker->date(),
-            'total_amount' => $this->faker->randomNumber(2),
-            'status' => $this->faker->word(),
-            'year' => $this->faker->text(255),
-            'mount' => $this->faker->randomNumber(0),
-            'notes' => $this->faker->text(),
+            'number'         => $this->faker->text(255),
+            'date'           => $this->faker->date(),
+            'total_amount'   => $this->faker->randomNumber(2),
+            'status'         => $this->faker->word(),
+            'year'           => $this->faker->text(255),
+            'mount'          => $this->faker->randomNumber(0),
+            'notes'          => $this->faker->text(),
             'sales_order_id' => \App\Models\SalesOrder::factory(),
-            'employee_id' => \App\Models\Employee::factory(),
-            'currency_id' => \App\Models\Currency::factory(),
+            'employee_id'    => \App\Models\Employee::factory(),
+            'currency_id'    => $this->faker->randomElement([1, 22]),
         ];
     }
 }

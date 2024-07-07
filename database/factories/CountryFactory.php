@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Models\Country;
-use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class CountryFactory extends Factory
@@ -23,12 +22,12 @@ class CountryFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->name(),
-            'code' => $this->faker->text(255),
-            'iso' => $this->faker->text(255),
-            'time_zone' => $this->faker->text(255),
-            'flag' => $this->faker->text(255),
-            'currency_id' => \App\Models\Currency::factory(),
+            'name'        => $this->faker->name(),
+            'code'        => $this->faker->text(255),
+            'iso'         => $this->faker->text(255),
+            'time_zone'   => $this->faker->text(255),
+            'flag'        => $this->faker->text(255),
+            'currency_id' => $this->faker->randomElement([1, 22]),
         ];
     }
 }
