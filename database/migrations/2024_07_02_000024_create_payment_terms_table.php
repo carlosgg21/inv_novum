@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->bigIncrements('id');
             $table->text('description');
             $table->integer('day')->nullable();
+            $table->string('code')->nullable();
 
             $table->timestamps();
             $table->softDeletes();

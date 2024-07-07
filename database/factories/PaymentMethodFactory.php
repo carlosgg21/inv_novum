@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use Illuminate\Support\Str;
 use App\Models\PaymentMethod;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -23,8 +22,8 @@ class PaymentMethodFactory extends Factory
     public function definition(): array
     {
         return [
-            'code' => $this->faker->text(255),
-            'name' => $this->faker->name(),
+            'code'        => $this->faker->text(255),
+            'name'        => $this->faker->name(),
             'description' => $this->faker->sentence(15),
         ];
     }

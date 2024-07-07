@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use Illuminate\Support\Str;
 use App\Models\PurchaseOrder;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -23,22 +22,22 @@ class PurchaseOrderFactory extends Factory
     public function definition(): array
     {
         return [
-            'number' => $this->faker->text(255),
-            'order_date' => $this->faker->date(),
-            'total_amount' => $this->faker->randomNumber(2),
-            'status' => 'not entered',
-            'taxes' => $this->faker->randomNumber(2),
-            'discount' => $this->faker->randomNumber(2),
-            'miscellaneus' => $this->faker->randomNumber(2),
-            'shipping_date' => $this->faker->date(),
-            'shipping_cost' => $this->faker->randomNumber(2),
+            'number'                  => $this->faker->text(255),
+            'order_date'              => $this->faker->date(),
+            'total_amount'            => $this->faker->randomFloat(2, 10, 500),
+            'status'                  => $this->faker->randomElement(['not entered', 'entered']),
+            'taxes'                   => $this->faker->randomFloat(2, 0, 50),
+            'discount'                => $this->faker->randomFloat(2, 0, 20),
+            'miscellaneous'           => $this->faker->randomFloat(2, 0, 30),
+            'shipping_date'           => $this->faker->date(),
+           'shipping_cost'            => $this->faker->randomFloat(2, 0, 50),
             'shippin_tracking_number' => $this->faker->text(255),
-            'received_date' => $this->faker->date(),
-            'billable' => $this->faker->boolean(),
-            'supplier_id' => \App\Models\Supplier::factory(),
-            'payment_method_id' => \App\Models\PaymentMethod::factory(),
-            'payment_term_id' => \App\Models\PaymentTerm::factory(),
-            'condition_id' => \App\Models\Condition::factory(),
+            'received_date'           => $this->faker->date(),
+            'billable'                => $this->faker->boolean(),
+            'supplier_id'             => \App\Models\Supplier::factory(),
+            'payment_method_id'       => $this->faker->randomElement([1, 4]),
+            'payment_term_id'         => $this->faker->randomElement([1, 7]),
+            'condition_id'            => $this->faker->randomElement([1, 5]),
         ];
     }
 }

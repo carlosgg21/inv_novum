@@ -21,7 +21,7 @@ return new class extends Migration {
                 ->default('not entered');
             $table->float('taxes')->nullable();
             $table->float('discount')->nullable();
-            $table->float('miscellanues')->nullable();
+            $table->float('miscellaneous')->nullable();
             $table->float('freight')->nullable();
             $table->float('order_total')->nullable();
             $table->unsignedBigInteger('customer_id')->nullable();

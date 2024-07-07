@@ -30,6 +30,12 @@ class DatabaseSeeder extends Seeder
         $this->call(CategorySeeder::class);
         $this->call(ChargeSeeder::class);
 
+$this->call(LocationSeeder::class);
+
+$this->call(PaymentTermSeeder::class);
+
+$this->call(PaymentMethodSeeder::class);
+
         $this->call(CurrencySeeder::class);
 
         $this->call(CitySeeder::class);
@@ -48,11 +54,9 @@ class DatabaseSeeder extends Seeder
         $this->call(InventorySeeder::class);
         $this->call(InventoryDetailSeeder::class);
         $this->call(InvoiceSeeder::class);
-        $this->call(LocationSeeder::class);
-        $this->call(PaymentMadeSeeder::class);
-        $this->call(PaymentMethodSeeder::class);
+ $this->call(PaymentMadeSeeder::class);
         $this->call(PaymentsReceivedSeeder::class);
-        $this->call(PaymentTermSeeder::class);
+     
         $this->call(PrefixSeeder::class);
         $this->call(ProductSeeder::class);
         $this->call(PurchaseOrderSeeder::class);

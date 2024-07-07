@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Models\PaymentTerm;
-use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class PaymentTermFactory extends Factory
@@ -24,7 +23,7 @@ class PaymentTermFactory extends Factory
     {
         return [
             'description' => $this->faker->sentence(15),
-            'day' => $this->faker->randomNumber(0),
+            'day'         => $this->faker->randomNumber(0),
         ];
     }
 }

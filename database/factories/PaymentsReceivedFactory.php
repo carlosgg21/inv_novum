@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use Illuminate\Support\Str;
 use App\Models\PaymentsReceived;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -23,15 +22,15 @@ class PaymentsReceivedFactory extends Factory
     public function definition(): array
     {
         return [
-            'amount' => $this->faker->randomNumber(2),
-            'date' => $this->faker->date(),
-            'notes' => $this->faker->text(),
-            'payment_method_id' => \App\Models\PaymentMethod::factory(),
-            'payment_term_id' => \App\Models\PaymentTerm::factory(),
-            'invoice_id' => \App\Models\Invoice::factory(),
-            'sales_order_id' => \App\Models\SalesOrder::factory(),
-            'customer_id' => \App\Models\Customer::factory(),
-            'received_id' => \App\Models\Employee::factory(),
+            'amount'            => $this->faker->randomNumber(2),
+            'date'              => $this->faker->date(),
+            'notes'             => $this->faker->text(),
+            'payment_method_id' => $this->faker->randomElement([1, 4]),
+            'payment_term_id'   => $this->faker->randomElement([1, 7]),
+            'invoice_id'        => \App\Models\Invoice::factory(),
+            'sales_order_id'    => \App\Models\SalesOrder::factory(),
+            'customer_id'       => \App\Models\Customer::factory(),
+            'received_id'       => \App\Models\Employee::factory(),
         ];
     }
 }

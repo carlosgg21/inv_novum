@@ -21,7 +21,7 @@ return new class extends Migration {
             $table->unsignedBigInteger('supplier_id');
             $table->float('taxes')->nullable();
             $table->float('discount')->nullable();
-            $table->float('miscellaneus')->nullable();
+            $table->float('miscellaneous')->nullable();
             $table->date('shipping_date')->nullable();
             $table->float('shipping_cost')->nullable();
             $table->string('shippin_tracking_number')->nullable();

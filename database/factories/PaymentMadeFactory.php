@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Models\PaymentMade;
-use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class PaymentMadeFactory extends Factory
@@ -23,15 +22,15 @@ class PaymentMadeFactory extends Factory
     public function definition(): array
     {
         return [
-            'amount' => $this->faker->randomNumber(2),
-            'reference_number' => $this->faker->text(255),
-            'date' => $this->faker->date(),
-            'aproved_by' => $this->faker->text(255),
-            'supplier_id' => \App\Models\Supplier::factory(),
-            'payment_method_id' => \App\Models\PaymentMethod::factory(),
-            'payment_term_id' => \App\Models\PaymentTerm::factory(),
-            'purchase_order_id' => \App\Models\PurchaseOrder::factory(),
-            'created_by' => \App\Models\Employee::factory(),
+            'amount'             => $this->faker->randomNumber(2),
+            'reference_number'   => $this->faker->text(255),
+            'date'               => $this->faker->date(),
+            'aproved_by'         => $this->faker->text(255),
+            'supplier_id'        => \App\Models\Supplier::factory(),
+             'payment_method_id' => $this->faker->randomElement([1, 4]),
+            'payment_term_id'    => $this->faker->randomElement([1, 7]),
+            'purchase_order_id'  => \App\Models\PurchaseOrder::factory(),
+            'created_by'         => \App\Models\Employee::factory(),
         ];
     }
 }
