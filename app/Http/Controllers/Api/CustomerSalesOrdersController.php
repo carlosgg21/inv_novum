@@ -41,7 +41,7 @@ class CustomerSalesOrdersController extends Controller
             'invoice_date' => ['nullable', 'date'],
             'taxes' => ['nullable', 'numeric'],
             'discount' => ['nullable', 'numeric'],
-            'miscellanues' => ['nullable', 'numeric'],
+            'miscellaneous' => ['nullable', 'numeric'],
             'freight' => ['nullable', 'numeric'],
             'order_total' => ['nullable', 'numeric'],
             'sold_by' => ['nullable', 'exists:employees,id'],

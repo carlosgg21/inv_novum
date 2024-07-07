@@ -22,6 +22,7 @@ class BankUpdateRequest extends FormRequest
         return [
             'logo' => ['image', 'max:1024', 'nullable'],
             'name' => ['required', 'max:255', 'string'],
+            'acronym' => ['nullable', 'max:255', 'string'],
             'description' => ['nullable', 'max:255', 'string'],
         ];
     }

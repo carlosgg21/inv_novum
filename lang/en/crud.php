@@ -245,6 +245,7 @@ return [
         'inputs' => [
             'logo' => 'Logo',
             'name' => 'Name',
+            'acronym' => 'Acronym',
             'description' => 'Description',
         ],
     ],
@@ -257,7 +258,7 @@ return [
         'edit_title' => 'Edit Contact',
         'show_title' => 'Show Contact',
         'inputs' => [
-            'identication' => 'Identication',
+            'identification' => 'Identification',
             'name' => 'Name',
             'last_name' => 'Last Name',
             'phone' => 'Phone',
@@ -408,8 +409,6 @@ return [
             'cost_price' => 'Cost Price',
             'size' => 'Size',
             'notes' => 'Notes',
-            'qty_stock' => 'Qty Stock',
-            'qty_on_order' => 'Qty On Order',
         ],
     ],
 
@@ -422,7 +421,7 @@ return [
         'show_title' => 'Show Inventory',
         'inputs' => [
             'location_id' => 'Location',
-            'quantity_stock' => 'Quantity Stock',
+            'quantity' => 'Quantity',
             'quantity_on_order' => 'Quantity On Order',
             'min_qty' => 'Min Qty',
             'max_qty' => 'Max Qty',
@@ -459,7 +458,7 @@ return [
             'invoice_date' => 'Invoice Date',
             'taxes' => 'Taxes',
             'discount' => 'Discount',
-            'miscellanues' => 'Miscellanues',
+            'miscellaneous' => 'Miscellaneous',
             'freight' => 'Freight',
             'order_total' => 'Order Total',
             'sold_by' => 'Sold By',
@@ -502,7 +501,7 @@ return [
             'status' => 'Status',
             'taxes' => 'Taxes',
             'discount' => 'Discount',
-            'miscellaneus' => 'Miscellaneus',
+            'miscellaneous' => 'Miscellaneous',
             'shipping_date' => 'Shipping Date',
             'shippin_tracking_number' => 'Shippin Tracking Number',
             'shipping_cost' => 'Shipping Cost',

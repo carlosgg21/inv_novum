@@ -80,14 +80,14 @@
         ></x-inputs.number>
     </x-inputs.group>
 
-    <x-inputs.group class="col-sm-12 col-lg-6">
+    <x-inputs.group class="col-sm-12">
         <x-inputs.number
-            name="miscellanues"
-            label="Miscellanues"
-            :value="old('miscellanues', ($editing ? $salesOrder->miscellanues : ''))"
+            name="miscellaneous"
+            label="Miscellaneous"
+            :value="old('miscellaneous', ($editing ? $salesOrder->miscellaneous : ''))"
             max="255"
             step="0.01"
-            placeholder="Miscellanues"
+            placeholder="Miscellaneous"
         ></x-inputs.number>
     </x-inputs.group>
 

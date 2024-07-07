@@ -71,7 +71,7 @@
                                 @lang('crud.purchase_orders.inputs.discount')
                             </th>
                             <th class="text-right">
-                                @lang('crud.purchase_orders.inputs.miscellaneus')
+                                @lang('crud.purchase_orders.inputs.miscellaneous')
                             </th>
                             <th class="text-left">
                                 @lang('crud.purchase_orders.inputs.shipping_date')
@@ -115,7 +115,7 @@
                             <td>{{ $purchaseOrder->status ?? '-' }}</td>
                             <td>{{ $purchaseOrder->taxes ?? '-' }}</td>
                             <td>{{ $purchaseOrder->discount ?? '-' }}</td>
-                            <td>{{ $purchaseOrder->miscellaneus ?? '-' }}</td>
+                            <td>{{ $purchaseOrder->miscellaneous ?? '-' }}</td>
                             <td>{{ $purchaseOrder->shipping_date ?? '-' }}</td>
                             <td>
                                 {{ $purchaseOrder->shippin_tracking_number ??

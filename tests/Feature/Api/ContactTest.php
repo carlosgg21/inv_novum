@@ -76,7 +76,7 @@ class ContactTest extends TestCase
         $country = Country::factory()->create();
 
         $data = [
-            'identication' => $this->faker->text(255),
+            'identification' => $this->faker->text(255),
             'name' => $this->faker->name(),
             'last_name' => $this->faker->lastName(),
             'phone' => $this->faker->phoneNumber(),

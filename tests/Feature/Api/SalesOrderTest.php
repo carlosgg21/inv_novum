@@ -82,7 +82,7 @@ class SalesOrderTest extends TestCase
             'status' => 'not entered',
             'taxes' => $this->faker->randomNumber(2),
             'discount' => $this->faker->randomNumber(2),
-            'miscellanues' => $this->faker->randomNumber(2),
+            'miscellaneous' => $this->faker->randomNumber(2),
             'freight' => $this->faker->randomNumber(2),
             'order_total' => $this->faker->randomNumber(2),
             'notes' => $this->faker->text(),

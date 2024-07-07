@@ -49,11 +49,11 @@
 
                     <x-inputs.group class="col-sm-12">
                         <x-inputs.number
-                            name="inventory.quantity_stock"
-                            label="Quantity Stock"
-                            wire:model="inventory.quantity_stock"
+                            name="inventory.quantity"
+                            label="Quantity"
+                            wire:model="inventory.quantity"
                             max="255"
-                            placeholder="Quantity Stock"
+                            placeholder="Quantity"
                         ></x-inputs.number>
                     </x-inputs.group>
 
@@ -135,7 +135,7 @@
                         @lang('crud.product_inventories.inputs.location_id')
                     </th>
                     <th class="text-right">
-                        @lang('crud.product_inventories.inputs.quantity_stock')
+                        @lang('crud.product_inventories.inputs.quantity')
                     </th>
                     <th class="text-right">
                         @lang('crud.product_inventories.inputs.quantity_on_order')
@@ -163,7 +163,7 @@
                         {{ optional($inventory->location)->name ?? '-' }}
                     </td>
                     <td class="text-right">
-                        {{ $inventory->quantity_stock ?? '-' }}
+                        {{ $inventory->quantity ?? '-' }}
                     </td>
                     <td class="text-right">
                         {{ $inventory->quantity_on_order ?? '-' }}

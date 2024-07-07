@@ -19,7 +19,7 @@ class SalesOrder extends Model
         'status',
         'taxes',
         'discount',
-        'miscellanues',
+        'miscellaneous',
         'freight',
         'order_total',
         'customer_id',

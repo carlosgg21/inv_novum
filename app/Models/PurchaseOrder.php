@@ -21,7 +21,7 @@ class PurchaseOrder extends Model
         'supplier_id',
         'taxes',
         'discount',
-        'miscellaneus',
+        'miscellaneous',
         'shipping_date',
         'shipping_cost',
         'shippin_tracking_number',

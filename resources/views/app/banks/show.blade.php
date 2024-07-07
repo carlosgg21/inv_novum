@@ -24,6 +24,10 @@
                     <span>{{ $bank->name ?? '-' }}</span>
                 </div>
                 <div class="mb-4">
+                    <h5>@lang('crud.banks.inputs.acronym')</h5>
+                    <span>{{ $bank->acronym ?? '-' }}</span>
+                </div>
+                <div class="mb-4">
                     <h5>@lang('crud.banks.inputs.description')</h5>
                     <span>{{ $bank->description ?? '-' }}</span>
                 </div>

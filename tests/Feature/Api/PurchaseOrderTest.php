@@ -81,7 +81,7 @@ class PurchaseOrderTest extends TestCase
             'status' => 'not entered',
             'taxes' => $this->faker->randomNumber(2),
             'discount' => $this->faker->randomNumber(2),
-            'miscellaneus' => $this->faker->randomNumber(2),
+            'miscellaneous' => $this->faker->randomNumber(2),
             'shipping_date' => $this->faker->date(),
             'shipping_cost' => $this->faker->randomNumber(2),
             'shippin_tracking_number' => $this->faker->text(255),

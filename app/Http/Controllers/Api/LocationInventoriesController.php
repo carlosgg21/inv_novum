@@ -34,7 +34,7 @@ class LocationInventoriesController extends Controller
         $this->authorize('create', Inventory::class);
 
         $validated = $request->validate([
-            'quantity_stock' => ['nullable', 'numeric'],
+            'quantity' => ['nullable', 'numeric'],
             'quantity_on_order' => ['nullable', 'numeric'],
             'min_qty' => ['nullable', 'numeric'],
             'max_qty' => ['nullable', 'numeric'],

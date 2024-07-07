@@ -48,8 +48,8 @@
                     <span>{{ $salesOrder->discount ?? '-' }}</span>
                 </div>
                 <div class="mb-4">
-                    <h5>@lang('crud.sales_orders.inputs.miscellanues')</h5>
-                    <span>{{ $salesOrder->miscellanues ?? '-' }}</span>
+                    <h5>@lang('crud.sales_orders.inputs.miscellaneous')</h5>
+                    <span>{{ $salesOrder->miscellaneous ?? '-' }}</span>
                 </div>
                 <div class="mb-4">
                     <h5>@lang('crud.sales_orders.inputs.freight')</h5>

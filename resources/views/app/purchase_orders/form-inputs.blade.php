@@ -75,12 +75,12 @@
 
     <x-inputs.group class="col-sm-12">
         <x-inputs.number
-            name="miscellaneus"
-            label="Miscellaneus"
-            :value="old('miscellaneus', ($editing ? $purchaseOrder->miscellaneus : ''))"
+            name="miscellaneous"
+            label="Miscellaneous"
+            :value="old('miscellaneous', ($editing ? $purchaseOrder->miscellaneous : ''))"
             max="255"
             step="0.01"
-            placeholder="Miscellaneus"
+            placeholder="Miscellaneous"
         ></x-inputs.number>
     </x-inputs.group>
 

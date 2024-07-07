@@ -14,7 +14,7 @@ class Inventory extends Model
     protected $fillable = [
         'product_id',
         'location_id',
-        'quantity_stock',
+        'quantity',
         'min_qty',
         'max_qty',
         'quantity_on_order',

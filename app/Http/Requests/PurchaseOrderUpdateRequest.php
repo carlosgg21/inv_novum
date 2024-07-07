@@ -27,7 +27,7 @@ class PurchaseOrderUpdateRequest extends FormRequest
             'status' => ['required', 'in:entered,not entered'],
             'taxes' => ['nullable', 'numeric'],
             'discount' => ['nullable', 'numeric'],
-            'miscellaneus' => ['nullable', 'numeric'],
+            'miscellaneous' => ['nullable', 'numeric'],
             'shipping_date' => ['nullable', 'date'],
             'shippin_tracking_number' => ['nullable', 'max:255', 'string'],
             'shipping_cost' => ['nullable', 'numeric'],

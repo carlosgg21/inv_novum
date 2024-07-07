@@ -33,7 +33,7 @@ class ProductInventoriesController extends Controller
 
         $validated = $request->validate([
             'location_id' => ['required', 'exists:locations,id'],
-            'quantity_stock' => ['nullable', 'numeric'],
+            'quantity' => ['nullable', 'numeric'],
             'quantity_on_order' => ['nullable', 'numeric'],
             'min_qty' => ['nullable', 'numeric'],
             'max_qty' => ['nullable', 'numeric'],

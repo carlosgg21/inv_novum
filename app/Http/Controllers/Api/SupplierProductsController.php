@@ -43,8 +43,6 @@ class SupplierProductsController extends Controller
             'cost_price' => ['nullable', 'numeric'],
             'size' => ['nullable', 'max:255', 'string'],
             'notes' => ['nullable', 'max:255', 'string'],
-            'qty_stock' => ['nullable', 'numeric'],
-            'qty_on_order' => ['nullable', 'numeric'],
         ]);
 
         if ($request->hasFile('image')) {

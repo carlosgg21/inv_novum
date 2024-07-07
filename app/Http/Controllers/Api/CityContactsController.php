@@ -30,7 +30,7 @@ class CityContactsController extends Controller
         $this->authorize('create', Contact::class);
 
         $validated = $request->validate([
-            'identication' => ['nullable', 'max:255', 'string'],
+            'identification' => ['nullable', 'max:255', 'string'],
             'name' => ['required', 'max:255', 'string'],
             'last_name' => ['required', 'max:255', 'string'],
             'phone' => ['nullable', 'max:255', 'string'],

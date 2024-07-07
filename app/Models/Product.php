@@ -24,8 +24,6 @@ class Product extends Model
         'brand_id',
         'supplier_id',
         'notes',
-        'qty_stock',
-        'qty_on_order',
     ];
 
     protected $searchableFields = ['*'];

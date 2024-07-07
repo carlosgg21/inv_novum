@@ -12,7 +12,7 @@ class Contact extends Model
     use Searchable;
 
     protected $fillable = [
-        'identication',
+        'identification',
         'name',
         'last_name',
         'phone',

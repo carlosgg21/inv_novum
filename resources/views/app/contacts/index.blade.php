@@ -48,7 +48,7 @@
                     <thead>
                         <tr>
                             <th class="text-left">
-                                @lang('crud.contacts.inputs.identication')
+                                @lang('crud.contacts.inputs.identification')
                             </th>
                             <th class="text-left">
                                 @lang('crud.contacts.inputs.name')
@@ -82,7 +82,7 @@
                     <tbody>
                         @forelse($contacts as $contact)
                         <tr>
-                            <td>{{ $contact->identication ?? '-' }}</td>
+                            <td>{{ $contact->identification ?? '-' }}</td>
                             <td>{{ $contact->name ?? '-' }}</td>
                             <td>{{ $contact->last_name ?? '-' }}</td>
                             <td>{{ $contact->phone ?? '-' }}</td>

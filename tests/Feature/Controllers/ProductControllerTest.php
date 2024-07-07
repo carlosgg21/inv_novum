@@ -125,8 +125,6 @@ class ProductControllerTest extends TestCase
             'cost_price' => $this->faker->randomNumber(2),
             'size' => $this->faker->text(255),
             'notes' => $this->faker->text(),
-            'qty_stock' => $this->faker->randomNumber(0),
-            'qty_on_order' => $this->faker->randomNumber(0),
             'category_id' => $category->id,
             'brand_id' => $brand->id,
             'supplier_id' => $supplier->id,

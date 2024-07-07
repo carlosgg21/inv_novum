@@ -37,7 +37,7 @@
         </div>
     </x-inputs.group>
 
-    <x-inputs.group class="col-sm-12">
+    <x-inputs.group class="col-sm-12 col-lg-8">
         <x-inputs.text
             name="name"
             label="Name"
@@ -45,6 +45,16 @@
             maxlength="255"
             placeholder="Name"
             required
+        ></x-inputs.text>
+    </x-inputs.group>
+
+    <x-inputs.group class="col-sm-12 col-lg-4">
+        <x-inputs.text
+            name="acronym"
+            label="Acronym"
+            :value="old('acronym', ($editing ? $bank->acronym : ''))"
+            maxlength="255"
+            placeholder="Acronym"
         ></x-inputs.text>
     </x-inputs.group>
 

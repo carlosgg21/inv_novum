@@ -152,24 +152,4 @@
             }}</x-inputs.textarea
         >
     </x-inputs.group>
-
-    <x-inputs.group class="col-sm-12">
-        <x-inputs.number
-            name="qty_stock"
-            label="Qty Stock"
-            :value="old('qty_stock', ($editing ? $product->qty_stock : ''))"
-            max="255"
-            placeholder="Qty Stock"
-        ></x-inputs.number>
-    </x-inputs.group>
-
-    <x-inputs.group class="col-sm-12">
-        <x-inputs.number
-            name="qty_on_order"
-            label="Qty On Order"
-            :value="old('qty_on_order', ($editing ? $product->qty_on_order : ''))"
-            max="255"
-            placeholder="Qty On Order"
-        ></x-inputs.number>
-    </x-inputs.group>
 </div>

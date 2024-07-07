@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use Illuminate\Support\Str;
 use App\Models\SalesOrderItem;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -23,12 +22,11 @@ class SalesOrderItemFactory extends Factory
     public function definition(): array
     {
         return [
-            'quantity' => $this->faker->randomNumber(),
-            'unit_price' => $this->faker->randomNumber(2),
-            'total_price' => $this->faker->randomNumber(2),
-            'notes' => $this->faker->text(),
+            'quantity'       => $this->faker->randomNumber(),
+            'unit_price'     => $this->faker->randomNumber(2),
+            'total_price'    => $this->faker->randomFloat(2, 10, 500),
             'sales_order_id' => \App\Models\SalesOrder::factory(),
-            'product_id' => \App\Models\Product::factory(),
+            'product_id'     => $this->faker->randomElement([1, 10]),
         ];
     }
 }

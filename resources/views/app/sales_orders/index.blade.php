@@ -74,7 +74,7 @@
                                 @lang('crud.sales_orders.inputs.discount')
                             </th>
                             <th class="text-right">
-                                @lang('crud.sales_orders.inputs.miscellanues')
+                                @lang('crud.sales_orders.inputs.miscellaneous')
                             </th>
                             <th class="text-right">
                                 @lang('crud.sales_orders.inputs.freight')
@@ -119,7 +119,7 @@
                             <td>{{ $salesOrder->invoice_date ?? '-' }}</td>
                             <td>{{ $salesOrder->taxes ?? '-' }}</td>
                             <td>{{ $salesOrder->discount ?? '-' }}</td>
-                            <td>{{ $salesOrder->miscellanues ?? '-' }}</td>
+                            <td>{{ $salesOrder->miscellaneous ?? '-' }}</td>
                             <td>{{ $salesOrder->freight ?? '-' }}</td>
                             <td>{{ $salesOrder->order_total ?? '-' }}</td>
                             <td>

@@ -19,6 +19,7 @@ return new class extends Migration {
             $table->string('flag')->nullable();
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

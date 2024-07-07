@@ -63,14 +63,6 @@
                     <h5>@lang('crud.products.inputs.notes')</h5>
                     <span>{{ $product->notes ?? '-' }}</span>
                 </div>
-                <div class="mb-4">
-                    <h5>@lang('crud.products.inputs.qty_stock')</h5>
-                    <span>{{ $product->qty_stock ?? '-' }}</span>
-                </div>
-                <div class="mb-4">
-                    <h5>@lang('crud.products.inputs.qty_on_order')</h5>
-                    <span>{{ $product->qty_on_order ?? '-' }}</span>
-                </div>
             </div>
 
             <div class="mt-4">

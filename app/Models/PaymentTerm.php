@@ -13,7 +13,7 @@ class PaymentTerm extends Model
     use Searchable;
     use SoftDeletes;
 
-    protected $fillable = ['description', 'day'];
+    protected $fillable = ['description', 'day', 'code'];
 
     protected $searchableFields = ['*'];
 

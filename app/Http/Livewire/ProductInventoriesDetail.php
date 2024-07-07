@@ -28,7 +28,7 @@ class ProductInventoriesDetail extends Component
 
     protected $rules = [
         'inventory.location_id' => ['required', 'exists:locations,id'],
-        'inventory.quantity_stock' => ['nullable', 'numeric'],
+        'inventory.quantity' => ['nullable', 'numeric'],
         'inventory.quantity_on_order' => ['nullable', 'numeric'],
         'inventory.min_qty' => ['nullable', 'numeric'],
         'inventory.max_qty' => ['nullable', 'numeric'],

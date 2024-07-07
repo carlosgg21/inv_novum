@@ -42,7 +42,7 @@ class EmployeeSalesOrdersController extends Controller
             'invoice_date' => ['nullable', 'date'],
             'taxes' => ['nullable', 'numeric'],
             'discount' => ['nullable', 'numeric'],
-            'miscellanues' => ['nullable', 'numeric'],
+            'miscellaneous' => ['nullable', 'numeric'],
             'freight' => ['nullable', 'numeric'],
             'order_total' => ['nullable', 'numeric'],
             'payment_method_id' => ['nullable', 'exists:payment_methods,id'],

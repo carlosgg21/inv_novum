@@ -95,7 +95,7 @@ class CurrencyTest extends TestCase
             route('api.currencies.destroy', $currency)
         );
 
-        $this->assertModelMissing($currency);
+        $this->assertSoftDeleted($currency);
 
         $response->assertNoContent();
     }

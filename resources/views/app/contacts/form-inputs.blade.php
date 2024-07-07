@@ -3,11 +3,11 @@
 <div class="row">
     <x-inputs.group class="col-sm-12">
         <x-inputs.text
-            name="identication"
-            label="Identication"
-            :value="old('identication', ($editing ? $contact->identication : ''))"
+            name="identification"
+            label="Identification"
+            :value="old('identification', ($editing ? $contact->identification : ''))"
             maxlength="255"
-            placeholder="Identication"
+            placeholder="Identification"
         ></x-inputs.text>
     </x-inputs.group>
 

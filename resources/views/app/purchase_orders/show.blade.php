@@ -44,8 +44,8 @@
                     <span>{{ $purchaseOrder->discount ?? '-' }}</span>
                 </div>
                 <div class="mb-4">
-                    <h5>@lang('crud.purchase_orders.inputs.miscellaneus')</h5>
-                    <span>{{ $purchaseOrder->miscellaneus ?? '-' }}</span>
+                    <h5>@lang('crud.purchase_orders.inputs.miscellaneous')</h5>
+                    <span>{{ $purchaseOrder->miscellaneous ?? '-' }}</span>
                 </div>
                 <div class="mb-4">
                     <h5>@lang('crud.purchase_orders.inputs.shipping_date')</h5>

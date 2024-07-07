@@ -136,6 +136,6 @@ class CurrencyControllerTest extends TestCase
 
         $response->assertRedirect(route('currencies.index'));
 
-        $this->assertModelMissing($currency);
+        $this->assertSoftDeleted($currency);
     }
 }

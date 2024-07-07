@@ -110,6 +110,7 @@ class BankControllerTest extends TestCase
 
         $data = [
             'name' => $this->faker->name(),
+            'acronym' => $this->faker->text(255),
             'logo' => $this->faker->text(255),
             'description' => $this->faker->sentence(15),
         ];

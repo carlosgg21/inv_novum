@@ -83,12 +83,6 @@
                             <th class="text-left">
                                 @lang('crud.products.inputs.notes')
                             </th>
-                            <th class="text-right">
-                                @lang('crud.products.inputs.qty_stock')
-                            </th>
-                            <th class="text-right">
-                                @lang('crud.products.inputs.qty_on_order')
-                            </th>
                             <th class="text-center">
                                 @lang('crud.common.actions')
                             </th>
@@ -119,8 +113,6 @@
                             <td>{{ $product->cost_price ?? '-' }}</td>
                             <td>{{ $product->size ?? '-' }}</td>
                             <td>{{ $product->notes ?? '-' }}</td>
-                            <td>{{ $product->qty_stock ?? '-' }}</td>
-                            <td>{{ $product->qty_on_order ?? '-' }}</td>
                             <td class="text-center" style="width: 134px;">
                                 <div
                                     role="group"
@@ -169,7 +161,7 @@
                         </tr>
                         @empty
                         <tr>
-                            <td colspan="15">
+                            <td colspan="13">
                                 @lang('crud.common.no_items_found')
                             </td>
                         </tr>
@@ -177,7 +169,7 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td colspan="15">{!! $products->render() !!}</td>
+                            <td colspan="13">{!! $products->render() !!}</td>
                         </tr>
                     </tfoot>
                 </table>

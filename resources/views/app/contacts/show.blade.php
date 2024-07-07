@@ -13,8 +13,8 @@
 
             <div class="mt-4">
                 <div class="mb-4">
-                    <h5>@lang('crud.contacts.inputs.identication')</h5>
-                    <span>{{ $contact->identication ?? '-' }}</span>
+                    <h5>@lang('crud.contacts.inputs.identification')</h5>
+                    <span>{{ $contact->identification ?? '-' }}</span>
                 </div>
                 <div class="mb-4">
                     <h5>@lang('crud.contacts.inputs.name')</h5>

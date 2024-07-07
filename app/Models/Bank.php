@@ -13,7 +13,7 @@ class Bank extends Model
     use Searchable;
     use SoftDeletes;
 
-    protected $fillable = ['name', 'logo', 'description'];
+    protected $fillable = ['name', 'acronym', 'logo', 'description'];
 
     protected $searchableFields = ['*'];
 

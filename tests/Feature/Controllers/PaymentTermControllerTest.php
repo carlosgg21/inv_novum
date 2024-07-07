@@ -64,6 +64,8 @@ class PaymentTermControllerTest extends TestCase
 
         $response = $this->post(route('payment-terms.store'), $data);
 
+        unset($data['code']);
+
         $this->assertDatabaseHas('payment_terms', $data);
 
         $paymentTerm = PaymentTerm::latest('id')->first();
@@ -111,12 +113,15 @@ class PaymentTermControllerTest extends TestCase
         $data = [
             'description' => $this->faker->sentence(15),
             'day' => $this->faker->randomNumber(0),
+            'code' => $this->faker->text(255),
         ];
 
         $response = $this->put(
             route('payment-terms.update', $paymentTerm),
             $data
         );
+
+        unset($data['code']);
 
         $data['id'] = $paymentTerm->id;
 

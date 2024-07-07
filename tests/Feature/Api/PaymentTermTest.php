@@ -52,6 +52,8 @@ class PaymentTermTest extends TestCase
 
         $response = $this->postJson(route('api.payment-terms.store'), $data);
 
+        unset($data['code']);
+
         $this->assertDatabaseHas('payment_terms', $data);
 
         $response->assertStatus(201)->assertJsonFragment($data);
@@ -67,12 +69,15 @@ class PaymentTermTest extends TestCase
         $data = [
             'description' => $this->faker->sentence(15),
             'day' => $this->faker->randomNumber(0),
+            'code' => $this->faker->text(255),
         ];
 
         $response = $this->putJson(
             route('api.payment-terms.update', $paymentTerm),
             $data
         );
+
+        unset($data['code']);
 
         $data['id'] = $paymentTerm->id;
 

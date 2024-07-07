@@ -26,8 +26,8 @@ class InventoryFactory extends Factory
             'min_qty'           => $this->faker->randomNumber(0),
             'max_qty'           => $this->faker->randomNumber(0),
             'quantity_on_order' => $this->faker->randomNumber(0),
-            'product_id'        => \App\Models\Product::factory(),
-            'location_id'       => \App\Models\Location::factory(),
+            'product_id'         => $this->faker->randomElement([1, 10]),
+            'location_id'      => $this->faker->randomElement([1, 4]),
         ];
     }
 }
