@@ -26,7 +26,9 @@
                             class="ti-dropbox"></i><span class="hide-menu">Inventory Manager </span></a>
                     <!-- <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-layers"></i><span class="hide-menu">Inventory Manager </span></a> -->
                     <ul aria-expanded="false" class="collapse">
-                        <li><a href="index.html">Products </a></li>
+                        @can('view-any', App\Models\Product::class)
+                            <li><a href="{{ route('products.index') }}">Products </a></li>
+                        @endcan
                         <li><a href="index2.html">Inventory</a></li>
                     </ul>
                 </li>
