@@ -1,41 +1,18 @@
 @extends('layouts.app')
+@section('title', 'Currencies')
+@section('page-title', 'Currencies List')
+@section('breadcrumb')
+<x-breadcrumb route="home" home="Home" title="Currencies List"></x-breadcrumb>
+<x-new-record route="currencies.create"></x-new-record>
+@endsection
 
 @section('content')
 <div class="container">
-    <div class="searchbar mt-0 mb-4">
-        <div class="row">
-            <div class="col-md-6">
-                <form>
-                    <div class="input-group">
-                        <input
-                            id="indexSearch"
-                            type="text"
-                            name="search"
-                            placeholder="{{ __('crud.common.search') }}"
-                            value="{{ $search ?? '' }}"
-                            class="form-control"
-                            autocomplete="off"
-                        />
-                        <div class="input-group-append">
-                            <button type="submit" class="btn btn-primary">
-                                <i class="icon ion-md-search"></i>
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="col-md-6 text-right">
-                @can('create', App\Models\Currency::class)
-                <a
-                    href="{{ route('currencies.create') }}"
-                    class="btn btn-primary"
-                >
-                    <i class="icon ion-md-add"></i> @lang('crud.common.create')
-                </a>
-                @endcan
-            </div>
-        </div>
-    </div>
+   <x-searchbar :search="$search">
+    <a href="{{ route('charges.index') }}" type="button" class="btn btn-primary btn-sm">
+        Clear Search
+    </a>
+</x-searchbar>
 
     <div class="card">
         <div class="card-body">
@@ -44,23 +21,18 @@
             </div>
 
             <div class="table-responsive">
-                <table class="table table-borderless table-hover">
-                    <thead>
+                <table class="table table-borderless table-hover table-sm table-striped">
+                        <thead class="table-heard">
                         <tr>
-                            <th class="text-left">
-                                @lang('crud.currencies.inputs.acronym')
-                            </th>
+                           
                             <th class="text-left">
                                 @lang('crud.currencies.inputs.name')
                             </th>
                             <th class="text-left">
+                                @lang('crud.currencies.inputs.acronym')
+                            </th>
+                            <th class="text-left">
                                 @lang('crud.currencies.inputs.sign')
-                            </th>
-                            <th class="text-left">
-                                @lang('crud.currencies.inputs.code')
-                            </th>
-                            <th class="text-left">
-                                @lang('crud.currencies.inputs.flag')
                             </th>
                             <th class="text-center">
                                 @lang('crud.common.actions')
@@ -70,56 +42,13 @@
                     <tbody>
                         @forelse($currencies as $currency)
                         <tr>
-                            <td>{{ $currency->acronym ?? '-' }}</td>
                             <td>{{ $currency->name ?? '-' }}</td>
-                            <td>{{ $currency->sign ?? '-' }}</td>
-                            <td>{{ $currency->code ?? '-' }}</td>
-                            <td>{{ $currency->flag ?? '-' }}</td>
-                            <td class="text-center" style="width: 134px;">
-                                <div
-                                    role="group"
-                                    aria-label="Row Actions"
-                                    class="btn-group"
-                                >
-                                    @can('update', $currency)
-                                    <a
-                                        href="{{ route('currencies.edit', $currency) }}"
-                                    >
-                                        <button
-                                            type="button"
-                                            class="btn btn-light"
-                                        >
-                                            <i class="icon ion-md-create"></i>
-                                        </button>
-                                    </a>
-                                    @endcan @can('view', $currency)
-                                    <a
-                                        href="{{ route('currencies.show', $currency) }}"
-                                    >
-                                        <button
-                                            type="button"
-                                            class="btn btn-light"
-                                        >
-                                            <i class="icon ion-md-eye"></i>
-                                        </button>
-                                    </a>
-                                    @endcan @can('delete', $currency)
-                                    <form
-                                        action="{{ route('currencies.destroy', $currency) }}"
-                                        method="POST"
-                                        onsubmit="return confirm('{{ __('crud.common.are_you_sure') }}')"
-                                    >
-                                        @csrf @method('DELETE')
-                                        <button
-                                            type="submit"
-                                            class="btn btn-light text-danger"
-                                        >
-                                            <i class="icon ion-md-trash"></i>
-                                        </button>
-                                    </form>
-                                    @endcan
-                                </div>
+                            <td>
+                                <i class="flag-icon {{ $currency->flag ?? '-' }}"></i>
+                                {{ $currency->acronym ?? '-' }}
                             </td>
+                            <td>{{ $currency->sign ?? '-' }}</td>                            
+                            <x-action-buttons :model="$currency" routePrefix="currencies" />
                         </tr>
                         @empty
                         <tr>
@@ -131,7 +60,7 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td colspan="6">{!! $currencies->render() !!}</td>
+                            <td class="pagination-sm" colspan="6">{!! $currencies->render() !!}</td>
                         </tr>
                     </tfoot>
                 </table>
@@ -139,4 +68,9 @@
         </div>
     </div>
 </div>
+@endsection
+@section('css')
+
+<link href="{{ asset('assets/node_modules/flag-icons/css/flag-icons.min.css') }}" rel="stylesheet">
+
 @endsection

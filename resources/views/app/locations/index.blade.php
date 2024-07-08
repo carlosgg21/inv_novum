@@ -51,7 +51,7 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td colspan="3">{!! $locations->render() !!}</td>
+                     <td class="pagination-sm" colspan="3">{!! $locations->render() !!}</td>
                     </tr>
                 </tfoot>
             </table>

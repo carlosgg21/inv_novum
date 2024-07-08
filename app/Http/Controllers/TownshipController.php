@@ -23,7 +23,7 @@ class TownshipController extends Controller
 
         $townships = Township::search($search)
             ->latest()
-            ->paginate(5)
+            ->paginate(10)
             ->withQueryString();
 
         return view('app.townships.index', compact('townships', 'search'));

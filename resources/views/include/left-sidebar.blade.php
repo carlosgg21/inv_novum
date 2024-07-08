@@ -65,7 +65,7 @@
                             <li><a href="{{ route('cities.index') }}">Cities</a></li>
                         @endcan
                         @can('view-any', App\Models\Township::class)
-                            <li><a href="{{ route('townships.index') }}">townships</a></li>
+                            <li><a href="{{ route('townships.index') }}">Townships</a></li>
                         @endcan
                         @can('view-any', App\Models\Currency::class)
                             <li><a href="{{ route('currencies.index') }}">Currencies</a></li>

@@ -22,7 +22,7 @@ class CurrencyController extends Controller
 
         $currencies = Currency::search($search)
             ->latest()
-            ->paginate(5)
+            ->paginate(10)
             ->withQueryString();
 
         return view('app.currencies.index', compact('currencies', 'search'));
