@@ -43,31 +43,7 @@
                             </td>
                             <td>{{ $brand->name ?? '-' }}</td>
                             <td>{{ $brand->description ?? '-' }}</td>
-                            <td class="text-center" style="width: 134px;">
-                                <div role="group" aria-label="Row Actions" class="btn-group">
-                                    @can('update', $brand)
-                                    <a href="{{ route('brands.edit', $brand) }}">
-                                        <button type="button" class="btn btn-light">
-                                       <i class="icon-note"></i>
-                                        </button>
-                                    </a>
-                                    @endcan @can('view', $brand)
-                                    <a href="{{ route('brands.show', $brand) }}">
-                                        <button type="button" class="btn btn-light">
-                                     <i class="ti-eye"></i>
-                                        </button>
-                                    </a>
-                                    @endcan @can('delete', $brand)
-                                    <form action="{{ route('brands.destroy', $brand) }}" method="POST"
-                                        onsubmit="return confirm('{{ __('crud.common.are_you_sure') }}')">
-                                        @csrf @method('DELETE')
-                                        <button type="submit" class="btn btn-light text-danger">
-                                         <i class="ti-trash"></i>
-                                        </button>
-                                    </form>
-                                    @endcan
-                                </div>
-                            </td>
+                        <x-action-buttons :model="$brand" routePrefix="brands" />
                         </tr>
                         @empty
                         <tr>

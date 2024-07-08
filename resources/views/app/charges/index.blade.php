@@ -40,31 +40,7 @@
                         <tr>
                             <td>{{ $charge->name ?? '-' }}</td>
                             <td>{{ $charge->description ?? '-' }}</td>
-                            <td class="text-center" style="width: 134px">
-                                <div role="group" aria-label="Row Actions" class="btn-group">
-                                    @can('update', $charge)
-                                    <a href="{{ route('charges.edit', $charge) }}">
-                                        <button type="button" class="btn btn-light">
-                                            <i class="icon-note"></i>
-                                        </button>
-                                    </a>
-                                    @endcan @can('view', $charge)
-                                    <a href="{{ route('charges.show', $charge) }}">
-                                        <button type="button" class="btn btn-light">
-                                            <i class="ti-eye"></i>
-                                        </button>
-                                    </a>
-                                    @endcan @can('delete', $charge)
-                                    <form action="{{ route('charges.destroy', $charge) }}" method="POST"
-                                        onsubmit="return confirm('{{ __('crud.common.are_you_sure') }}')">
-                                        @csrf @method('DELETE')
-                                        <button type="submit" class="btn btn-light text-danger">
-                                            <i class="ti-trash"></i>
-                                        </button>
-                                    </form>
-                                    @endcan
-                                </div>
-                            </td>
+                            <x-action-buttons :model="$charge" routePrefix="charges" />
                         </tr>
                         @empty
                         <tr>
