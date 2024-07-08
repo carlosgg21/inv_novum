@@ -5,24 +5,12 @@
         <!-- ============================================================== -->
         <div class="navbar-header">
             <a class="navbar-brand" href="{{ url('home') }}">
-                <!-- Logo icon -->
-                {{-- <b> --}}
-                    <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
-                    <!-- Dark Logo icon -->
+            
                     <img src="{{ asset('assets/images/logo-icon.png')  }}" alt="homepage" class="dark-logo" width="40" />
                     <!-- Light Logo icon -->
                     <img src="{{ asset('assets/images/logo-light-icon.png')  }}" alt="homepage" class="light-logo" width="40" />
 
-                {{-- </b> --}}
-                <!--End Logo icon -->
-                <!-- Logo text -->
-                {{-- <span> --}}
-                    <!-- dark Logo text -->
-                    {{-- <img src="{{ asset('assets/images/logo.png')  }}" alt="homepage" class="dark-logo"  width="200" /> --}}
-                    <!-- Light Logo text -->
-                    {{-- <img src="{{ asset('assets/images/logo.png')  }}" class="light-logo" alt="homepage"  width="200" /> --}}
-
-                {{-- </span> --}}
+  
             </a>
         </div>
         <!-- ============================================================== -->
@@ -64,8 +52,15 @@
                         <a href="javascript:void(0)" class="dropdown-item"><i class="ti-settings"></i> Account Setting</a>
                         <!-- text-->
                         <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <i class="fa fa-power-off"></i> Logout
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
                         <!-- text-->
-                        <a href="login.html" class="dropdown-item"><i class="fa fa-power-off"></i> Logout</a>
+                        {{-- <a href="login.html" class="dropdown-item"><i class="fa fa-power-off"></i> Logout</a> --}}
                         <!-- text-->
                     </div>
                 </li>

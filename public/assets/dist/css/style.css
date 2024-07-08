@@ -22195,3 +22195,25 @@ File: scss
     overflow: hidden; }
   .hidden-md-down {
     display: none; } }
+
+    /*-- ============================================================== 
+ CUSTOM STYLE
+ ============================================================== */
+      .btn-info-t {
+        color: #fff;
+        background-color: #078264;
+        border-color: #078264;
+        }
+        
+        .btn-info-t:hover {
+        color: #fff;
+        background-color: #078264;
+        border-color: #078264;
+        
+        
+        }
+
+        .table-heard{
+            background-color: #00B88B; 
+            color: white;
+        }

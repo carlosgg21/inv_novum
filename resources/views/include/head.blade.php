@@ -13,7 +13,6 @@
 <!-- Custom CSS -->
 <link href="{{ asset('assets/dist/css/style.css') }}" rel="stylesheet">
 
-<link href="{{ asset('assets/icons/flag-icons-main/css/flag-icons.css') }}" rel="stylesheet">
 
 
 <style>

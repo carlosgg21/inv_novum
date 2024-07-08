@@ -23,7 +23,7 @@ class BankController extends Controller
 
         $banks = Bank::search($search)
             ->latest()
-            ->paginate(5)
+            ->paginate(10)
             ->withQueryString();
 
         return view('app.banks.index', compact('banks', 'search'));

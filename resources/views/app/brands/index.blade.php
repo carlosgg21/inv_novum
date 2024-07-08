@@ -1,34 +1,34 @@
 @extends('layouts.app')
-@section('title', 'Charges')
-@section('page-title', 'Charge List')
+@section('title', 'Brands')
+@section('page-title', 'Brands List')
 @section('breadcrumb')
-<x-breadcrumb route="home" home="Home" title="Charge List"></x-breadcrumb>
-<x-new-record route="charges.create"></x-new-record>
+<x-breadcrumb route="home" home="Home" title="Brands List"></x-breadcrumb>
+<x-new-record route="brands.create"></x-new-record>
 @endsection
 
 @section('content')
 <div class="container">
-   <x-searchbar :search="$search">
-    <a href="{{ route('charges.index') }}" type="button" class="btn btn-primary btn-sm">
+<x-searchbar :search="$search">
+  <a href="{{ route('brands.index') }}" type="button" class="btn btn-primary btn-sm">
         Clear Search
     </a>
 </x-searchbar>
 
     <div class="card">
         <div class="card-body">
-            {{-- <div style="display: flex; justify-content: space-between;">
-                <h4 class="card-title">@lang('crud.charges.index_title')</h4>
-            </div> --}}
-
+          
             <div class="table-responsive">
-                <table class="table table-borderless table-hover table-sm table-striped">
-                    <thead class="table-heard" >
+           <table class="table table-borderless table-hover table-sm table-striped">
+                    <thead class="table-heard">
                         <tr>
                             <th class="text-left">
-                                @lang('crud.charges.inputs.name')
+                                @lang('crud.brands.inputs.image')
                             </th>
                             <th class="text-left">
-                                @lang('crud.charges.inputs.description')
+                                @lang('crud.brands.inputs.name')
+                            </th>
+                            <th class="text-left">
+                                @lang('crud.brands.inputs.description')
                             </th>
                             <th class="text-center">
                                 @lang('crud.common.actions')
@@ -36,30 +36,33 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse($charges as $charge)
+                        @forelse($brands as $brand)
                         <tr>
-                            <td>{{ $charge->name ?? '-' }}</td>
-                            <td>{{ $charge->description ?? '-' }}</td>
-                            <td class="text-center" style="width: 134px">
+                            <td>
+                                <x-partials.thumbnail src="{{ $brand->image ? \Storage::url($brand->image) : '' }}" />
+                            </td>
+                            <td>{{ $brand->name ?? '-' }}</td>
+                            <td>{{ $brand->description ?? '-' }}</td>
+                            <td class="text-center" style="width: 134px;">
                                 <div role="group" aria-label="Row Actions" class="btn-group">
-                                    @can('update', $charge)
-                                    <a href="{{ route('charges.edit', $charge) }}">
+                                    @can('update', $brand)
+                                    <a href="{{ route('brands.edit', $brand) }}">
                                         <button type="button" class="btn btn-light">
-                                            <i class="icon-note"></i>
+                                       <i class="icon-note"></i>
                                         </button>
                                     </a>
-                                    @endcan @can('view', $charge)
-                                    <a href="{{ route('charges.show', $charge) }}">
+                                    @endcan @can('view', $brand)
+                                    <a href="{{ route('brands.show', $brand) }}">
                                         <button type="button" class="btn btn-light">
-                                            <i class="ti-eye"></i>
+                                     <i class="ti-eye"></i>
                                         </button>
                                     </a>
-                                    @endcan @can('delete', $charge)
-                                    <form action="{{ route('charges.destroy', $charge) }}" method="POST"
+                                    @endcan @can('delete', $brand)
+                                    <form action="{{ route('brands.destroy', $brand) }}" method="POST"
                                         onsubmit="return confirm('{{ __('crud.common.are_you_sure') }}')">
                                         @csrf @method('DELETE')
                                         <button type="submit" class="btn btn-light text-danger">
-                                            <i class="ti-trash"></i>
+                                         <i class="ti-trash"></i>
                                         </button>
                                     </form>
                                     @endcan
@@ -68,7 +71,7 @@
                         </tr>
                         @empty
                         <tr>
-                            <td colspan="3">
+                            <td colspan="4">
                                 @lang('crud.common.no_items_found')
                             </td>
                         </tr>
@@ -76,7 +79,7 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                           <td class="pagination-sm" colspan="3">{!! $charges->render() !!}</td>
+                            <td class="pagination-sm" colspan="4">{!! $brands->render() !!}</td>
                         </tr>
                     </tfoot>
                 </table>

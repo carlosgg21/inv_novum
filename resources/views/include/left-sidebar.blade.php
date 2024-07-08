@@ -45,9 +45,13 @@
                         <li><a href="app-email.html">Customers</a></li>
                         <li><a href="app-email.html">Suppliers</a></li>
                         <li><a href="app-email.html">Employees</a></li>
-                        <li><a href="app-email.html">Charges</a></li>
+                        @can('view-any', App\Models\Charge::class)
+                            <li><a href="{{ route('charges.index') }}" >Charges</a></li>
+                        @endcan
                         <li class="nav-small-cap">LISTS</li>
-                        <li><a href="app-email.html">Brands</a></li>
+                        @can('view-any', App\Models\Brand::class)
+                            <li><a href="{{ route('brands.index') }}" >Brands</a></li>
+                        @endcan
                         <li><a href="app-email-detail.html">Product Categories</a></li>
                         <li><a href="app-compose.html">Locations</a></li>
                         <li><a href="app-compose.html">Countries</a></li>
@@ -71,7 +75,9 @@
                         <li><a href="ui-user-card.html">Defaults</a></li>
                         <li><a href="ui-user-card.html">Settings</a></li>
                         <li><a href="ui-user-card.html">Prefixes</a></li>
-                        <li><a href="app-compose.html">Bank</a></li>
+                        @can('view-any', App\Models\Bank::class)
+                            <li><a href="{{ route('banks.index') }}" >Bank</a></li>
+                        @endcan 
                     </ul>
                 </li>
 

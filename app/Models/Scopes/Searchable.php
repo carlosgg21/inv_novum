@@ -24,13 +24,15 @@ trait Searchable
      * Adds a scope to search the table based on the
      * $searchableFields array inside the model
      */
-    public function scopeSearch(Builder $query, string $search): Builder
+    public function scopeSearch(Builder $query, ?string $search): Builder
     {
-        $query->where(function ($query) use ($search) {
-            foreach ($this->getSearchableFields() as $field) {
-                $query->orWhere($field, 'like', "%{$search}%");
-            }
-        });
+        if ($search) {
+            $query->where(function ($query) use ($search) {
+                foreach ($this->getSearchableFields() as $field) {
+                    $query->orWhere($field, 'like', "%{$search}%");
+                }
+            });
+        }
 
         return $query;
     }
