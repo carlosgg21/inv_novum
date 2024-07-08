@@ -8,11 +8,11 @@
 
 @section('content')
 <div class="container">
-   <x-searchbar :search="$search">
-    <a href="{{ route('charges.index') }}" type="button" class="btn btn-primary btn-sm">
-        Clear Search
-    </a>
-</x-searchbar>
+    <x-searchbar :search="$search">
+        <a href="{{ route('charges.index') }}" type="button" class="btn btn-primary btn-sm">
+            Clear Search
+        </a>
+    </x-searchbar>
 
     <div class="card">
         <div class="card-body">
@@ -22,7 +22,7 @@
 
             <div class="table-responsive">
                 <table class="table table-borderless table-hover table-sm table-striped">
-                    <thead class="table-heard" >
+                    <thead class="table-heard">
                         <tr>
                             <th class="text-left">
                                 @lang('crud.charges.inputs.name')
@@ -52,7 +52,7 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                           <td class="pagination-sm" colspan="3">{!! $charges->render() !!}</td>
+                            <td class="pagination-sm" colspan="3">{!! $charges->render() !!}</td>
                         </tr>
                     </tfoot>
                 </table>

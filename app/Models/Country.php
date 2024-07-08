@@ -48,4 +48,9 @@ class Country extends Model
     {
         return $this->hasMany(Contact::class);
     }
+    
+     public function isActive()
+    {
+        return $this->deleted_at === null;
+    }
 }

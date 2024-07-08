@@ -52,10 +52,24 @@
                         @can('view-any', App\Models\Brand::class)
                             <li><a href="{{ route('brands.index') }}" >Brands</a></li>
                         @endcan
-                        <li><a href="app-email-detail.html">Product Categories</a></li>
-                        <li><a href="app-compose.html">Locations</a></li>
-                        <li><a href="app-compose.html">Countries</a></li>
-                        <li><a href="app-compose.html">Currencies</a></li>
+                        @can('view-any', App\Models\Category::class)
+                            <li><a href="{{ route('categories.index') }}">Product Categories</a></li>
+                        @endcan
+                        @can('view-any', App\Models\Location::class)
+                        <li><a href="{{ route('locations.index') }}">Locations</a></li>
+                        @endcan
+                        @can('view-any', App\Models\Country::class)
+                            <li><a href="{{ route('countries.index') }}">Countries</a></li>
+                        @endcan
+                        @can('view-any', App\Models\City::class)
+                            <li><a href="{{ route('cities.index') }}">Cities</a></li>
+                        @endcan
+                        @can('view-any', App\Models\Township::class)
+                            <li><a href="{{ route('townships.index') }}">townships</a></li>
+                        @endcan
+                        @can('view-any', App\Models\Currency::class)
+                            <li><a href="{{ route('currencies.index') }}">Currencies</a></li>
+                        @endcan
                         <li><a href="app-compose.html">Payment Terms</a></li>
                         <li><a href="app-compose.html">Payment Methods</a></li>
 

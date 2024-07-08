@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Country;
-use App\Models\Currency;
-use Illuminate\View\View;
-use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\CountryStoreRequest;
 use App\Http\Requests\CountryUpdateRequest;
+use App\Models\Country;
+use App\Models\Currency;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class CountryController extends Controller
 {
@@ -21,9 +21,10 @@ class CountryController extends Controller
 
         $search = $request->get('search', '');
 
-        $countries = Country::search($search)
-            ->latest()
-            ->paginate(5)
+        $countries = Country::withTrashed()
+            ->search($search)
+            ->orderByRaw('CASE WHEN deleted_at IS NULL THEN 0 ELSE 1 END, name ASC')
+            ->paginate(10)
             ->withQueryString();
 
         return view('app.countries.index', compact('countries', 'search'));
