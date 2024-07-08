@@ -70,8 +70,15 @@
                         @can('view-any', App\Models\Currency::class)
                             <li><a href="{{ route('currencies.index') }}">Currencies</a></li>
                         @endcan
-                        <li><a href="app-compose.html">Payment Terms</a></li>
-                        <li><a href="app-compose.html">Payment Methods</a></li>
+                        @can('view-any', App\Models\PaymentTerm::class)
+                            <li><a href="{{ route('payment-terms.index') }}">Payment Terms</a></li>
+                        @endcan
+                        @can('view-any', App\Models\PaymentMethod::class)                            
+                            <li><a href="{{ route('payment-methods.index') }}">Payment Methods</a></li>
+                        @endcan
+                        @can('view-any', App\Models\Bank::class)
+                            <li><a href="{{ route('banks.index') }}">Bank</a></li>
+                        @endcan
 
                     </ul>
                 </li>
@@ -89,9 +96,7 @@
                         <li><a href="ui-user-card.html">Defaults</a></li>
                         <li><a href="ui-user-card.html">Settings</a></li>
                         <li><a href="ui-user-card.html">Prefixes</a></li>
-                        @can('view-any', App\Models\Bank::class)
-                            <li><a href="{{ route('banks.index') }}" >Bank</a></li>
-                        @endcan 
+                    
                     </ul>
                 </li>
 

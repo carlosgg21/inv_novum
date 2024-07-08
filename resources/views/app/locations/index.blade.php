@@ -8,7 +8,7 @@
 
 @section('content')
 <x-searchbar :search="$search">
-    <a href="{{ route('charges.index') }}" type="button" class="btn btn-primary btn-sm">
+    <a href="{{ route('locations.index') }}" type="button" class="btn btn-primary btn-sm">
         Clear Search
     </a>
 </x-searchbar>
