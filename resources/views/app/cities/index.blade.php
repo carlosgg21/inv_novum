@@ -1,48 +1,25 @@
 @extends('layouts.app')
+@section('title', 'Cities')
+@section('page-title', 'Cities List')
+@section('breadcrumb')
+<x-breadcrumb route="home" home="Home" title="Cities List"></x-breadcrumb>
+<x-new-record route="cities.create"></x-new-record>
+@endsection
 
 @section('content')
 <div class="container">
-    <div class="searchbar mt-0 mb-4">
-        <div class="row">
-            <div class="col-md-6">
-                <form>
-                    <div class="input-group">
-                        <input
-                            id="indexSearch"
-                            type="text"
-                            name="search"
-                            placeholder="{{ __('crud.common.search') }}"
-                            value="{{ $search ?? '' }}"
-                            class="form-control"
-                            autocomplete="off"
-                        />
-                        <div class="input-group-append">
-                            <button type="submit" class="btn btn-primary">
-                                <i class="icon ion-md-search"></i>
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="col-md-6 text-right">
-                @can('create', App\Models\City::class)
-                <a href="{{ route('cities.create') }}" class="btn btn-primary">
-                    <i class="icon ion-md-add"></i> @lang('crud.common.create')
-                </a>
-                @endcan
-            </div>
-        </div>
-    </div>
+<x-searchbar :search="$search">
+    <a href="{{ route('cities.index') }}" type="button" class="btn btn-primary btn-sm">
+        Clear Search
+    </a>
+</x-searchbar>
 
     <div class="card">
         <div class="card-body">
-            <div style="display: flex; justify-content: space-between;">
-                <h4 class="card-title">@lang('crud.cities.index_title')</h4>
-            </div>
-
+         
             <div class="table-responsive">
-                <table class="table table-borderless table-hover">
-                    <thead>
+              <table class="table table-borderless table-hover table-sm table-striped">
+                        <thead class="table-heard">
                         <tr>
                             <th class="text-left">
                                 @lang('crud.cities.inputs.country_id')
@@ -72,47 +49,7 @@
                             <td>{{ $city->name ?? '-' }}</td>
                             <td>{{ $city->acronym ?? '-' }}</td>
                             <td>{{ $city->zip_code ?? '-' }}</td>
-                            <td class="text-center" style="width: 134px;">
-                                <div
-                                    role="group"
-                                    aria-label="Row Actions"
-                                    class="btn-group"
-                                >
-                                    @can('update', $city)
-                                    <a href="{{ route('cities.edit', $city) }}">
-                                        <button
-                                            type="button"
-                                            class="btn btn-light"
-                                        >
-                                            <i class="icon ion-md-create"></i>
-                                        </button>
-                                    </a>
-                                    @endcan @can('view', $city)
-                                    <a href="{{ route('cities.show', $city) }}">
-                                        <button
-                                            type="button"
-                                            class="btn btn-light"
-                                        >
-                                            <i class="icon ion-md-eye"></i>
-                                        </button>
-                                    </a>
-                                    @endcan @can('delete', $city)
-                                    <form
-                                        action="{{ route('cities.destroy', $city) }}"
-                                        method="POST"
-                                        onsubmit="return confirm('{{ __('crud.common.are_you_sure') }}')"
-                                    >
-                                        @csrf @method('DELETE')
-                                        <button
-                                            type="submit"
-                                            class="btn btn-light text-danger"
-                                        >
-                                            <i class="icon ion-md-trash"></i>
-                                        </button>
-                                    </form>
-                                    @endcan
-                                </div>
-                            </td>
+                         <x-action-buttons :model="$city" routePrefix="cities" />
                         </tr>
                         @empty
                         <tr>
@@ -124,7 +61,7 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td colspan="6">{!! $cities->render() !!}</td>
+                            <td class="pagination-sm" colspan="6">{!! $cities->render() !!}</td>
                         </tr>
                     </tfoot>
                 </table>

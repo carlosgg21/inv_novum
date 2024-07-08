@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Models\Township;
-use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class TownshipFactory extends Factory
@@ -23,10 +22,10 @@ class TownshipFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->name(),
-            'code' => $this->faker->text(255),
+            'name'     => $this->faker->name(),
+            'code'     => $this->faker->text(255),
             'zip_code' => $this->faker->text(255),
-            'city_id' => \App\Models\City::factory(),
+            'city_id'  => $this->faker->randomElement([1, 40]),
         ];
     }
 }

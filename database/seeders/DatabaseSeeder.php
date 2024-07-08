@@ -22,6 +22,8 @@ class DatabaseSeeder extends Seeder
 
         $this->call(CountrySeeder::class);
 
+$this->call(CitySeeder::class);
+
         // $this->call(AddressSeeder::class);
         $this->call(AppDefaultSeeder::class);
         $this->call(BankSeeder::class);
@@ -38,7 +40,7 @@ $this->call(PaymentMethodSeeder::class);
 
         $this->call(CurrencySeeder::class);
 
-        $this->call(CitySeeder::class);
+
         $this->call(CompanySeeder::class);
         $this->call(CompanyContactSeeder::class);
         $this->call(ConditionSeeder::class);
