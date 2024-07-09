@@ -1,11 +1,11 @@
 <?php
-
 namespace App\Http\Controllers\Api;
 
+use App\Models\Product;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\ProductResource;
 use App\Http\Resources\ProductCollection;
 
 class SupplierProductsController extends Controller
@@ -27,30 +27,27 @@ class SupplierProductsController extends Controller
         return new ProductCollection($products);
     }
 
-    public function store(Request $request, Supplier $supplier): ProductResource
-    {
-        $this->authorize('create', Product::class);
+    public function store(
+        Request $request,
+        Supplier $supplier,
+        Product $product
+    ): Response {
+        $this->authorize('update', $supplier);
 
-        $validated = $request->validate([
-            'image' => ['nullable', 'image', 'max:1024'],
-            'brand_id' => ['nullable', 'exists:brands,id'],
-            'category_id' => ['nullable', 'exists:categories,id'],
-            'code' => ['nullable', 'max:255', 'string'],
-            'name' => ['required', 'max:255', 'string'],
-            'description' => ['nullable', 'max:255', 'string'],
-            'unit' => ['nullable', 'max:255', 'string'],
-            'unit_price' => ['required', 'numeric'],
-            'cost_price' => ['nullable', 'numeric'],
-            'size' => ['nullable', 'max:255', 'string'],
-            'notes' => ['nullable', 'max:255', 'string'],
-        ]);
+        $supplier->products()->syncWithoutDetaching([$product->id]);
 
-        if ($request->hasFile('image')) {
-            $validated['image'] = $request->file('image')->store('public');
-        }
+        return response()->noContent();
+    }
 
-        $product = $supplier->products()->create($validated);
+    public function destroy(
+        Request $request,
+        Supplier $supplier,
+        Product $product
+    ): Response {
+        $this->authorize('update', $supplier);
 
-        return new ProductResource($product);
+        $supplier->products()->detach($product);
+
+        return response()->noContent();
     }
 }

@@ -49,7 +49,6 @@ use App\Http\Controllers\Api\CategoryProductsController;
 use App\Http\Controllers\Api\CompanyEmployeesController;
 use App\Http\Controllers\Api\BankBankAccountsController;
 use App\Http\Controllers\Api\EmployeeInvoicesController;
-use App\Http\Controllers\Api\SupplierProductsController;
 use App\Http\Controllers\Api\TownshipContactsController;
 use App\Http\Controllers\Api\CountrySuppliersController;
 use App\Http\Controllers\Api\CountryAddressesController;
@@ -62,6 +61,7 @@ use App\Http\Controllers\Api\SalesOrderInvoicesController;
 use App\Http\Controllers\Api\LocationInventoriesController;
 use App\Http\Controllers\Api\CustomerSalesOrdersController;
 use App\Http\Controllers\Api\EmployeeSalesOrdersController;
+use App\Http\Controllers\Api\SupplierInventoriesController;
 use App\Http\Controllers\Api\CurrencyBankAccountsController;
 use App\Http\Controllers\Api\EmployeePaymentMadesController;
 use App\Http\Controllers\Api\SupplierPaymentMadesController;
@@ -445,16 +445,6 @@ Route::name('api.')
 
         Route::apiResource('suppliers', SupplierController::class);
 
-        // Supplier Products
-        Route::get('/suppliers/{supplier}/products', [
-            SupplierProductsController::class,
-            'index',
-        ])->name('suppliers.products.index');
-        Route::post('/suppliers/{supplier}/products', [
-            SupplierProductsController::class,
-            'store',
-        ])->name('suppliers.products.store');
-
         // Supplier Purchase Orders
         Route::get('/suppliers/{supplier}/purchase-orders', [
             SupplierPurchaseOrdersController::class,
@@ -474,6 +464,16 @@ Route::name('api.')
             SupplierPaymentMadesController::class,
             'store',
         ])->name('suppliers.payment-mades.store');
+
+        // Supplier Inventories
+        Route::get('/suppliers/{supplier}/inventories', [
+            SupplierInventoriesController::class,
+            'index',
+        ])->name('suppliers.inventories.index');
+        Route::post('/suppliers/{supplier}/inventories', [
+            SupplierInventoriesController::class,
+            'store',
+        ])->name('suppliers.inventories.store');
 
         Route::apiResource('townships', TownshipController::class);
 
@@ -643,4 +643,16 @@ Route::name('api.')
             'payments-receiveds',
             PaymentsReceivedController::class
         );
+
+        Route::apiResource('inventories', InventoryController::class);
+
+        // Inventory Inventory Details
+        Route::get('/inventories/{inventory}/inventory-details', [
+            InventoryInventoryDetailsController::class,
+            'index',
+        ])->name('inventories.inventory-details.index');
+        Route::post('/inventories/{inventory}/inventory-details', [
+            InventoryInventoryDetailsController::class,
+            'store',
+        ])->name('inventories.inventory-details.store');
     });

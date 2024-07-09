@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Brand;
 use App\Models\Product;
 use App\Models\Category;
-use App\Models\Supplier;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
@@ -41,12 +40,8 @@ class ProductController extends Controller
 
         $brands = Brand::pluck('name', 'id');
         $categories = Category::pluck('name', 'id');
-        $suppliers = Supplier::pluck('name', 'id');
 
-        return view(
-            'app.products.create',
-            compact('brands', 'categories', 'suppliers')
-        );
+        return view('app.products.create', compact('brands', 'categories'));
     }
 
     /**
@@ -87,11 +82,10 @@ class ProductController extends Controller
 
         $brands = Brand::pluck('name', 'id');
         $categories = Category::pluck('name', 'id');
-        $suppliers = Supplier::pluck('name', 'id');
 
         return view(
             'app.products.edit',
-            compact('product', 'brands', 'categories', 'suppliers')
+            compact('product', 'brands', 'categories')
         );
     }
 

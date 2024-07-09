@@ -22,8 +22,11 @@ return new class extends Migration {
             $table->string('size')->nullable();
             $table->unsignedBigInteger('category_id')->nullable();
             $table->unsignedBigInteger('brand_id')->nullable();
-            $table->unsignedBigInteger('supplier_id')->nullable();
-            $table->text('notes')->nullable();        
+            $table->integer('qty')->nullable();
+            $table->text('notes')->nullable();
+            $table->integer('min_qty')->nullable();
+            $table->integer('max_qty')->nullable();
+            $table->integer('on_order')->nullable();
 
             $table->timestamps();
         });

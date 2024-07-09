@@ -22,8 +22,11 @@ class Product extends Model
         'size',
         'category_id',
         'brand_id',
-        'supplier_id',
+        'qty',
         'notes',
+        'min_qty',
+        'max_qty',
+        'on_order',
     ];
 
     protected $searchableFields = ['*'];
@@ -36,11 +39,6 @@ class Product extends Model
     public function brand()
     {
         return $this->belongsTo(Brand::class);
-    }
-
-    public function supplier()
-    {
-        return $this->belongsTo(Supplier::class);
     }
 
     public function salesOrderItems()

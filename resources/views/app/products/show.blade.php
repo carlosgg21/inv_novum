@@ -32,16 +32,20 @@
                     <span>{{ $product->code ?? '-' }}</span>
                 </div>
                 <div class="mb-4">
-                    <h5>@lang('crud.products.inputs.supplier_id')</h5>
-                    <span>{{ optional($product->supplier)->name ?? '-' }}</span>
-                </div>
-                <div class="mb-4">
                     <h5>@lang('crud.products.inputs.name')</h5>
                     <span>{{ $product->name ?? '-' }}</span>
                 </div>
                 <div class="mb-4">
                     <h5>@lang('crud.products.inputs.description')</h5>
                     <span>{{ $product->description ?? '-' }}</span>
+                </div>
+                <div class="mb-4">
+                    <h5>@lang('crud.products.inputs.qty')</h5>
+                    <span>{{ $product->qty ?? '-' }}</span>
+                </div>
+                <div class="mb-4">
+                    <h5>@lang('crud.products.inputs.on_order')</h5>
+                    <span>{{ $product->on_order ?? '-' }}</span>
                 </div>
                 <div class="mb-4">
                     <h5>@lang('crud.products.inputs.unit')</h5>
@@ -62,6 +66,14 @@
                 <div class="mb-4">
                     <h5>@lang('crud.products.inputs.notes')</h5>
                     <span>{{ $product->notes ?? '-' }}</span>
+                </div>
+                <div class="mb-4">
+                    <h5>@lang('crud.products.inputs.min_qty')</h5>
+                    <span>{{ $product->min_qty ?? '-' }}</span>
+                </div>
+                <div class="mb-4">
+                    <h5>@lang('crud.products.inputs.max_qty')</h5>
+                    <span>{{ $product->max_qty ?? '-' }}</span>
                 </div>
             </div>
 

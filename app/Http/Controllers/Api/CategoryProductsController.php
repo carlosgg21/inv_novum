@@ -35,14 +35,17 @@ class CategoryProductsController extends Controller
             'image' => ['nullable', 'image', 'max:1024'],
             'brand_id' => ['nullable', 'exists:brands,id'],
             'code' => ['nullable', 'max:255', 'string'],
-            'supplier_id' => ['nullable', 'exists:suppliers,id'],
             'name' => ['required', 'max:255', 'string'],
             'description' => ['nullable', 'max:255', 'string'],
+            'qty' => ['nullable', 'numeric'],
+            'on_order' => ['nullable', 'numeric'],
             'unit' => ['nullable', 'max:255', 'string'],
             'unit_price' => ['required', 'numeric'],
             'cost_price' => ['nullable', 'numeric'],
             'size' => ['nullable', 'max:255', 'string'],
             'notes' => ['nullable', 'max:255', 'string'],
+            'min_qty' => ['nullable', 'numeric'],
+            'max_qty' => ['nullable', 'numeric'],
         ]);
 
         if ($request->hasFile('image')) {

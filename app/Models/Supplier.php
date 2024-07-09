@@ -24,11 +24,6 @@ class Supplier extends Model
 
     protected $searchableFields = ['*'];
 
-    public function products()
-    {
-        return $this->hasMany(Product::class);
-    }
-
     public function purchaseOrders()
     {
         return $this->hasMany(PurchaseOrder::class);
@@ -42,6 +37,11 @@ class Supplier extends Model
     public function paymentMades()
     {
         return $this->hasMany(PaymentMade::class);
+    }
+
+    public function inventories()
+    {
+        return $this->hasMany(Inventory::class);
     }
 
     public function contact()

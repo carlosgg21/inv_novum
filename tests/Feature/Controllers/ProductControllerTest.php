@@ -7,7 +7,6 @@ use App\Models\Product;
 
 use App\Models\Brand;
 use App\Models\Category;
-use App\Models\Supplier;
 
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -114,7 +113,6 @@ class ProductControllerTest extends TestCase
 
         $category = Category::factory()->create();
         $brand = Brand::factory()->create();
-        $supplier = Supplier::factory()->create();
 
         $data = [
             'code' => $this->faker->text(255),
@@ -124,10 +122,13 @@ class ProductControllerTest extends TestCase
             'unit_price' => $this->faker->randomNumber(2),
             'cost_price' => $this->faker->randomNumber(2),
             'size' => $this->faker->text(255),
+            'qty' => $this->faker->randomNumber(0),
             'notes' => $this->faker->text(),
+            'min_qty' => $this->faker->randomNumber(0),
+            'max_qty' => $this->faker->randomNumber(0),
+            'on_order' => $this->faker->randomNumber(0),
             'category_id' => $category->id,
             'brand_id' => $brand->id,
-            'supplier_id' => $supplier->id,
         ];
 
         $response = $this->put(route('products.update', $product), $data);

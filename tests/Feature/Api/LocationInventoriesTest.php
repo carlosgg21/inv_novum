@@ -64,8 +64,6 @@ class LocationInventoriesTest extends TestCase
             $data
         );
 
-        unset($data['product_id']);
-
         $this->assertDatabaseHas('inventories', $data);
 
         $response->assertStatus(201)->assertJsonFragment($data);

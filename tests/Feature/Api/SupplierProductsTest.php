@@ -34,42 +34,58 @@ class SupplierProductsTest extends TestCase
     public function it_gets_supplier_products(): void
     {
         $supplier = Supplier::factory()->create();
-        $products = Product::factory()
-            ->count(2)
-            ->create([
-                'supplier_id' => $supplier->id,
-            ]);
+        $product = Product::factory()->create();
+
+        $supplier->products()->attach($product);
 
         $response = $this->getJson(
             route('api.suppliers.products.index', $supplier)
         );
 
-        $response->assertOk()->assertSee($products[0]->name);
+        $response->assertOk()->assertSee($product->name);
     }
 
     /**
      * @test
      */
-    public function it_stores_the_supplier_products(): void
+    public function it_can_attach_products_to_supplier(): void
     {
         $supplier = Supplier::factory()->create();
-        $data = Product::factory()
-            ->make([
-                'supplier_id' => $supplier->id,
-            ])
-            ->toArray();
+        $product = Product::factory()->create();
 
         $response = $this->postJson(
-            route('api.suppliers.products.store', $supplier),
-            $data
+            route('api.suppliers.products.store', [$supplier, $product])
         );
 
-        $this->assertDatabaseHas('products', $data);
+        $response->assertNoContent();
 
-        $response->assertStatus(201)->assertJsonFragment($data);
+        $this->assertTrue(
+            $supplier
+                ->products()
+                ->where('products.id', $product->id)
+                ->exists()
+        );
+    }
 
-        $product = Product::latest('id')->first();
+    /**
+     * @test
+     */
+    public function it_can_detach_products_from_supplier(): void
+    {
+        $supplier = Supplier::factory()->create();
+        $product = Product::factory()->create();
 
-        $this->assertEquals($supplier->id, $product->supplier_id);
+        $response = $this->deleteJson(
+            route('api.suppliers.products.store', [$supplier, $product])
+        );
+
+        $response->assertNoContent();
+
+        $this->assertFalse(
+            $supplier
+                ->products()
+                ->where('products.id', $product->id)
+                ->exists()
+        );
     }
 }

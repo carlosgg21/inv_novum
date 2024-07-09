@@ -18,6 +18,7 @@ class Inventory extends Model
         'min_qty',
         'max_qty',
         'quantity_on_order',
+        'supplier_id',
     ];
 
     protected $searchableFields = ['*'];
@@ -35,5 +36,10 @@ class Inventory extends Model
     public function inventoryDetails()
     {
         return $this->hasMany(InventoryDetail::class);
+    }
+
+    public function supplier()
+    {
+        return $this->belongsTo(Supplier::class);
     }
 }

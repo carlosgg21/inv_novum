@@ -73,16 +73,6 @@
     </x-inputs.group>
 
     <x-inputs.group class="col-sm-12">
-        <x-inputs.select name="supplier_id" label="Supplier">
-            @php $selected = old('supplier_id', ($editing ? $product->supplier_id : '')) @endphp
-            <option disabled {{ empty($selected) ? 'selected' : '' }}>Please select the Supplier</option>
-            @foreach($suppliers as $value => $label)
-            <option value="{{ $value }}" {{ $selected == $value ? 'selected' : '' }} >{{ $label }}</option>
-            @endforeach
-        </x-inputs.select>
-    </x-inputs.group>
-
-    <x-inputs.group class="col-sm-12">
         <x-inputs.text
             name="name"
             label="Name"
@@ -101,6 +91,26 @@
             >{{ old('description', ($editing ? $product->description : ''))
             }}</x-inputs.textarea
         >
+    </x-inputs.group>
+
+    <x-inputs.group class="col-sm-12 col-lg-6">
+        <x-inputs.number
+            name="qty"
+            label="Qty"
+            :value="old('qty', ($editing ? $product->qty : ''))"
+            max="255"
+            placeholder="Qty"
+        ></x-inputs.number>
+    </x-inputs.group>
+
+    <x-inputs.group class="col-sm-12 col-lg-6">
+        <x-inputs.number
+            name="on_order"
+            label="On Order"
+            :value="old('on_order', ($editing ? $product->on_order : ''))"
+            max="255"
+            placeholder="On Order"
+        ></x-inputs.number>
     </x-inputs.group>
 
     <x-inputs.group class="col-sm-12 col-lg-6">
@@ -151,5 +161,25 @@
             >{{ old('notes', ($editing ? $product->notes : ''))
             }}</x-inputs.textarea
         >
+    </x-inputs.group>
+
+    <x-inputs.group class="col-sm-12 col-lg-6">
+        <x-inputs.number
+            name="min_qty"
+            label="Min Qty"
+            :value="old('min_qty', ($editing ? $product->min_qty : ''))"
+            max="255"
+            placeholder="Min Qty"
+        ></x-inputs.number>
+    </x-inputs.group>
+
+    <x-inputs.group class="col-sm-12 col-lg-6">
+        <x-inputs.number
+            name="max_qty"
+            label="Max Qty"
+            :value="old('max_qty', ($editing ? $product->max_qty : ''))"
+            max="255"
+            placeholder="Max Qty"
+        ></x-inputs.number>
     </x-inputs.group>
 </div>

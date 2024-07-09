@@ -24,6 +24,13 @@ return new class extends Migration {
                 ->on('locations')
                 ->onUpdate('CASCADE')
                 ->onDelete('CASCADE');
+
+            $table
+                ->foreign('supplier_id')
+                ->references('id')
+                ->on('suppliers')
+                ->onUpdate('CASCADE')
+                ->onDelete('CASCADE');
         });
     }
 
@@ -35,6 +42,7 @@ return new class extends Migration {
         Schema::table('inventories', function (Blueprint $table) {
             $table->dropForeign(['product_id']);
             $table->dropForeign(['location_id']);
+            $table->dropForeign(['supplier_id']);
         });
     }
 };

@@ -18,6 +18,7 @@ return new class extends Migration {
             $table->integer('min_qty')->nullable();
             $table->integer('max_qty')->nullable();
             $table->integer('quantity_on_order')->nullable();
+            $table->unsignedBigInteger('supplier_id')->nullable();
 
             $table->timestamps();
         });
