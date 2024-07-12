@@ -94,7 +94,7 @@ class CityTest extends TestCase
 
         $response = $this->deleteJson(route('api.cities.destroy', $city));
 
-        $this->assertModelMissing($city);
+        $this->assertSoftDeleted($city);
 
         $response->assertNoContent();
     }

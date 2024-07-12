@@ -2,7 +2,7 @@
 
 <div class="row">
     <x-inputs.group class="col-sm-12">
-        <x-inputs.select name="supplier_id" label="Supplier" required>
+        <x-inputs.select name="supplier_id" label="Supplier">
             @php $selected = old('supplier_id', ($editing ? $inventory->supplier_id : '')) @endphp
             <option disabled {{ empty($selected) ? 'selected' : '' }}>Please select the Supplier</option>
             @foreach($suppliers as $value => $label)

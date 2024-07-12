@@ -20,7 +20,7 @@ class InventoryUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'supplier_id' => ['required', 'exists:suppliers,id'],
+            'supplier_id' => ['nullable', 'exists:suppliers,id'],
             'product_id' => ['required', 'exists:products,id'],
             'location_id' => ['required', 'exists:locations,id'],
             'quantity' => ['nullable', 'numeric'],

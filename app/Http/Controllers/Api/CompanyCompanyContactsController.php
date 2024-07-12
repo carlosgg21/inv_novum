@@ -36,8 +36,8 @@ class CompanyCompanyContactsController extends Controller
         $validated = $request->validate([
             'name' => ['required', 'max:255', 'string'],
             'last_name' => ['required', 'max:255', 'string'],
-            'charge_id' => ['nullable', 'exists:charges,id'],
             'title' => ['nullable', 'max:255', 'string'],
+            'charge_id' => ['nullable', 'exists:charges,id'],
             'boss' => ['required', 'boolean'],
             'email' => ['nullable', 'email'],
             'phone' => ['nullable', 'max:255', 'string'],

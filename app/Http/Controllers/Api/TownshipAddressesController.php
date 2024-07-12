@@ -38,6 +38,8 @@ class TownshipAddressesController extends Controller
             'addressable_id' => ['required', 'max:255'],
             'city_id' => ['nullable', 'exists:cities,id'],
             'addressable_type' => ['required', 'max:255', 'string'],
+            'zip_code' => ['nullable', 'max:255', 'string'],
+            'default' => ['nullable', 'boolean'],
         ]);
 
         $address = $township->addresses()->create($validated);

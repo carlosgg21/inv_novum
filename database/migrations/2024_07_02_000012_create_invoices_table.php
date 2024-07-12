@@ -18,7 +18,7 @@ return new class extends Migration {
                 ->nullable();
             $table->date('date');
             $table->unsignedBigInteger('sales_order_id');
-            $table->float('total_amount')->nullable();
+            $table->decimal('total_amount')->nullable();
             $table->string('status');
             $table->string('year')->nullable();
             $table->integer('mount')->nullable();

@@ -119,6 +119,7 @@ class AddressControllerTest extends TestCase
         $data = [
             'address' => $this->faker->text(),
             'zip_code' => $this->faker->text(255),
+            'default' => $this->faker->boolean(),
             'township_id' => $township->id,
             'city_id' => $city->id,
             'country_id' => $country->id,

@@ -18,11 +18,13 @@ return new class extends Migration {
             $table->string('bank_accountable_type')->nullable();
             $table->unsignedBigInteger('bank_id')->nullable();
             $table->unsignedBigInteger('currency_id')->nullable();
+            $table->boolean('default')->nullable();
 
             $table->index('bank_accountable_id');
             $table->index('bank_accountable_type');
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

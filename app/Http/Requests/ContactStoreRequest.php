@@ -26,6 +26,8 @@ class ContactStoreRequest extends FormRequest
             'phone' => ['nullable', 'max:255', 'string'],
             'email' => ['nullable', 'email'],
             'address' => ['nullable', 'max:255', 'string'],
+            'zip_code' => ['nullable', 'max:255', 'string'],
+            'default' => ['nullable', 'boolean'],
             'country_id' => ['nullable', 'exists:countries,id'],
             'city_id' => ['nullable', 'exists:cities,id'],
             'township_id' => ['nullable', 'exists:townships,id'],

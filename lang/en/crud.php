@@ -226,8 +226,8 @@ return [
         'inputs' => [
             'name' => 'Name',
             'last_name' => 'Last Name',
-            'charge_id' => 'Charge',
             'title' => 'Title',
+            'charge_id' => 'Charge',
             'boss' => 'Is Boss',
             'email' => 'Email',
             'phone' => 'Phone',
@@ -264,6 +264,8 @@ return [
             'phone' => 'Phone',
             'email' => 'Email',
             'address' => 'Address',
+            'zip_code' => 'Zip Code',
+            'default' => 'Default',
             'country_id' => 'Country',
             'city_id' => 'City',
             'township_id' => 'Township',
@@ -338,6 +340,8 @@ return [
             'city_id' => 'City',
             'addressable_type' => 'Addressable Type',
             'township_id' => 'Township',
+            'zip_code' => 'Zip Code',
+            'default' => 'Default',
         ],
     ],
 

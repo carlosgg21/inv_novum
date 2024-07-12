@@ -153,6 +153,6 @@ class EmployeeControllerTest extends TestCase
 
         $response->assertRedirect(route('employees.index'));
 
-        $this->assertModelMissing($employee);
+        $this->assertSoftDeleted($employee);
     }
 }

@@ -37,6 +37,14 @@
                     <span>{{ $contact->address ?? '-' }}</span>
                 </div>
                 <div class="mb-4">
+                    <h5>@lang('crud.contacts.inputs.zip_code')</h5>
+                    <span>{{ $contact->zip_code ?? '-' }}</span>
+                </div>
+                <div class="mb-4">
+                    <h5>@lang('crud.contacts.inputs.default')</h5>
+                    <span>{{ $contact->default ?? '-' }}</span>
+                </div>
+                <div class="mb-4">
                     <h5>@lang('crud.contacts.inputs.country_id')</h5>
                     <span>{{ optional($contact->country)->name ?? '-' }}</span>
                 </div>

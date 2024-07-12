@@ -27,6 +27,7 @@ return new class extends Migration {
             $table->string('qr_code')->nullable();
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

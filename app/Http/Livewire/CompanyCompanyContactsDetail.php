@@ -29,8 +29,8 @@ class CompanyCompanyContactsDetail extends Component
     protected $rules = [
         'companyContact.name' => ['required', 'max:255', 'string'],
         'companyContact.last_name' => ['required', 'max:255', 'string'],
-        'companyContact.charge_id' => ['nullable', 'exists:charges,id'],
         'companyContact.title' => ['nullable', 'max:255', 'string'],
+        'companyContact.charge_id' => ['nullable', 'exists:charges,id'],
         'companyContact.boss' => ['required', 'boolean'],
         'companyContact.email' => ['nullable', 'email'],
         'companyContact.phone' => ['nullable', 'max:255', 'string'],

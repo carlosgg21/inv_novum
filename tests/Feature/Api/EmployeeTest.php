@@ -112,7 +112,7 @@ class EmployeeTest extends TestCase
             route('api.employees.destroy', $employee)
         );
 
-        $this->assertModelMissing($employee);
+        $this->assertSoftDeleted($employee);
 
         $response->assertNoContent();
     }

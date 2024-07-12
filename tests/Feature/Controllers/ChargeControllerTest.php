@@ -133,6 +133,6 @@ class ChargeControllerTest extends TestCase
 
         $response->assertRedirect(route('charges.index'));
 
-        $this->assertModelMissing($charge);
+        $this->assertSoftDeleted($charge);
     }
 }

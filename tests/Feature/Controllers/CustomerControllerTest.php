@@ -135,6 +135,6 @@ class CustomerControllerTest extends TestCase
 
         $response->assertRedirect(route('customers.index'));
 
-        $this->assertModelMissing($customer);
+        $this->assertSoftDeleted($customer);
     }
 }

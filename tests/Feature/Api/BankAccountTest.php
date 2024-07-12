@@ -57,6 +57,7 @@ class BankAccountTest extends TestCase
 
         unset($data['bank_accountable_id']);
         unset($data['bank_accountable_type']);
+        unset($data['default']);
 
         $this->assertDatabaseHas('bank_accounts', $data);
 
@@ -76,6 +77,7 @@ class BankAccountTest extends TestCase
         $data = [
             'number' => $this->faker->text(255),
             'type' => $this->faker->word(),
+            'default' => $this->faker->boolean(),
             'bank_id' => $bank->id,
             'currency_id' => $currency->id,
         ];
@@ -87,6 +89,7 @@ class BankAccountTest extends TestCase
 
         unset($data['bank_accountable_id']);
         unset($data['bank_accountable_type']);
+        unset($data['default']);
 
         $data['id'] = $bankAccount->id;
 
@@ -106,7 +109,7 @@ class BankAccountTest extends TestCase
             route('api.bank-accounts.destroy', $bankAccount)
         );
 
-        $this->assertModelMissing($bankAccount);
+        $this->assertSoftDeleted($bankAccount);
 
         $response->assertNoContent();
     }

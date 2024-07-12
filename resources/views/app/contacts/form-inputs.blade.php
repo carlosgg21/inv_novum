@@ -43,7 +43,7 @@
         ></x-inputs.text>
     </x-inputs.group>
 
-    <x-inputs.group class="col-sm-12 col-lg-6">
+    <x-inputs.group class="col-sm-12">
         <x-inputs.email
             name="email"
             label="Email"
@@ -58,6 +58,24 @@
             >{{ old('address', ($editing ? $contact->address : ''))
             }}</x-inputs.textarea
         >
+    </x-inputs.group>
+
+    <x-inputs.group class="col-sm-12">
+        <x-inputs.text
+            name="zip_code"
+            label="Zip Code"
+            :value="old('zip_code', ($editing ? $contact->zip_code : ''))"
+            maxlength="255"
+            placeholder="Zip Code"
+        ></x-inputs.text>
+    </x-inputs.group>
+
+    <x-inputs.group class="col-sm-12">
+        <x-inputs.checkbox
+            name="default"
+            label="Default"
+            :checked="old('default', ($editing ? $contact->default : 0))"
+        ></x-inputs.checkbox>
     </x-inputs.group>
 
     @livewire('selects.country-id-city-id-township-id-dependent-select',

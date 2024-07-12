@@ -19,9 +19,14 @@ class Address extends Model
         'country_id',
         'addressable_id',
         'addressable_type',
+        'default',
     ];
 
     protected $searchableFields = ['*'];
+
+    protected $casts = [
+        'default' => 'boolean',
+    ];
 
     public function township()
     {

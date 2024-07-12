@@ -151,6 +151,6 @@ class ProductControllerTest extends TestCase
 
         $response->assertRedirect(route('products.index'));
 
-        $this->assertModelMissing($product);
+        $this->assertSoftDeleted($product);
     }
 }

@@ -44,13 +44,18 @@ class Supplier extends Model
         return $this->hasMany(Inventory::class);
     }
 
-    public function contact()
-    {
-        return $this->morphOne(Contact::class, 'contactable');
-    }
-
     public function bankAccounts()
     {
         return $this->morphMany(BankAccount::class, 'bank_accountable');
+    }
+
+    public function contacts()
+    {
+        return $this->morphMany(Contact::class, 'contactable');
+    }
+
+    public function addresses()
+    {
+        return $this->morphMany(Address::class, 'addressable');
     }
 }

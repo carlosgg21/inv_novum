@@ -92,7 +92,7 @@ class ConditionTest extends TestCase
             route('api.conditions.destroy', $condition)
         );
 
-        $this->assertModelMissing($condition);
+        $this->assertSoftDeleted($condition);
 
         $response->assertNoContent();
     }

@@ -40,6 +40,14 @@
                     <h5>@lang('crud.addresses.inputs.township_id')</h5>
                     <span>{{ optional($address->township)->name ?? '-' }}</span>
                 </div>
+                <div class="mb-4">
+                    <h5>@lang('crud.addresses.inputs.zip_code')</h5>
+                    <span>{{ $address->zip_code ?? '-' }}</span>
+                </div>
+                <div class="mb-4">
+                    <h5>@lang('crud.addresses.inputs.default')</h5>
+                    <span>{{ $address->default ?? '-' }}</span>
+                </div>
             </div>
 
             <div class="mt-4">

@@ -27,6 +27,8 @@ class AddressStoreRequest extends FormRequest
             'city_id' => ['nullable', 'exists:cities,id'],
             'addressable_type' => ['required', 'max:255', 'string'],
             'township_id' => ['nullable', 'exists:townships,id'],
+            'zip_code' => ['nullable', 'max:255', 'string'],
+            'default' => ['nullable', 'boolean'],
         ];
     }
 }

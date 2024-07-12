@@ -29,6 +29,7 @@ return new class extends Migration {
             $table->integer('on_order')->nullable();
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

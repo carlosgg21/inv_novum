@@ -133,6 +133,6 @@ class ConditionControllerTest extends TestCase
 
         $response->assertRedirect(route('conditions.index'));
 
-        $this->assertModelMissing($condition);
+        $this->assertSoftDeleted($condition);
     }
 }

@@ -19,6 +19,7 @@ return new class extends Migration {
             $table->unsignedBigInteger('country_id')->nullable();
             $table->unsignedBigInteger('addressable_id');
             $table->string('addressable_type');
+            $table->boolean('default')->nullable();
 
             $table->index('addressable_id');
             $table->index('addressable_type');

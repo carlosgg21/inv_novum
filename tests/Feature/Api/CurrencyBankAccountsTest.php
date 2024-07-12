@@ -66,6 +66,7 @@ class CurrencyBankAccountsTest extends TestCase
 
         unset($data['bank_accountable_id']);
         unset($data['bank_accountable_type']);
+        unset($data['default']);
 
         $this->assertDatabaseHas('bank_accounts', $data);
 

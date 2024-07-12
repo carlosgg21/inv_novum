@@ -98,7 +98,7 @@ class TownshipTest extends TestCase
             route('api.townships.destroy', $township)
         );
 
-        $this->assertModelMissing($township);
+        $this->assertSoftDeleted($township);
 
         $response->assertNoContent();
     }

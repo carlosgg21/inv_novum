@@ -36,6 +36,8 @@ class CountryContactsController extends Controller
             'phone' => ['nullable', 'max:255', 'string'],
             'email' => ['nullable', 'email'],
             'address' => ['nullable', 'max:255', 'string'],
+            'zip_code' => ['nullable', 'max:255', 'string'],
+            'default' => ['nullable', 'boolean'],
             'city_id' => ['nullable', 'exists:cities,id'],
             'township_id' => ['nullable', 'exists:townships,id'],
         ]);

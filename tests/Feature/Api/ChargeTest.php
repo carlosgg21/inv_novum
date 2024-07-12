@@ -87,7 +87,7 @@ class ChargeTest extends TestCase
 
         $response = $this->deleteJson(route('api.charges.destroy', $charge));
 
-        $this->assertModelMissing($charge);
+        $this->assertSoftDeleted($charge);
 
         $response->assertNoContent();
     }

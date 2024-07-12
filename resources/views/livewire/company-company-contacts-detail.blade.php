@@ -55,6 +55,16 @@
                     </x-inputs.group>
 
                     <x-inputs.group class="col-sm-12 col-lg-6">
+                        <x-inputs.text
+                            name="companyContact.title"
+                            label="Title"
+                            wire:model="companyContact.title"
+                            maxlength="255"
+                            placeholder="Title"
+                        ></x-inputs.text>
+                    </x-inputs.group>
+
+                    <x-inputs.group class="col-sm-12 col-lg-6">
                         <x-inputs.select
                             name="companyContact.charge_id"
                             label="Charge"
@@ -65,16 +75,6 @@
                             <option value="{{ $value }}"  >{{ $label }}</option>
                             @endforeach
                         </x-inputs.select>
-                    </x-inputs.group>
-
-                    <x-inputs.group class="col-sm-12 col-lg-6">
-                        <x-inputs.text
-                            name="companyContact.title"
-                            label="Title"
-                            wire:model="companyContact.title"
-                            maxlength="255"
-                            placeholder="Title"
-                        ></x-inputs.text>
                     </x-inputs.group>
 
                     <x-inputs.group class="col-sm-12">
@@ -155,10 +155,10 @@
                         @lang('crud.company_company_contacts.inputs.last_name')
                     </th>
                     <th class="text-left">
-                        @lang('crud.company_company_contacts.inputs.charge_id')
+                        @lang('crud.company_company_contacts.inputs.title')
                     </th>
                     <th class="text-left">
-                        @lang('crud.company_company_contacts.inputs.title')
+                        @lang('crud.company_company_contacts.inputs.charge_id')
                     </th>
                     <th class="text-left">
                         @lang('crud.company_company_contacts.inputs.boss')
@@ -192,10 +192,10 @@
                         {{ $companyContact->last_name ?? '-' }}
                     </td>
                     <td class="text-left">
-                        {{ optional($companyContact->charge)->name ?? '-' }}
+                        {{ $companyContact->title ?? '-' }}
                     </td>
                     <td class="text-left">
-                        {{ $companyContact->title ?? '-' }}
+                        {{ optional($companyContact->charge)->name ?? '-' }}
                     </td>
                     <td class="text-left">
                         {{ $companyContact->boss ?? '-' }}

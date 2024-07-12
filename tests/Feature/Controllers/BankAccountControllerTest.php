@@ -69,6 +69,7 @@ class BankAccountControllerTest extends TestCase
 
         unset($data['bank_accountable_id']);
         unset($data['bank_accountable_type']);
+        unset($data['default']);
 
         $this->assertDatabaseHas('bank_accounts', $data);
 
@@ -120,6 +121,7 @@ class BankAccountControllerTest extends TestCase
         $data = [
             'number' => $this->faker->text(255),
             'type' => $this->faker->word(),
+            'default' => $this->faker->boolean(),
             'bank_id' => $bank->id,
             'currency_id' => $currency->id,
         ];
@@ -131,6 +133,7 @@ class BankAccountControllerTest extends TestCase
 
         unset($data['bank_accountable_id']);
         unset($data['bank_accountable_type']);
+        unset($data['default']);
 
         $data['id'] = $bankAccount->id;
 
@@ -150,6 +153,6 @@ class BankAccountControllerTest extends TestCase
 
         $response->assertRedirect(route('bank-accounts.index'));
 
-        $this->assertModelMissing($bankAccount);
+        $this->assertSoftDeleted($bankAccount);
     }
 }

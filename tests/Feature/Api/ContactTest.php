@@ -82,6 +82,8 @@ class ContactTest extends TestCase
             'phone' => $this->faker->phoneNumber(),
             'email' => $this->faker->email(),
             'address' => $this->faker->text(),
+            'zip_code' => $this->faker->text(255),
+            'default' => $this->faker->boolean(),
             'township_id' => $township->id,
             'city_id' => $city->id,
             'country_id' => $country->id,
@@ -111,7 +113,7 @@ class ContactTest extends TestCase
 
         $response = $this->deleteJson(route('api.contacts.destroy', $contact));
 
-        $this->assertModelMissing($contact);
+        $this->assertSoftDeleted($contact);
 
         $response->assertNoContent();
     }

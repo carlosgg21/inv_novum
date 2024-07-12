@@ -108,7 +108,7 @@ class ProductTest extends TestCase
 
         $response = $this->deleteJson(route('api.products.destroy', $product));
 
-        $this->assertModelMissing($product);
+        $this->assertSoftDeleted($product);
 
         $response->assertNoContent();
     }

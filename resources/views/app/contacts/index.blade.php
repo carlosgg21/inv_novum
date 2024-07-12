@@ -66,6 +66,12 @@
                                 @lang('crud.contacts.inputs.address')
                             </th>
                             <th class="text-left">
+                                @lang('crud.contacts.inputs.zip_code')
+                            </th>
+                            <th class="text-left">
+                                @lang('crud.contacts.inputs.default')
+                            </th>
+                            <th class="text-left">
                                 @lang('crud.contacts.inputs.country_id')
                             </th>
                             <th class="text-left">
@@ -88,6 +94,8 @@
                             <td>{{ $contact->phone ?? '-' }}</td>
                             <td>{{ $contact->email ?? '-' }}</td>
                             <td>{{ $contact->address ?? '-' }}</td>
+                            <td>{{ $contact->zip_code ?? '-' }}</td>
+                            <td>{{ $contact->default ?? '-' }}</td>
                             <td>
                                 {{ optional($contact->country)->name ?? '-' }}
                             </td>
@@ -143,7 +151,7 @@
                         </tr>
                         @empty
                         <tr>
-                            <td colspan="10">
+                            <td colspan="12">
                                 @lang('crud.common.no_items_found')
                             </td>
                         </tr>
@@ -151,7 +159,7 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td colspan="10">{!! $contacts->render() !!}</td>
+                            <td colspan="12">{!! $contacts->render() !!}</td>
                         </tr>
                     </tfoot>
                 </table>

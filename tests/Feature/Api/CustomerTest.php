@@ -94,7 +94,7 @@ class CustomerTest extends TestCase
             route('api.customers.destroy', $customer)
         );
 
-        $this->assertModelMissing($customer);
+        $this->assertSoftDeleted($customer);
 
         $response->assertNoContent();
     }

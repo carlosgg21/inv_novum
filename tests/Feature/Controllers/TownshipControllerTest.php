@@ -139,6 +139,6 @@ class TownshipControllerTest extends TestCase
 
         $response->assertRedirect(route('townships.index'));
 
-        $this->assertModelMissing($township);
+        $this->assertSoftDeleted($township);
     }
 }

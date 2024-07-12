@@ -36,6 +36,8 @@ class CityAddressesController extends Controller
             'addressable_id' => ['required', 'max:255'],
             'addressable_type' => ['required', 'max:255', 'string'],
             'township_id' => ['nullable', 'exists:townships,id'],
+            'zip_code' => ['nullable', 'max:255', 'string'],
+            'default' => ['nullable', 'boolean'],
         ]);
 
         $address = $city->addresses()->create($validated);

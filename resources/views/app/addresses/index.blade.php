@@ -68,6 +68,12 @@
                             <th class="text-left">
                                 @lang('crud.addresses.inputs.township_id')
                             </th>
+                            <th class="text-left">
+                                @lang('crud.addresses.inputs.zip_code')
+                            </th>
+                            <th class="text-left">
+                                @lang('crud.addresses.inputs.default')
+                            </th>
                             <th class="text-center">
                                 @lang('crud.common.actions')
                             </th>
@@ -87,6 +93,8 @@
                             <td>
                                 {{ optional($address->township)->name ?? '-' }}
                             </td>
+                            <td>{{ $address->zip_code ?? '-' }}</td>
+                            <td>{{ $address->default ?? '-' }}</td>
                             <td class="text-center" style="width: 134px;">
                                 <div
                                     role="group"
@@ -135,7 +143,7 @@
                         </tr>
                         @empty
                         <tr>
-                            <td colspan="8">
+                            <td colspan="10">
                                 @lang('crud.common.no_items_found')
                             </td>
                         </tr>
@@ -143,7 +151,7 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td colspan="8">{!! $addresses->render() !!}</td>
+                            <td colspan="10">{!! $addresses->render() !!}</td>
                         </tr>
                     </tfoot>
                 </table>

@@ -140,6 +140,6 @@ class CityControllerTest extends TestCase
 
         $response->assertRedirect(route('cities.index'));
 
-        $this->assertModelMissing($city);
+        $this->assertSoftDeleted($city);
     }
 }
