@@ -2,18 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
-use App\Models\Supplier;
-use App\Models\Location;
-use App\Models\Inventory;
-use Illuminate\View\View;
-use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\InventoryStoreRequest;
 use App\Http\Requests\InventoryUpdateRequest;
+use App\Models\Inventory;
+use App\Models\Location;
+use App\Models\Product;
+use App\Models\Supplier;
+use App\Repositories\InventoryRepository;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class InventoryController extends Controller
 {
+    protected $inventoryRepository;
+
+    public function __construct(InventoryRepository $inventoryRepository)
+    {
+        $this->inventoryRepository = $inventoryRepository;
+    }
     /**
      * Display a listing of the resource.
      */
@@ -22,11 +29,14 @@ class InventoryController extends Controller
         $this->authorize('view-any', Inventory::class);
 
         $search = $request->get('search', '');
+//        $data = $this->inventoryRepository->getInventories();
+// dd($data->toArray());
+        $inventories = $this->inventoryRepository->getInventories()->paginate(5);
 
-        $inventories = Inventory::search($search)
-            ->latest()
-            ->paginate(5)
-            ->withQueryString();
+//Inventory::search($search)
+//             ->latest()
+//             ->paginate(5)
+//             ->withQueryString();
 
         return view('app.inventories.index', compact('inventories', 'search'));
     }

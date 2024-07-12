@@ -9,7 +9,7 @@
 @section('content')
 <div class="container">
    <x-searchbar :search="$search">
-    <a href="{{ route('charges.index') }}" type="button" class="btn btn-primary btn-sm">
+    <a href="{{ route('currencies.index') }}" type="button" class="btn btn-primary btn-sm">
         Clear Search
     </a>
 </x-searchbar>

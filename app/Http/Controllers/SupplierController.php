@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Country;
-use App\Models\Supplier;
-use Illuminate\View\View;
-use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\SupplierStoreRequest;
 use App\Http\Requests\SupplierUpdateRequest;
+use App\Models\Country;
+use App\Models\Supplier;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class SupplierController extends Controller
 {
@@ -50,6 +50,12 @@ class SupplierController extends Controller
 
         $validated = $request->validated();
 
+        if (!empty($validated['note'])) {
+            $userName = auth()->user()->name;
+            $timestamp = now()->toDateTimeString();
+            $validated['note'] .= " [{$timestamp} by {$userName}]";
+        }
+
         $supplier = Supplier::create($validated);
 
         return redirect()
@@ -82,13 +88,17 @@ class SupplierController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(
-        SupplierUpdateRequest $request,
-        Supplier $supplier
-    ): RedirectResponse {
+    public function update( SupplierUpdateRequest $request,Supplier $supplier): RedirectResponse 
+    {
         $this->authorize('update', $supplier);
 
         $validated = $request->validated();
+
+        if (!empty($validated['note'])) {
+            $userName = auth()->user()->name;
+            $timestamp = now()->toDateTimeString();
+            $validated['note'] .= " [{$timestamp} by {$userName}]";
+        }
 
         $supplier->update($validated);
 

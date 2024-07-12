@@ -22,7 +22,7 @@ class EmployeeFactory extends Factory
     public function definition(): array
     {
         return [
-            'identification' => $this->faker->text(255),
+            'identification' => $this->faker->unique()->regexify('[0-9]{11}'),
             'name'           => $this->faker->name(),
             'last_name'      => $this->faker->lastName(),
             'phone'          => $this->faker->phoneNumber(),

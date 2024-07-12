@@ -16,6 +16,7 @@ use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\PaymentMadeController;
@@ -85,6 +86,7 @@ Route::prefix('/')
         Route::resource('sales-orders', SalesOrderController::class);
         Route::resource('purchase-orders', PurchaseOrderController::class);
         Route::resource('invoices', InvoiceController::class);
+        Route::resource('inventories', InventoryController::class);
         Route::resource('countries', CountryController::class);
         Route::resource('payment-mades', PaymentMadeController::class);
         Route::resource(
