@@ -22,7 +22,7 @@ class SalesOrderFactory extends Factory
     public function definition(): array
     {
         return [
-            'number'            => $this->faker->text(255),
+            'number'            => $this->faker->unique()->regexify('[0-9]{6}'),
             'prefix'            => $this->faker->text(255),
             'order_date'        => $this->faker->date(),
             'invoice_date'      => $this->faker->date(),
@@ -36,7 +36,7 @@ class SalesOrderFactory extends Factory
             'internal_notes'    => $this->faker->text(),
             'approved_by'       => $this->faker->text(255),
             'customer_id'       => \App\Models\Customer::factory(),
-           'payment_method_id'  => $this->faker->randomElement([1, 4]),
+            'payment_method_id'  => $this->faker->randomElement([1, 4]),
             'payment_term_id'   => $this->faker->randomElement([1, 7]),
             'sold_by'           => \App\Models\Employee::factory(),
         ];

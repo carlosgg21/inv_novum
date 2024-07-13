@@ -24,6 +24,7 @@ class InvoiceController extends Controller
         $search = $request->get('search', '');
 
         $invoices = Invoice::search($search)
+            ->excludeStatuses(['cancelled', 'closed'])
             ->latest()
             ->paginate(5)
             ->withQueryString();

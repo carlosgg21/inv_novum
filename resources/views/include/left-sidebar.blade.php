@@ -23,7 +23,7 @@
                 </li>
 
                 <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i
-                            class="ti-dropbox"></i><span class="hide-menu">Inventory Manager </span></a>
+                            class=" fas fa-dolly-flatbed"></i><span class="hide-menu">Inventory Manager </span></a>
                             {{-- class="ti-dropbox"></i><span class="hide-menu">Inventory Manager </span></a> --}}
                     <!-- <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-layers"></i><span class="hide-menu">Inventory Manager </span></a> -->
                     <ul aria-expanded="false" class="collapse">
@@ -36,12 +36,15 @@
                     </ul>
                 </li>
                 <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i
-                            class="ti-wallet"></i><span class="hide-menu">Accounting</span></a>
+                            class="fas fa-donate"></i><span class="hide-menu">Accounting</span></a>
+{{--                            class="ti-wallet"></i><span class="hide-menu">Accounting</span></a>--}}
                     <!-- <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-bookmark-alt"></i><span class="hide-menu">Accounting</span></a> -->
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="app-calendar.html">Payment In</a></li>
                         <li><a href="app-chat.html">Payment Out</a></li>
-                        <li><a href="app-ticket.html">Invoice</a></li>
+                        @can('view-any', App\Models\Invoice::class)
+                            <li><a href="{{ route('invoices.index') }}">Invoice</a></li>
+                        @endcan
                     </ul>
                 </li>
                 <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i
@@ -55,7 +58,7 @@
                         @endcan
                         @can('view-any', App\Models\Employee::class)
                          <li><a href="{{ route('employees.index') }}">Employees</a></li>
-                        @endcan                       
+                        @endcan
                         <li class="nav-small-cap">LISTS</li>
                         @can('view-any', App\Models\Brand::class)
                             <li><a href="{{ route('brands.index') }}" >Brands</a></li>
@@ -84,7 +87,7 @@
                         @can('view-any', App\Models\PaymentTerm::class)
                             <li><a href="{{ route('payment-terms.index') }}">Payment Terms</a></li>
                         @endcan
-                        @can('view-any', App\Models\PaymentMethod::class)                            
+                        @can('view-any', App\Models\PaymentMethod::class)
                             <li><a href="{{ route('payment-methods.index') }}">Payment Methods</a></li>
                         @endcan
                         @can('view-any', App\Models\Bank::class)
@@ -107,7 +110,7 @@
                         <li><a href="ui-user-card.html">Defaults</a></li>
                         <li><a href="ui-user-card.html">Settings</a></li>
                         <li><a href="ui-user-card.html">Prefixes</a></li>
-                    
+
                     </ul>
                 </li>
 

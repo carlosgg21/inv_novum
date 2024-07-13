@@ -22,7 +22,7 @@ class PurchaseOrderFactory extends Factory
     public function definition(): array
     {
         return [
-            'number'                  => $this->faker->text(255),
+            'number'                  => $this->faker->unique()->regexify('[0-9]{6}'),
             'order_date'              => $this->faker->date(),
             'total_amount'            => $this->faker->randomFloat(2, 10, 500),
             'status'                  => $this->faker->randomElement(['not entered', 'entered']),

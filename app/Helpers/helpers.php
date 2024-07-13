@@ -16,6 +16,7 @@ if (!function_exists('format_money')) {
             'JPY' => '¥',
             'RUB' => '₽',
             'BRL' => 'R$',
+            'CUP' => '$',
         ];
 
         return array_key_exists($currency, $currencies)
@@ -63,7 +64,7 @@ if (!function_exists('setting')) {
         });
     }
 
-    
+
 if (!function_exists('format_date')) {
     function format_date($date, $format = 'Y-m-d')
     {

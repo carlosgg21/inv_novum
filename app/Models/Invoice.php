@@ -30,6 +30,32 @@ class Invoice extends Model
         'date' => 'date',
     ];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($invoice) {
+            $invoice->number = self::generateInvoiceNumber();
+        });
+
+        static::updating(function ($invoice) {
+            if (!$invoice->number) {
+                $invoice->number = self::generateInvoiceNumber();
+            }
+        });
+    }
+
+    public static function generateInvoiceNumber()
+    {
+        $invoiceNumberStart =  setting('invoice.invoice_number_star', 'default_value');
+
+        $lastInvoice = self::latest('id')->first();
+        $lastNumber = $lastInvoice ? intval($lastInvoice->number) : intval($invoiceNumberStart) - 1;
+
+        return str_pad($lastNumber + 1, 6, '0', STR_PAD_LEFT);
+
+    }
+
     public function salesOrder()
     {
         return $this->belongsTo(SalesOrder::class);
@@ -48,5 +74,40 @@ class Invoice extends Model
     public function paymentsReceiveds()
     {
         return $this->hasMany(PaymentsReceived::class);
+    }
+
+    public function scopeOpen($query)
+    {
+        return $query->where('status', 'open');
+    }
+
+    public function scopeAccepted($query)
+    {
+        return $query->where('status', 'accepted');
+    }
+
+    public function scopePaid($query)
+    {
+        return $query->where('status', 'paid');
+    }
+
+    public function scopeClosed($query)
+    {
+        return $query->where('status', 'closed');
+    }
+
+    public function scopeCancelled($query)
+    {
+        return $query->where('status', 'cancelled');
+    }
+
+    public function scopeExcludeStatuses($query, array $statuses)
+    {
+        return $query->whereNotIn('status', $statuses);
+    }
+
+    public function isPaid()
+    {
+        return $this->status === 'paid';
     }
 }

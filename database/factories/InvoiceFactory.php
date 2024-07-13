@@ -21,13 +21,27 @@ class InvoiceFactory extends Factory
      */
     public function definition(): array
     {
+        $date = $this->faker->dateTimeBetween('-20 years', 'now');
+        $year = $date->format('Y');
+        $month = $date->format('n'); // 'n' returns month without leading zeros
+
+        $statuses = [
+            'open' => 'open',
+            'aceptada' => 'accepted',
+            'paid' => 'paid',
+            'clouse' => 'closed',
+            'cancelada' => 'cancelled',
+        ];
+
+        $status = $this->faker->randomElement($statuses);
+
         return [
-            'number'         => $this->faker->text(255),
-            'date'           => $this->faker->date(),
+            'number'         => $this->faker->unique()->regexify('[0-9]{6}'),
+            'date'           => $date,
             'total_amount'   => $this->faker->randomNumber(2),
-            'status'         => $this->faker->word(),
-            'year'           => $this->faker->text(255),
-            'mount'          => $this->faker->randomNumber(0),
+            'status'         => $status,
+            'year'           => $year,
+            'month'          => $month,
             'notes'          => $this->faker->text(),
             'sales_order_id' => \App\Models\SalesOrder::factory(),
             'employee_id'    => \App\Models\Employee::factory(),

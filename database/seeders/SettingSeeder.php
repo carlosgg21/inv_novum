@@ -3,7 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\Setting;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class SettingSeeder extends Seeder
 {
@@ -12,8 +14,24 @@ class SettingSeeder extends Seeder
      */
     public function run(): void
     {
-        Setting::factory()
-            ->count(5)
-            ->create();
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        Setting::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
+        $settings = [
+            [
+                'group' => 'invoice',
+                'name' => 'invoice_number_start',
+                'value' => '1',
+                'type' => 'boolean',
+                'description' => 'Use default number start for the invoice in the system',
+                'manager_by' => 1,
+            ],
+
+        ];
+
+        foreach ($settings as $setting) {
+            Setting::create($setting);
+        }
     }
 }

@@ -1,61 +1,36 @@
 @extends('layouts.app')
+@section('title', 'Invoices')
+@section('page-title', 'Invoices List')
+@section('breadcrumb')
+    <x-breadcrumb route="home" home="Home" title="Invoices List"></x-breadcrumb>
+    <x-new-record route="invoices.create"></x-new-record>
+@endsection
 
 @section('content')
 <div class="container">
-    <div class="searchbar mt-0 mb-4">
-        <div class="row">
-            <div class="col-md-6">
-                <form>
-                    <div class="input-group">
-                        <input
-                            id="indexSearch"
-                            type="text"
-                            name="search"
-                            placeholder="{{ __('crud.common.search') }}"
-                            value="{{ $search ?? '' }}"
-                            class="form-control"
-                            autocomplete="off"
-                        />
-                        <div class="input-group-append">
-                            <button type="submit" class="btn btn-primary">
-                                <i class="icon ion-md-search"></i>
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="col-md-6 text-right">
-                @can('create', App\Models\Invoice::class)
-                <a
-                    href="{{ route('invoices.create') }}"
-                    class="btn btn-primary"
-                >
-                    <i class="icon ion-md-add"></i> @lang('crud.common.create')
-                </a>
-                @endcan
-            </div>
-        </div>
-    </div>
+    <x-searchbar :search="$search">
+        <a href="{{ route('invoices.index') }}" type="button" class="btn btn-primary btn-sm">
+            Clear Search
+        </a>
+    </x-searchbar>
 
     <div class="card">
         <div class="card-body">
-            <div style="display: flex; justify-content: space-between;">
-                <h4 class="card-title">@lang('crud.invoices.index_title')</h4>
-            </div>
-
             <div class="table-responsive">
                 <table class="table table-borderless table-hover">
                     <thead>
                         <tr>
                             <th class="text-left">
-                                @lang('crud.invoices.inputs.sales_order_id')
-                            </th>
-                            <th class="text-left">
                                 @lang('crud.invoices.inputs.number')
                             </th>
                             <th class="text-left">
-                                @lang('crud.invoices.inputs.date')
+                               Invoice Date
                             </th>
+                            <th class="text-left">
+                                @lang('crud.invoices.inputs.sales_order_id')
+                            </th>
+
+
                             <th class="text-left">
                                 @lang('crud.invoices.inputs.status')
                             </th>
@@ -65,18 +40,9 @@
                             <th class="text-left">
                                 @lang('crud.invoices.inputs.employee_id')
                             </th>
-                            <th class="text-left">
-                                @lang('crud.invoices.inputs.currency_id')
-                            </th>
-                            <th class="text-left">
-                                @lang('crud.invoices.inputs.year')
-                            </th>
-                            <th class="text-left">
-                                @lang('crud.invoices.inputs.mount')
-                            </th>
-                            <th class="text-left">
-                                @lang('crud.invoices.inputs.notes')
-                            </th>
+
+
+
                             <th class="text-center">
                                 @lang('crud.common.actions')
                             </th>
@@ -85,68 +51,22 @@
                     <tbody>
                         @forelse($invoices as $invoice)
                         <tr>
+                            <td>{{ $invoice->number ?? '-' }}</td>
+                            <td>{{ $invoice->date ? format_date($invoice->date , 'd/M/Y') : '-'}}</td>
                             <td>
                                 {{ optional($invoice->salesOrder)->number ?? '-'
                                 }}
                             </td>
-                            <td>{{ $invoice->number ?? '-' }}</td>
-                            <td>{{ $invoice->date ?? '-' }}</td>
                             <td>{{ $invoice->status ?? '-' }}</td>
-                            <td>{{ $invoice->total_amount ?? '-' }}</td>
+                            <td>
+                                <i class="flag-icon {{ $invoice->currency->flag ?? '-' }}"></i>
+                                {{ $invoice->total_amount ? format_money($invoice->total_amount, $invoice->currency->acronym )  : '-' }}
+                            </td>
                             <td>
                                 {{ optional($invoice->employee)->name ?? '-' }}
                             </td>
-                            <td>
-                                {{ optional($invoice->currency)->name ?? '-' }}
-                            </td>
-                            <td>{{ $invoice->year ?? '-' }}</td>
-                            <td>{{ $invoice->mount ?? '-' }}</td>
-                            <td>{{ $invoice->notes ?? '-' }}</td>
-                            <td class="text-center" style="width: 134px;">
-                                <div
-                                    role="group"
-                                    aria-label="Row Actions"
-                                    class="btn-group"
-                                >
-                                    @can('update', $invoice)
-                                    <a
-                                        href="{{ route('invoices.edit', $invoice) }}"
-                                    >
-                                        <button
-                                            type="button"
-                                            class="btn btn-light"
-                                        >
-                                            <i class="icon ion-md-create"></i>
-                                        </button>
-                                    </a>
-                                    @endcan @can('view', $invoice)
-                                    <a
-                                        href="{{ route('invoices.show', $invoice) }}"
-                                    >
-                                        <button
-                                            type="button"
-                                            class="btn btn-light"
-                                        >
-                                            <i class="icon ion-md-eye"></i>
-                                        </button>
-                                    </a>
-                                    @endcan @can('delete', $invoice)
-                                    <form
-                                        action="{{ route('invoices.destroy', $invoice) }}"
-                                        method="POST"
-                                        onsubmit="return confirm('{{ __('crud.common.are_you_sure') }}')"
-                                    >
-                                        @csrf @method('DELETE')
-                                        <button
-                                            type="submit"
-                                            class="btn btn-light text-danger"
-                                        >
-                                            <i class="icon ion-md-trash"></i>
-                                        </button>
-                                    </form>
-                                    @endcan
-                                </div>
-                            </td>
+
+                            <x-action-buttons :model="$invoice" routePrefix="invoices" />
                         </tr>
                         @empty
                         <tr>
@@ -166,4 +86,9 @@
         </div>
     </div>
 </div>
+@endsection
+@section('css')
+
+    <link href="{{ asset('assets/node_modules/flag-icons/css/flag-icons.min.css') }}" rel="stylesheet">
+
 @endsection

@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
                 'password' => \Hash::make('admin'),
             ]);
         $this->call(PermissionsSeeder::class);
-
+        $this->call(SettingSeeder::class);
         $this->call(CountrySeeder::class);
 
 $this->call(CitySeeder::class);
@@ -60,14 +60,14 @@ $this->call(ProductSeeder::class);
         $this->call(InvoiceSeeder::class);
  $this->call(PaymentMadeSeeder::class);
         $this->call(PaymentsReceivedSeeder::class);
-     
+
         $this->call(PrefixSeeder::class);
 
         $this->call(PurchaseOrderSeeder::class);
         $this->call(PurchaseOrderItemSeeder::class);
         $this->call(SalesOrderSeeder::class);
         $this->call(SalesOrderItemSeeder::class);
-        $this->call(SettingSeeder::class);
+
 
         $this->call(UserSeeder::class);
     }

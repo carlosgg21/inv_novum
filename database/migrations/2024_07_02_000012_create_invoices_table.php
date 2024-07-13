@@ -21,7 +21,7 @@ return new class extends Migration {
             $table->decimal('total_amount')->nullable();
             $table->string('status');
             $table->string('year')->nullable();
-            $table->integer('mount')->nullable();
+            $table->integer('month')->nullable();
             $table->unsignedBigInteger('employee_id')->nullable();
             $table->unsignedBigInteger('currency_id');
             $table->text('notes')->nullable();

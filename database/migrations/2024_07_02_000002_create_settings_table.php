@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->text('value');
             $table->string('type');
             $table->text('description')->nullable();
-            $table->integer('manager_by');
+            $table->integer('manager_by')->default(1);
 
             $table->timestamps();
             $table->softDeletes();

@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->string('number')->nullable();
             $table->date('order_date');
             $table->float('total_amount');
+            $table->string('prefix')->nullable();
             $table
                 ->enum('status', ['entered', 'not entered'])
                 ->default('not entered');
