@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use App\Models\Scopes\Searchable;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class Invoice extends Model
 {
@@ -47,13 +47,14 @@ class Invoice extends Model
 
     public static function generateInvoiceNumber()
     {
-        $invoiceNumberStart =  setting('invoice.invoice_number_star', 'default_value');
+        $invoiceNumberStart = setting('invoice.start_with_default_value')
+            ? app_default('invoice.invoice_number_start')
+            : 1;
 
         $lastInvoice = self::latest('id')->first();
         $lastNumber = $lastInvoice ? intval($lastInvoice->number) : intval($invoiceNumberStart) - 1;
 
         return str_pad($lastNumber + 1, 6, '0', STR_PAD_LEFT);
-
     }
 
     public function salesOrder()

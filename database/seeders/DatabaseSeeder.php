@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Artisan;
 
 class DatabaseSeeder extends Seeder
 {
@@ -11,6 +12,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        
+// Clear cache before seeding
+
+         Artisan::call('cache:clear');
+
         // Adding an admin user
         $user = \App\Models\User::factory()
             ->count(1)

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\AppDefault;
 use App\Models\Setting;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
@@ -63,13 +64,43 @@ if (!function_exists('setting')) {
             return $setting ? $setting->value : $default;
         });
     }
+}
 
 
-if (!function_exists('format_date')) {
-    function format_date($date, $format = 'Y-m-d')
+
+if (!function_exists('app_default')) {
+    /**
+     * Undocumented function
+     *
+     * @param [type] $key
+     * @param [type] $default
+     * @return void
+     */
+    function app_default($key, $defaultValue = null)
     {
-        return $date ? date($format, strtotime($date)) : '';
+        $parts = explode('.', $key);
+
+        if (count($parts) !== 2) {
+            throw new InvalidArgumentException("The setting key must be in the format ',module.name'. Given: {$key}");
+        }
+
+        list($module, $name) = $parts;
+
+        return Cache::rememberForever("app_default{$module}_{$name}", function () use ($module, $name, $defaultValue) {
+            $app_default = AppDefault::where('module', $module)->where('name', $name)->first();
+
+            
+
+            return $app_default ? $app_default->value : $defaultValue;
+        });
     }
 }
 
-}
+
+    if (!function_exists('format_date')) {
+        function format_date($date, $format = 'Y-m-d')
+        {
+            return $date ? date($format, strtotime($date)) : '';
+        }
+    }
+

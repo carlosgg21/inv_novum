@@ -21,7 +21,7 @@ class SettingSeeder extends Seeder
         $settings = [
             [
                 'group' => 'invoice',
-                'name' => 'invoice_number_start',
+                'name' => 'start_with_default_value',
                 'value' => '1',
                 'type' => 'boolean',
                 'description' => 'Use default number start for the invoice in the system',
