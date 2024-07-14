@@ -112,7 +112,7 @@
                 <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i
                             class="ti-panel"></i><span class="hide-menu">System</span></a>
                     <ul aria-expanded="false" class="collapse">
-                        <li><a href="ui-cards.html">Company</a></li>
+                        <li><a href="{{ route('companies.index') }}"></i>Company</a></li>
                         <li><a href="ui-user-card.html">App Defaults</a></li>
                         <li><a href="ui-user-card.html">Settings</a></li>
                         <li><a href="ui-user-card.html">Prefixes</a></li>

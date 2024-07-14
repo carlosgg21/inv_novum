@@ -5,33 +5,20 @@
     <div class="card">
         <div class="card-body">
             <h4 class="card-title">
-                <a href="{{ route('companies.index') }}" class="mr-4"
-                    ><i class="icon ion-md-arrow-back"></i
-                ></a>
+                <a href="{{ route('companies.index') }}" class="mr-4"><i class="icon ion-md-arrow-back"></i></a>
                 @lang('crud.companies.edit_title')
             </h4>
 
-            <x-form
-                method="PUT"
-                action="{{ route('companies.update', $company) }}"
-                has-files
-                class="mt-4"
-            >
+            <x-form method="PUT" action="{{ route('companies.update', $company) }}" has-files class="mt-4">
                 @include('app.companies.form-inputs')
 
                 <div class="mt-4">
-                    <a
-                        href="{{ route('companies.index') }}"
-                        class="btn btn-light"
-                    >
+                    <a href="{{ route('companies.index') }}" class="btn btn-light">
                         <i class="icon ion-md-return-left text-primary"></i>
                         @lang('crud.common.back')
                     </a>
 
-                    <a
-                        href="{{ route('companies.create') }}"
-                        class="btn btn-light"
-                    >
+                    <a href="{{ route('companies.create') }}" class="btn btn-light">
                         <i class="icon ion-md-add text-primary"></i>
                         @lang('crud.common.create')
                     </a>

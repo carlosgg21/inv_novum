@@ -30,10 +30,17 @@ class InventoryController extends Controller
 
         $search = $request->get('search', '');
        $data = $this->inventoryRepository->getInventories();
-// dd($data->toRAwSQL());
+       $inventories = $data->map(function ($items, $productId) {
+        $productDetails = $items->first()->product;
+        return [
+            'product' => $productDetails,
+            'inventories' => $items,
+        ];
+    });
+// dd($groupedInventories);
 // dd($data->get()->groupBy('product_id')->toArray());
         // $inventories = $this->inventoryRepository->getInventories()->paginate(5);
-        $inventories = $this->inventoryRepository->getInventories()->get()->groupBy('product_id');
+        // $inventories = $this->inventoryRepository->getInventories()->get()->groupBy('product_id');
 //  dd($inventories->toArray());
 //Inventory::search($search)
 //             ->latest()

@@ -32,41 +32,39 @@ class InventoryRepository
     //     });
     // }
 
-    
+    //     public function getInventories()
+    // {
+    //     return Product::with([
+    //         'category',
+    //         'brand',
+    //         'salesOrderItems',
+    //         'purchaseOrderItems',
+    //         'inventories' => function ($query) {
+    //             $query->whereHas('inventoryDetails', function ($query) {
+    //                 $query->where('quantity', '>', 0)
+    //                       ->orWhere('quantity_on_order', '>', 0);
+    //             });
+    //         },
+    //         'inventories.inventoryDetails',
+    //         'inventories.location',
+    //         'inventories.supplier',
+    //     ]);
+    // }
 
-
-//     public function getInventories()
-// {
-//     return Product::with([
-//         'category',
-//         'brand',
-//         'salesOrderItems',
-//         'purchaseOrderItems',
-//         'inventories' => function ($query) {
-//             $query->whereHas('inventoryDetails', function ($query) {
-//                 $query->where('quantity', '>', 0)
-//                       ->orWhere('quantity_on_order', '>', 0);
-//             });
-//         },
-//         'inventories.inventoryDetails',
-//         'inventories.location',
-//         'inventories.supplier',
-//     ]);
-// }
-
-
-
-        public function getInventories()
+    public function getInventories()
     {
-        return Inventory::with([
-                'product',
-                'product.category',
-                'product.brand',         
-                'location',
-                'supplier',
-            ]) ->where('quantity', '>', 0)
-                  ->orWhere('quantity_on_order', '>', 0);
-  
-    }
+        $inventories = Inventory::with([
+                   'product',
+                   'product.category',
+                   'product.brand',
+                   'location',
+                   'supplier',
+               ])
+               ->where('quantity', '>', 0)
+               ->orWhere('quantity_on_order', '>', 0)
+               ->get()
+               ->groupBy('product_id');
 
+        return $inventories;
+    }
 }

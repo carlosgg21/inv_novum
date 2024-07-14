@@ -7,15 +7,8 @@
             <div class="col-md-6">
                 <form>
                     <div class="input-group">
-                        <input
-                            id="indexSearch"
-                            type="text"
-                            name="search"
-                            placeholder="{{ __('crud.common.search') }}"
-                            value="{{ $search ?? '' }}"
-                            class="form-control"
-                            autocomplete="off"
-                        />
+                        <input id="indexSearch" type="text" name="search" placeholder="{{ __('crud.common.search') }}"
+                            value="{{ $search ?? '' }}" class="form-control" autocomplete="off" />
                         <div class="input-group-append">
                             <button type="submit" class="btn btn-primary">
                                 <i class="icon ion-md-search"></i>
@@ -26,10 +19,7 @@
             </div>
             <div class="col-md-6 text-right">
                 @can('create', App\Models\Company::class)
-                <a
-                    href="{{ route('companies.create') }}"
-                    class="btn btn-primary"
-                >
+                <a href="{{ route('companies.create') }}" class="btn btn-primary">
                     <i class="icon ion-md-add"></i> @lang('crud.common.create')
                 </a>
                 @endcan
@@ -102,54 +92,32 @@
                             <td>{{ $company->web_site ?? '-' }}</td>
                             <td>
                                 <pre>
-{{ json_encode($company->social_media) ?? '-' }}</pre
-                                >
+{{ json_encode($company->social_media) ?? '-' }}</pre>
                             </td>
                             <td>{{ $company->address ?? '-' }}</td>
                             <td>
                                 <x-partials.thumbnail
-                                    src="{{ $company->qr_code ? \Storage::url($company->qr_code) : '' }}"
-                                />
+                                    src="{{ $company->qr_code ? \Storage::url($company->qr_code) : '' }}" />
                             </td>
                             <td class="text-center" style="width: 134px;">
-                                <div
-                                    role="group"
-                                    aria-label="Row Actions"
-                                    class="btn-group"
-                                >
+                                <div role="group" aria-label="Row Actions" class="btn-group">
                                     @can('update', $company)
-                                    <a
-                                        href="{{ route('companies.edit', $company) }}"
-                                    >
-                                        <button
-                                            type="button"
-                                            class="btn btn-light"
-                                        >
+                                    <a href="{{ route('companies.edit', $company) }}">
+                                        <button type="button" class="btn btn-light">
                                             <i class="icon ion-md-create"></i>
                                         </button>
                                     </a>
                                     @endcan @can('view', $company)
-                                    <a
-                                        href="{{ route('companies.show', $company) }}"
-                                    >
-                                        <button
-                                            type="button"
-                                            class="btn btn-light"
-                                        >
+                                    <a href="{{ route('companies.show', $company) }}">
+                                        <button type="button" class="btn btn-light">
                                             <i class="icon ion-md-eye"></i>
                                         </button>
                                     </a>
                                     @endcan @can('delete', $company)
-                                    <form
-                                        action="{{ route('companies.destroy', $company) }}"
-                                        method="POST"
-                                        onsubmit="return confirm('{{ __('crud.common.are_you_sure') }}')"
-                                    >
+                                    <form action="{{ route('companies.destroy', $company) }}" method="POST"
+                                        onsubmit="return confirm('{{ __('crud.common.are_you_sure') }}')">
                                         @csrf @method('DELETE')
-                                        <button
-                                            type="submit"
-                                            class="btn btn-light text-danger"
-                                        >
+                                        <button type="submit" class="btn btn-light text-danger">
                                             <i class="icon ion-md-trash"></i>
                                         </button>
                                     </form>

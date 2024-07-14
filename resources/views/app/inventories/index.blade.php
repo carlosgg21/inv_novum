@@ -14,10 +14,10 @@
         <div class="card-body">
 
             <div class="table-responsive">
-             <table class="table table-borderless table-hover table-sm table-striped">
-                <thead class="table-heard">
+                <table class="table table-borderless table-hover table-sm table-striped">
+                    <thead class="table-heard">
                         <tr>
-                            <th > </th>
+                            <th> </th>
                             <th class="text-left"> Code</th>
                             <th class="text-left"> Name</th>
                             <th class="text-left"> Category</th>
@@ -28,71 +28,58 @@
                     </thead>
                     <tbody>
                         @forelse($inventories as $key=>$inventory)
-                  {{-- @dd($inventory->toArray()) --}}
-                            {{-- <tr data-toggle="collapse" data-target="#{{ $inventory->code }}" class="accordion-toggle"> --}}
-                             <tr data-toggle="collapse" data-target="#{{ $key }}" class="accordion-toggle">
-                                            <td><button class="btn btn-default btn-xs"><span class="fas fa-angle-right"></span></button></td>
-                                            <td>{{ $inventory->first()->product->code ?? '-' }}</td>
-                                            <td>{{ $inventory->first()->product->name ?? '-' }}</td>
-                                            <td>{{ optional($inventory->first()->product->category)->name ?? '-' }}</td>
-                                            <td>{{ optional($inventory->first()->product->brand)->name ?? '-' }}</td>
-                                            <td>{{ $inventory->first()->product->qty ?? 0 }}</td>
-                                            <td>{{ $inventory->first()->product->on_order ?? 0 }}</td>
+                        {{-- @dd($inventory->toArray()) --}}
+                        {{-- <tr data-toggle="collapse" data-target="#{{ $inventory->code }}" class="accordion-toggle">
+                            --}}
+                        <tr data-toggle="collapse" data-target="#{{ $key }}" class="accordion-toggle">
+                            <td><button class="btn btn-default btn-xs"><span class="fas fa-angle-right"></span></button>
+                            </td>
+                            <td>{{ $inventory['product']->code ?? '-' }}</td>
+                            <td>{{ $inventory['product']->name ?? '-' }}</td>
+                            <td>{{ optional($inventory['product']->category)->name ?? '-' }}</td>
+                            <td>{{ optional($inventory['product']->brand)->name ?? '-' }}</td>
+                            <td class="text-center">{{ $inventory['inventories']->sum('quantity') ?? 0 }}</td>
+                            <td class="text-center">{{ $inventory['inventories']->sum('quantity_on_order') ?? 0 }}</td>
+                        </tr>
 
-                                    <tr>
-                                        <td colspan="7" class="hiddenRow">
-                                       <div id="{{ $key }}" class="accordian-body collapse collapsed-content">
+                        <tr>
+                            <td colspan="7" class="hiddenRow">
+                                <div id="{{ $key }}" class="accordian-body collapse collapsed-content">
+
+                                    <table class="table table-boder table-sm">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Supplier</th>
+                                                <th scope="col">Location</th>
+                                                <th scope="col">Qty</th>
+                                                <th scope="col">On Qty</th>
+                                                <th scope="col">Batch Number</th>
+                                                <th scope="col">Expire Date</th>
+                                                <th class="text-rigth" scope="col">Cost</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach($inventory['inventories'] as $details)
+                                            <tr>
+                                                <th scope="row">{{ $loop->index + 1 }}</th>
+                                                <td>{{ optional($details->supplier)->name ?? '-' }}</td>
+                                                <td>{{ optional($details->location)->name ?? '-' }}</td>
+                                                <td>{{ $details->quantity ?? 0 }}</td>
+                                                <td>{{ $details->quantity_on_order ?? 0 }}</td>
+                                                <td>{{ $details->batch_number ?? '-' }}</td>
                                                 
-                                                <table class="table table-boder table-sm">
-                                                       <thead class="thead-dark">
-                                                        <tr>
-                                                            <th scope="col">#</th>
-                                                            <th scope="col">Supplier</th>
-                                                            <th scope="col">Location</th>
-                                                            <th scope="col">Qty</th>
-                                                            <th scope="col">On Qty</th>
-                                                            {{-- <th scope="col">Expire Date</th> --}}
-                                                            <th class="text-rigth" scope="col">Cost</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        @foreach($inventory as $details)
-                                                        {{-- @dd($details->toArray()) --}}
-                                                        <tr>
-                                                            <th scope="row">{{ $loop->index+1 }}</th>                                                    
-                                                             <td>{{ optional($details->supplier)->name ?? '-' }}</td>
-                                                             <td>{{ optional($details->location)->name ?? '-' }}</td>
-                                                             <td>{{ $details->quantity ?? 0 }}</td>
-                                                             <td>{{ $details->quantity_on_order ?? 0 }}</td>
-                                                     
-                                                             <td class="text-rigth">$ 22.00</td>
-                                                     
-                                                        </tr>
-                                                      @endforeach
-                                                     
-                                                    </tbody>
-                                                </table>
+                                                <td>{{  $details->expire_date ? format_date($details->expire_date, 'd/m/y') : '-' }}</td>
+                                                <td class="text-right">$ 22.00</td>
+                                            </tr>
+                                            @endforeach
 
-                                            </div>
-                                        </td>
-                                    </tr>
-                            {{-- <td>
-                                {{ optional($inventory->supplier)->name ?? '-'
-                                }}
+                                        </tbody>
+                                    </table>
+
+                                </div>
                             </td>
-                            <td>
-                                {{ optional($inventory->product)->name ?? '-' }}
-                            </td>
-                            <td>
-                                {{ optional($inventory->location)->name ?? '-'
-                                }}
-                            </td>
-                            <td>{{ $inventory->quantity ?? '-' }}</td>
-                            <td>{{ $inventory->min_qty ?? '-' }}</td>
-                            <td>{{ $inventory->max_qty ?? '-' }}</td>
-                            <td>{{ $inventory->quantity_on_order ?? '-' }}</td>
-                          
-                        </tr> --}}
+                        </tr>                       
                         @empty
                         <tr>
                             <td colspan="8">
@@ -101,63 +88,55 @@
                         </tr>
                         @endforelse
                     </tbody>
-                    {{-- <tfoot>
-                        <tr>
-                            <td colspan="8">{!! $inventories->render() !!}</td>
-                        </tr>
-                    </tfoot> --}}
+            
                 </table>
             </div>
-            {{-- <div class="d-flex justify-content-center">
-                {{ $inventories->links() }}
-            </div> --}}
+        
         </div>
     </div>
 </div>
 @endsection
 @section('css')
 <style>
-    
     .collapsed-content {
-    background-color: #f9f9f9;
-    border-left: 4px solid #009973;
-  
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        background-color: #f9f9f9;
+        border-left: 4px solid #009973;
+
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     }
-    
-  
-    
+
+
+
     .collapsed-content thead {
-    background-color: #f0f0f0;
+        background-color: #f0f0f0;
     }
-    
-  
-    
-   
-    
-    
-    
-    
-    
-   
-    
+
+
+
+
+
+
+
+
+
+
+
     .accordian-body {
-    transition: all 0.3s ease;
+        transition: all 0.3s ease;
     }
+
     .accordion-toggle {
-    cursor: pointer;
+        cursor: pointer;
     }
-    
+
     .hiddenRow {
-    padding: 0 !important;
+        padding: 0 !important;
     }
-    
-   
-    </style>
+</style>
 @endsection
 @section('js')
 <script>
-   $(document).ready(function() {
+    $(document).ready(function() {
     $('.accordion-toggle').on('click', function() {
     var target = $(this).data('target');
     var icon = $(this).find('.fas');

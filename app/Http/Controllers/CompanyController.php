@@ -21,6 +21,17 @@ class CompanyController extends Controller
 
         $search = $request->get('search', '');
 
+        $company = Company::find(1);
+
+// Acceder a los datos
+$socialMedia = $company->social_media;
+
+// dump($socialMedia );
+// dd($facebookData = $socialMedia[0]['facebook']
+//  );
+// $facebook = $company->social_media['social_profiles']['facebook'] ?? null;
+
+// dd($facebook);
         $companies = Company::search($search)
             ->latest()
             ->paginate(5)

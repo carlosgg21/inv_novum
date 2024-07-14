@@ -18,7 +18,7 @@
     name="{{ $name }}"
     value="{{ old($name, $value ?? '') }}"
     {{ ($required ?? false) ? 'required' : '' }}
-    {{ $attributes->merge(['class' => 'form-control']) }}
+    {{ $attributes->merge(['class' => 'form-control form-control-sm']) }}
     {{ $min ? "min={$min}" : '' }}
     {{ $max ? "max={$max}" : '' }}
     {{ $step ? "step={$step}" : '' }}
