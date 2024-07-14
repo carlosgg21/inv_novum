@@ -22,12 +22,12 @@ class InventoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'quantity'          => $this->faker->randomNumber(),
-            'min_qty'           => $this->faker->randomNumber(0),
-            'max_qty'           => $this->faker->randomNumber(0),
-            'quantity_on_order' => $this->faker->randomNumber(0),
+            'quantity'           => $this->faker->randomNumber(),
+            'quantity_on_order'  => $this->faker->randomNumber(0),
             'product_id'         => $this->faker->randomElement([1, 10]),
-            'location_id'      => $this->faker->randomElement([1, 4]),
+            'location_id'        => $this->faker->randomElement([1, 4]),
+            'expire_date'        => $this->faker->date(),
+            'batch_number'       => $this->faker->unique()->regexify('[0-9]{6}'),
         ];
     }
 }

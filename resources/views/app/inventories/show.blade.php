@@ -35,16 +35,16 @@
                     <span>{{ $inventory->quantity ?? '-' }}</span>
                 </div>
                 <div class="mb-4">
-                    <h5>@lang('crud.inventories.inputs.min_qty')</h5>
-                    <span>{{ $inventory->min_qty ?? '-' }}</span>
-                </div>
-                <div class="mb-4">
-                    <h5>@lang('crud.inventories.inputs.max_qty')</h5>
-                    <span>{{ $inventory->max_qty ?? '-' }}</span>
-                </div>
-                <div class="mb-4">
                     <h5>@lang('crud.inventories.inputs.quantity_on_order')</h5>
                     <span>{{ $inventory->quantity_on_order ?? '-' }}</span>
+                </div>
+                <div class="mb-4">
+                    <h5>@lang('crud.inventories.inputs.batch_number')</h5>
+                    <span>{{ $inventory->batch_number ?? '-' }}</span>
+                </div>
+                <div class="mb-4">
+                    <h5>@lang('crud.inventories.inputs.expire_date')</h5>
+                    <span>{{ $inventory->expire_date ?? '-' }}</span>
                 </div>
             </div>
 

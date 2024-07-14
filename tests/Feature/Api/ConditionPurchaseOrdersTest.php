@@ -64,6 +64,8 @@ class ConditionPurchaseOrdersTest extends TestCase
             $data
         );
 
+        unset($data['prefix']);
+
         $this->assertDatabaseHas('purchase_orders', $data);
 
         $response->assertStatus(201)->assertJsonFragment($data);

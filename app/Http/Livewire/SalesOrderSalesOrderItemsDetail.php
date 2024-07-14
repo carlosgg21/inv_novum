@@ -3,7 +3,6 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-use App\Models\Product;
 use Illuminate\View\View;
 use App\Models\SalesOrder;
 use Livewire\WithPagination;
@@ -17,7 +16,6 @@ class SalesOrderSalesOrderItemsDetail extends Component
 
     public SalesOrder $salesOrder;
     public SalesOrderItem $salesOrderItem;
-    public $productsForSelect = [];
 
     public $selected = [];
     public $editing = false;
@@ -31,21 +29,17 @@ class SalesOrderSalesOrderItemsDetail extends Component
         'salesOrderItem.unit_price' => ['required', 'numeric'],
         'salesOrderItem.total_price' => ['required', 'numeric'],
         'salesOrderItem.notes' => ['nullable', 'max:255', 'string'],
-        'salesOrderItem.product_id' => ['required', 'exists:products,id'],
     ];
 
     public function mount(SalesOrder $salesOrder): void
     {
         $this->salesOrder = $salesOrder;
-        $this->productsForSelect = Product::pluck('name', 'id');
         $this->resetSalesOrderItemData();
     }
 
     public function resetSalesOrderItemData(): void
     {
         $this->salesOrderItem = new SalesOrderItem();
-
-        $this->salesOrderItem->product_id = null;
 
         $this->dispatchBrowserEvent('refresh');
     }

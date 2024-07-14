@@ -24,9 +24,9 @@ class InventoryStoreRequest extends FormRequest
             'product_id' => ['required', 'exists:products,id'],
             'location_id' => ['required', 'exists:locations,id'],
             'quantity' => ['nullable', 'numeric'],
-            'min_qty' => ['nullable', 'numeric'],
-            'max_qty' => ['nullable', 'numeric'],
             'quantity_on_order' => ['nullable', 'numeric'],
+            'batch_number' => ['nullable', 'max:255', 'string'],
+            'expire_date' => ['nullable', 'date'],
         ];
     }
 }

@@ -15,7 +15,15 @@ return new class extends Migration {
             $table->string('name');
             $table->string('display')->nullable();
             $table->text('description')->nullable();
-            $table->string('used_in')->nullable();
+            $table
+                ->enum('used_in', [
+                    'invoice',
+                    'sales_order',
+                    'purchase_order',
+                    'customer',
+                    'employee',
+                ])
+                ->nullable();
             $table->integer('star_number')->nullable();
             $table
                 ->integer('position')
@@ -23,6 +31,7 @@ return new class extends Migration {
                 ->nullable();
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -52,6 +52,8 @@ class AppDefaultTest extends TestCase
 
         $response = $this->postJson(route('api.app-defaults.store'), $data);
 
+        unset($data['manager_by']);
+
         $this->assertDatabaseHas('app_defaults', $data);
 
         $response->assertStatus(201)->assertJsonFragment($data);
@@ -70,12 +72,15 @@ class AppDefaultTest extends TestCase
             'display_name' => $this->faker->text(255),
             'value' => $this->faker->text(),
             'description' => $this->faker->sentence(15),
+            'manager_by' => $this->faker->boolean(),
         ];
 
         $response = $this->putJson(
             route('api.app-defaults.update', $appDefault),
             $data
         );
+
+        unset($data['manager_by']);
 
         $data['id'] = $appDefault->id;
 

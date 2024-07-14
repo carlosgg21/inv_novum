@@ -12,13 +12,13 @@ return new class extends Migration {
     {
         Schema::create('purchase_order_items', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('product_id');
             $table->unsignedBigInteger('purchase_order_id');
             $table->integer('quantity');
             $table->float('unit_price');
             $table->float('total_price');
             $table->integer('qty_received')->nullable();
             $table->text('noted');
+            $table->unsignedBigInteger('inventory_id');
 
             $table->timestamps();
         });

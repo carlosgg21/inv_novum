@@ -44,7 +44,7 @@ class LocationInventoriesTest extends TestCase
             route('api.locations.inventories.index', $location)
         );
 
-        $response->assertOk()->assertSee($inventories[0]->id);
+        $response->assertOk()->assertSee($inventories[0]->batch_number);
     }
 
     /**

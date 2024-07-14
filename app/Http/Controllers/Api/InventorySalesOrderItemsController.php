@@ -2,23 +2,23 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\SalesOrder;
+use App\Models\Inventory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\SalesOrderItemResource;
 use App\Http\Resources\SalesOrderItemCollection;
 
-class SalesOrderSalesOrderItemsController extends Controller
+class InventorySalesOrderItemsController extends Controller
 {
     public function index(
         Request $request,
-        SalesOrder $salesOrder
+        Inventory $inventory
     ): SalesOrderItemCollection {
-        $this->authorize('view', $salesOrder);
+        $this->authorize('view', $inventory);
 
         $search = $request->get('search', '');
 
-        $salesOrderItems = $salesOrder
+        $salesOrderItems = $inventory
             ->salesOrderItems()
             ->search($search)
             ->latest()
@@ -29,7 +29,7 @@ class SalesOrderSalesOrderItemsController extends Controller
 
     public function store(
         Request $request,
-        SalesOrder $salesOrder
+        Inventory $inventory
     ): SalesOrderItemResource {
         $this->authorize('create', SalesOrderItem::class);
 
@@ -40,7 +40,7 @@ class SalesOrderSalesOrderItemsController extends Controller
             'notes' => ['nullable', 'max:255', 'string'],
         ]);
 
-        $salesOrderItem = $salesOrder->salesOrderItems()->create($validated);
+        $salesOrderItem = $inventory->salesOrderItems()->create($validated);
 
         return new SalesOrderItemResource($salesOrderItem);
     }

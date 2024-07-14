@@ -62,7 +62,6 @@ class InventoryRepository
                 'product',
                 'product.category',
                 'product.brand',         
-                'inventoryDetails',
                 'location',
                 'supplier',
             ]) ->where('quantity', '>', 0)

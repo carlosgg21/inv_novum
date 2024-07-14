@@ -3,7 +3,6 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-use App\Models\Product;
 use Illuminate\View\View;
 use Livewire\WithPagination;
 use App\Models\PurchaseOrder;
@@ -17,7 +16,6 @@ class PurchaseOrderPurchaseOrderItemsDetail extends Component
 
     public PurchaseOrder $purchaseOrder;
     public PurchaseOrderItem $purchaseOrderItem;
-    public $productsForSelect = [];
 
     public $selected = [];
     public $editing = false;
@@ -27,7 +25,6 @@ class PurchaseOrderPurchaseOrderItemsDetail extends Component
     public $modalTitle = 'New PurchaseOrderItem';
 
     protected $rules = [
-        'purchaseOrderItem.product_id' => ['required', 'exists:products,id'],
         'purchaseOrderItem.quantity' => ['required', 'numeric'],
         'purchaseOrderItem.qty_received' => ['nullable', 'numeric'],
         'purchaseOrderItem.unit_price' => ['required', 'numeric'],
@@ -38,15 +35,12 @@ class PurchaseOrderPurchaseOrderItemsDetail extends Component
     public function mount(PurchaseOrder $purchaseOrder): void
     {
         $this->purchaseOrder = $purchaseOrder;
-        $this->productsForSelect = Product::pluck('name', 'id');
         $this->resetPurchaseOrderItemData();
     }
 
     public function resetPurchaseOrderItemData(): void
     {
         $this->purchaseOrderItem = new PurchaseOrderItem();
-
-        $this->purchaseOrderItem->product_id = null;
 
         $this->dispatchBrowserEvent('refresh');
     }

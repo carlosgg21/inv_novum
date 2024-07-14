@@ -98,7 +98,7 @@ class PrefixTest extends TestCase
 
         $response = $this->deleteJson(route('api.prefixes.destroy', $prefix));
 
-        $this->assertModelMissing($prefix);
+        $this->assertSoftDeleted($prefix);
 
         $response->assertNoContent();
     }

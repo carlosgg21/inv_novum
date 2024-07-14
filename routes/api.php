@@ -42,7 +42,6 @@ use App\Http\Controllers\Api\CountryCitiesController;
 use App\Http\Controllers\Api\CompanyContactController;
 use App\Http\Controllers\Api\SalesOrderItemController;
 use App\Http\Controllers\Api\ChargeEmployeesController;
-use App\Http\Controllers\Api\InventoryDetailController;
 use App\Http\Controllers\Api\CountryContactsController;
 use App\Http\Controllers\Api\CurrencyInvoicesController;
 use App\Http\Controllers\Api\CategoryProductsController;
@@ -69,20 +68,19 @@ use App\Http\Controllers\Api\ChargeCompanyContactsController;
 use App\Http\Controllers\Api\PaymentTermSalesOrdersController;
 use App\Http\Controllers\Api\CompanyCompanyContactsController;
 use App\Http\Controllers\Api\SupplierPurchaseOrdersController;
-use App\Http\Controllers\Api\ProductSalesOrderItemsController;
 use App\Http\Controllers\Api\ConditionPurchaseOrdersController;
 use App\Http\Controllers\Api\PaymentTermPaymentMadesController;
 use App\Http\Controllers\Api\PaymentMethodSalesOrdersController;
+use App\Http\Controllers\Api\InventorySalesOrderItemsController;
 use App\Http\Controllers\Api\InvoicePaymentsReceivedsController;
 use App\Http\Controllers\Api\PaymentMethodPaymentMadesController;
 use App\Http\Controllers\Api\PaymentTermPurchaseOrdersController;
 use App\Http\Controllers\Api\CustomerPaymentsReceivedsController;
 use App\Http\Controllers\Api\EmployeePaymentsReceivedsController;
-use App\Http\Controllers\Api\ProductPurchaseOrderItemsController;
-use App\Http\Controllers\Api\InventoryInventoryDetailsController;
 use App\Http\Controllers\Api\SalesOrderSalesOrderItemsController;
 use App\Http\Controllers\Api\PurchaseOrderPaymentMadesController;
 use App\Http\Controllers\Api\PaymentMethodPurchaseOrdersController;
+use App\Http\Controllers\Api\InventoryPurchaseOrderItemsController;
 use App\Http\Controllers\Api\SalesOrderPaymentsReceivedsController;
 use App\Http\Controllers\Api\PaymentTermPaymentsReceivedsController;
 use App\Http\Controllers\Api\PaymentMethodPaymentsReceivedsController;
@@ -499,26 +497,6 @@ Route::name('api.')
 
         Route::apiResource('products', ProductController::class);
 
-        // Product Sales Order Items
-        Route::get('/products/{product}/sales-order-items', [
-            ProductSalesOrderItemsController::class,
-            'index',
-        ])->name('products.sales-order-items.index');
-        Route::post('/products/{product}/sales-order-items', [
-            ProductSalesOrderItemsController::class,
-            'store',
-        ])->name('products.sales-order-items.store');
-
-        // Product Purchase Order Items
-        Route::get('/products/{product}/purchase-order-items', [
-            ProductPurchaseOrderItemsController::class,
-            'index',
-        ])->name('products.purchase-order-items.index');
-        Route::post('/products/{product}/purchase-order-items', [
-            ProductPurchaseOrderItemsController::class,
-            'store',
-        ])->name('products.purchase-order-items.store');
-
         // Product Inventories
         Route::get('/products/{product}/inventories', [
             ProductInventoriesController::class,
@@ -646,13 +624,23 @@ Route::name('api.')
 
         Route::apiResource('inventories', InventoryController::class);
 
-        // Inventory Inventory Details
-        Route::get('/inventories/{inventory}/inventory-details', [
-            InventoryInventoryDetailsController::class,
+        // Inventory Sales Order Items
+        Route::get('/inventories/{inventory}/sales-order-items', [
+            InventorySalesOrderItemsController::class,
             'index',
-        ])->name('inventories.inventory-details.index');
-        Route::post('/inventories/{inventory}/inventory-details', [
-            InventoryInventoryDetailsController::class,
+        ])->name('inventories.sales-order-items.index');
+        Route::post('/inventories/{inventory}/sales-order-items', [
+            InventorySalesOrderItemsController::class,
             'store',
-        ])->name('inventories.inventory-details.store');
+        ])->name('inventories.sales-order-items.store');
+
+        // Inventory Purchase Order Items
+        Route::get('/inventories/{inventory}/purchase-order-items', [
+            InventoryPurchaseOrderItemsController::class,
+            'index',
+        ])->name('inventories.purchase-order-items.index');
+        Route::post('/inventories/{inventory}/purchase-order-items', [
+            InventoryPurchaseOrderItemsController::class,
+            'store',
+        ])->name('inventories.purchase-order-items.store');
     });

@@ -44,7 +44,7 @@ class SupplierInventoriesTest extends TestCase
             route('api.suppliers.inventories.index', $supplier)
         );
 
-        $response->assertOk()->assertSee($inventories[0]->id);
+        $response->assertOk()->assertSee($inventories[0]->batch_number);
     }
 
     /**

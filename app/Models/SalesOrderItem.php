@@ -17,7 +17,7 @@ class SalesOrderItem extends Model
         'unit_price',
         'total_price',
         'notes',
-        'product_id',
+        'inventory_id',
     ];
 
     protected $searchableFields = ['*'];
@@ -29,8 +29,8 @@ class SalesOrderItem extends Model
         return $this->belongsTo(SalesOrder::class);
     }
 
-    public function product()
+    public function inventory()
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(Inventory::class);
     }
 }

@@ -12,26 +12,26 @@ class PurchaseOrderItem extends Model
     use Searchable;
 
     protected $fillable = [
-        'product_id',
         'purchase_order_id',
         'quantity',
         'unit_price',
         'total_price',
         'qty_received',
         'noted',
+        'inventory_id',
     ];
 
     protected $searchableFields = ['*'];
 
     protected $table = 'purchase_order_items';
 
-    public function product()
-    {
-        return $this->belongsTo(Product::class);
-    }
-
     public function purchaseOrder()
     {
         return $this->belongsTo(PurchaseOrder::class);
+    }
+
+    public function inventory()
+    {
+        return $this->belongsTo(Inventory::class);
     }
 }

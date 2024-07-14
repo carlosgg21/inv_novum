@@ -15,13 +15,17 @@ class Inventory extends Model
         'product_id',
         'location_id',
         'quantity',
-        'min_qty',
-        'max_qty',
+        'batch_number',
         'quantity_on_order',
         'supplier_id',
+        'expire_date',
     ];
 
     protected $searchableFields = ['*'];
+
+    protected $casts = [
+        'expire_date' => 'date',
+    ];
 
     public function product()
     {
@@ -33,13 +37,18 @@ class Inventory extends Model
         return $this->belongsTo(Location::class);
     }
 
-    public function inventoryDetails()
-    {
-        return $this->hasMany(InventoryDetail::class);
-    }
-
     public function supplier()
     {
         return $this->belongsTo(Supplier::class);
+    }
+
+    public function salesOrderItems()
+    {
+        return $this->hasMany(SalesOrderItem::class);
+    }
+
+    public function purchaseOrderItems()
+    {
+        return $this->hasMany(PurchaseOrderItem::class);
     }
 }

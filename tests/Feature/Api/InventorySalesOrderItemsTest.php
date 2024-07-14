@@ -3,7 +3,7 @@
 namespace Tests\Feature\Api;
 
 use App\Models\User;
-use App\Models\SalesOrder;
+use App\Models\Inventory;
 use App\Models\SalesOrderItem;
 
 use Tests\TestCase;
@@ -11,7 +11,7 @@ use Laravel\Sanctum\Sanctum;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class SalesOrderSalesOrderItemsTest extends TestCase
+class InventorySalesOrderItemsTest extends TestCase
 {
     use RefreshDatabase, WithFaker;
 
@@ -31,17 +31,17 @@ class SalesOrderSalesOrderItemsTest extends TestCase
     /**
      * @test
      */
-    public function it_gets_sales_order_sales_order_items(): void
+    public function it_gets_inventory_sales_order_items(): void
     {
-        $salesOrder = SalesOrder::factory()->create();
+        $inventory = Inventory::factory()->create();
         $salesOrderItems = SalesOrderItem::factory()
             ->count(2)
             ->create([
-                'sales_order_id' => $salesOrder->id,
+                'inventory_id' => $inventory->id,
             ]);
 
         $response = $this->getJson(
-            route('api.sales-orders.sales-order-items.index', $salesOrder)
+            route('api.inventories.sales-order-items.index', $inventory)
         );
 
         $response->assertOk()->assertSee($salesOrderItems[0]->notes);
@@ -50,17 +50,17 @@ class SalesOrderSalesOrderItemsTest extends TestCase
     /**
      * @test
      */
-    public function it_stores_the_sales_order_sales_order_items(): void
+    public function it_stores_the_inventory_sales_order_items(): void
     {
-        $salesOrder = SalesOrder::factory()->create();
+        $inventory = Inventory::factory()->create();
         $data = SalesOrderItem::factory()
             ->make([
-                'sales_order_id' => $salesOrder->id,
+                'inventory_id' => $inventory->id,
             ])
             ->toArray();
 
         $response = $this->postJson(
-            route('api.sales-orders.sales-order-items.store', $salesOrder),
+            route('api.inventories.sales-order-items.store', $inventory),
             $data
         );
 
@@ -73,6 +73,6 @@ class SalesOrderSalesOrderItemsTest extends TestCase
 
         $salesOrderItem = SalesOrderItem::latest('id')->first();
 
-        $this->assertEquals($salesOrder->id, $salesOrderItem->sales_order_id);
+        $this->assertEquals($inventory->id, $salesOrderItem->inventory_id);
     }
 }

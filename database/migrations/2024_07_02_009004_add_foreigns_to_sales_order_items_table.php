@@ -19,9 +19,9 @@ return new class extends Migration {
                 ->onDelete('CASCADE');
 
             $table
-                ->foreign('product_id')
+                ->foreign('inventory_id')
                 ->references('id')
-                ->on('products')
+                ->on('inventories')
                 ->onUpdate('CASCADE')
                 ->onDelete('CASCADE');
         });
@@ -34,7 +34,7 @@ return new class extends Migration {
     {
         Schema::table('sales_order_items', function (Blueprint $table) {
             $table->dropForeign(['sales_order_id']);
-            $table->dropForeign(['product_id']);
+            $table->dropForeign(['inventory_id']);
         });
     }
 };

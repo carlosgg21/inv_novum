@@ -3,7 +3,7 @@
 namespace Tests\Feature\Api;
 
 use App\Models\User;
-use App\Models\PurchaseOrder;
+use App\Models\Inventory;
 use App\Models\PurchaseOrderItem;
 
 use Tests\TestCase;
@@ -11,7 +11,7 @@ use Laravel\Sanctum\Sanctum;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class PurchaseOrderPurchaseOrderItemsTest extends TestCase
+class InventoryPurchaseOrderItemsTest extends TestCase
 {
     use RefreshDatabase, WithFaker;
 
@@ -31,20 +31,17 @@ class PurchaseOrderPurchaseOrderItemsTest extends TestCase
     /**
      * @test
      */
-    public function it_gets_purchase_order_purchase_order_items(): void
+    public function it_gets_inventory_purchase_order_items(): void
     {
-        $purchaseOrder = PurchaseOrder::factory()->create();
+        $inventory = Inventory::factory()->create();
         $purchaseOrderItems = PurchaseOrderItem::factory()
             ->count(2)
             ->create([
-                'purchase_order_id' => $purchaseOrder->id,
+                'inventory_id' => $inventory->id,
             ]);
 
         $response = $this->getJson(
-            route(
-                'api.purchase-orders.purchase-order-items.index',
-                $purchaseOrder
-            )
+            route('api.inventories.purchase-order-items.index', $inventory)
         );
 
         $response->assertOk()->assertSee($purchaseOrderItems[0]->noted);
@@ -53,20 +50,17 @@ class PurchaseOrderPurchaseOrderItemsTest extends TestCase
     /**
      * @test
      */
-    public function it_stores_the_purchase_order_purchase_order_items(): void
+    public function it_stores_the_inventory_purchase_order_items(): void
     {
-        $purchaseOrder = PurchaseOrder::factory()->create();
+        $inventory = Inventory::factory()->create();
         $data = PurchaseOrderItem::factory()
             ->make([
-                'purchase_order_id' => $purchaseOrder->id,
+                'inventory_id' => $inventory->id,
             ])
             ->toArray();
 
         $response = $this->postJson(
-            route(
-                'api.purchase-orders.purchase-order-items.store',
-                $purchaseOrder
-            ),
+            route('api.inventories.purchase-order-items.store', $inventory),
             $data
         );
 
@@ -79,9 +73,6 @@ class PurchaseOrderPurchaseOrderItemsTest extends TestCase
 
         $purchaseOrderItem = PurchaseOrderItem::latest('id')->first();
 
-        $this->assertEquals(
-            $purchaseOrder->id,
-            $purchaseOrderItem->purchase_order_id
-        );
+        $this->assertEquals($inventory->id, $purchaseOrderItem->inventory_id);
     }
 }

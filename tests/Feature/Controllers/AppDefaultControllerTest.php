@@ -64,6 +64,8 @@ class AppDefaultControllerTest extends TestCase
 
         $response = $this->post(route('app-defaults.store'), $data);
 
+        unset($data['manager_by']);
+
         $this->assertDatabaseHas('app_defaults', $data);
 
         $appDefault = AppDefault::latest('id')->first();
@@ -114,12 +116,15 @@ class AppDefaultControllerTest extends TestCase
             'display_name' => $this->faker->text(255),
             'value' => $this->faker->text(),
             'description' => $this->faker->sentence(15),
+            'manager_by' => $this->faker->boolean(),
         ];
 
         $response = $this->put(
             route('app-defaults.update', $appDefault),
             $data
         );
+
+        unset($data['manager_by']);
 
         $data['id'] = $appDefault->id;
 

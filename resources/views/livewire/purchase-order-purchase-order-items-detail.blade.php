@@ -38,19 +38,6 @@
             <div class="modal-body">
                 <div>
                     <x-inputs.group class="col-sm-12">
-                        <x-inputs.select
-                            name="purchaseOrderItem.product_id"
-                            label="Product"
-                            wire:model="purchaseOrderItem.product_id"
-                        >
-                            <option value="null" disabled>Please select the Product</option>
-                            @foreach($productsForSelect as $value => $label)
-                            <option value="{{ $value }}"  >{{ $label }}</option>
-                            @endforeach
-                        </x-inputs.select>
-                    </x-inputs.group>
-
-                    <x-inputs.group class="col-sm-12">
                         <x-inputs.number
                             name="purchaseOrderItem.quantity"
                             label="Quantity"
@@ -135,9 +122,6 @@
                             title="{{ trans('crud.common.select_all') }}"
                         />
                     </th>
-                    <th class="text-left">
-                        @lang('crud.purchase_order_purchase_order_items.inputs.product_id')
-                    </th>
                     <th class="text-right">
                         @lang('crud.purchase_order_purchase_order_items.inputs.quantity')
                     </th>
@@ -165,9 +149,6 @@
                             value="{{ $purchaseOrderItem->id }}"
                             wire:model="selected"
                         />
-                    </td>
-                    <td class="text-left">
-                        {{ optional($purchaseOrderItem->product)->name ?? '-' }}
                     </td>
                     <td class="text-right">
                         {{ $purchaseOrderItem->quantity ?? '-' }}
@@ -206,7 +187,7 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="7">{{ $purchaseOrderItems->render() }}</td>
+                    <td colspan="6">{{ $purchaseOrderItems->render() }}</td>
                 </tr>
             </tfoot>
         </table>

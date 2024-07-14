@@ -30,8 +30,6 @@ class ProductInventoriesDetail extends Component
         'inventory.location_id' => ['required', 'exists:locations,id'],
         'inventory.quantity' => ['nullable', 'numeric'],
         'inventory.quantity_on_order' => ['nullable', 'numeric'],
-        'inventory.min_qty' => ['nullable', 'numeric'],
-        'inventory.max_qty' => ['nullable', 'numeric'],
     ];
 
     public function mount(Product $product): void

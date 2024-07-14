@@ -51,7 +51,7 @@
         </x-inputs.select>
     </x-inputs.group>
 
-    <x-inputs.group class="col-sm-12 col-lg-6">
+    <x-inputs.group class="col-sm-12">
         <x-inputs.number
             name="taxes"
             label="Taxes"
@@ -62,7 +62,7 @@
         ></x-inputs.number>
     </x-inputs.group>
 
-    <x-inputs.group class="col-sm-12 col-lg-6">
+    <x-inputs.group class="col-sm-12">
         <x-inputs.number
             name="discount"
             label="Discount"
@@ -93,7 +93,7 @@
         ></x-inputs.date>
     </x-inputs.group>
 
-    <x-inputs.group class="col-sm-12 col-lg-6">
+    <x-inputs.group class="col-sm-12">
         <x-inputs.text
             name="shippin_tracking_number"
             label="Shippin Tracking Number"
@@ -103,7 +103,7 @@
         ></x-inputs.text>
     </x-inputs.group>
 
-    <x-inputs.group class="col-sm-12 col-lg-6">
+    <x-inputs.group class="col-sm-12">
         <x-inputs.number
             name="shipping_cost"
             label="Shipping Cost"
@@ -123,7 +123,7 @@
         ></x-inputs.date>
     </x-inputs.group>
 
-    <x-inputs.group class="col-sm-12 col-lg-6">
+    <x-inputs.group class="col-sm-12">
         <x-inputs.select name="payment_method_id" label="Payment Method">
             @php $selected = old('payment_method_id', ($editing ? $purchaseOrder->payment_method_id : '')) @endphp
             <option disabled {{ empty($selected) ? 'selected' : '' }}>Please select the Payment Method</option>
@@ -133,7 +133,7 @@
         </x-inputs.select>
     </x-inputs.group>
 
-    <x-inputs.group class="col-sm-12 col-lg-6">
+    <x-inputs.group class="col-sm-12">
         <x-inputs.select name="payment_term_id" label="Payment Term">
             @php $selected = old('payment_term_id', ($editing ? $purchaseOrder->payment_term_id : '')) @endphp
             <option disabled {{ empty($selected) ? 'selected' : '' }}>Please select the Payment Term</option>

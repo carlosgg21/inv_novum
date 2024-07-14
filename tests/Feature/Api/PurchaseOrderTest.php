@@ -57,6 +57,8 @@ class PurchaseOrderTest extends TestCase
 
         $response = $this->postJson(route('api.purchase-orders.store'), $data);
 
+        unset($data['prefix']);
+
         $this->assertDatabaseHas('purchase_orders', $data);
 
         $response->assertStatus(201)->assertJsonFragment($data);
@@ -76,6 +78,7 @@ class PurchaseOrderTest extends TestCase
 
         $data = [
             'number' => $this->faker->text(255),
+            'prefix' => $this->faker->text(255),
             'order_date' => $this->faker->date(),
             'total_amount' => $this->faker->randomNumber(2),
             'status' => 'not entered',
@@ -97,6 +100,8 @@ class PurchaseOrderTest extends TestCase
             route('api.purchase-orders.update', $purchaseOrder),
             $data
         );
+
+        unset($data['prefix']);
 
         $data['id'] = $purchaseOrder->id;
 

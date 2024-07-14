@@ -39,8 +39,9 @@ class CurrencyInvoicesController extends Controller
             'total_amount' => ['nullable', 'numeric'],
             'employee_id' => ['nullable', 'exists:employees,id'],
             'year' => ['nullable', 'max:255', 'string'],
-            'mount' => ['nullable', 'numeric'],
+            'month' => ['nullable', 'numeric'],
             'notes' => ['nullable', 'max:255', 'string'],
+            'prefix' => ['nullable', 'max:255', 'string'],
         ]);
 
         $invoice = $currency->invoices()->create($validated);

@@ -74,19 +74,6 @@
                             maxlength="255"
                         ></x-inputs.textarea>
                     </x-inputs.group>
-
-                    <x-inputs.group class="col-sm-12">
-                        <x-inputs.select
-                            name="salesOrderItem.product_id"
-                            label="Product"
-                            wire:model="salesOrderItem.product_id"
-                        >
-                            <option value="null" disabled>Please select the Product</option>
-                            @foreach($productsForSelect as $value => $label)
-                            <option value="{{ $value }}"  >{{ $label }}</option>
-                            @endforeach
-                        </x-inputs.select>
-                    </x-inputs.group>
                 </div>
             </div>
 
@@ -134,9 +121,6 @@
                     <th class="text-left">
                         @lang('crud.sales_order_sales_order_items.inputs.notes')
                     </th>
-                    <th class="text-left">
-                        @lang('crud.sales_order_sales_order_items.inputs.product_id')
-                    </th>
                     <th></th>
                 </tr>
             </thead>
@@ -162,9 +146,6 @@
                     <td class="text-left">
                         {{ $salesOrderItem->notes ?? '-' }}
                     </td>
-                    <td class="text-left">
-                        {{ optional($salesOrderItem->product)->name ?? '-' }}
-                    </td>
                     <td class="text-right" style="width: 134px;">
                         <div
                             role="group"
@@ -187,7 +168,7 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="6">{{ $salesOrderItems->render() }}</td>
+                    <td colspan="5">{{ $salesOrderItems->render() }}</td>
                 </tr>
             </tfoot>
         </table>

@@ -74,11 +74,12 @@ class InvoiceTest extends TestCase
 
         $data = [
             'number' => $this->faker->text(255),
-            'date' => $this->faker->date(),
             'total_amount' => $this->faker->randomNumber(1),
+            'date' => $this->faker->date(),
+            'prefix' => $this->faker->text(255),
             'status' => $this->faker->word(),
             'year' => $this->faker->text(255),
-            'mount' => $this->faker->randomNumber(0),
+            'month' => $this->faker->randomNumber(0),
             'notes' => $this->faker->text(),
             'sales_order_id' => $salesOrder->id,
             'employee_id' => $employee->id,

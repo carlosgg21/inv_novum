@@ -28,6 +28,7 @@ class AppDefaultFactory extends Factory
             'display_name' => $this->faker->text(255),
             'value' => $this->faker->text(),
             'description' => $this->faker->sentence(15),
+            'manager_by' => $this->faker->boolean(),
         ];
     }
 }

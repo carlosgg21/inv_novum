@@ -15,10 +15,10 @@ return new class extends Migration {
             $table->unsignedBigInteger('product_id');
             $table->unsignedBigInteger('location_id');
             $table->integer('quantity')->nullable();
-            $table->integer('min_qty')->nullable();
-            $table->integer('max_qty')->nullable();
+            $table->string('batch_number')->nullable();
             $table->integer('quantity_on_order')->nullable();
             $table->unsignedBigInteger('supplier_id')->nullable();
+            $table->date('expire_date')->nullable();
 
             $table->timestamps();
         });

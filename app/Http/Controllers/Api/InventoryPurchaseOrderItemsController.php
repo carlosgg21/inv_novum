@@ -2,23 +2,23 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\Inventory;
 use Illuminate\Http\Request;
-use App\Models\PurchaseOrder;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\PurchaseOrderItemResource;
 use App\Http\Resources\PurchaseOrderItemCollection;
 
-class PurchaseOrderPurchaseOrderItemsController extends Controller
+class InventoryPurchaseOrderItemsController extends Controller
 {
     public function index(
         Request $request,
-        PurchaseOrder $purchaseOrder
+        Inventory $inventory
     ): PurchaseOrderItemCollection {
-        $this->authorize('view', $purchaseOrder);
+        $this->authorize('view', $inventory);
 
         $search = $request->get('search', '');
 
-        $purchaseOrderItems = $purchaseOrder
+        $purchaseOrderItems = $inventory
             ->purchaseOrderItems()
             ->search($search)
             ->latest()
@@ -29,7 +29,7 @@ class PurchaseOrderPurchaseOrderItemsController extends Controller
 
     public function store(
         Request $request,
-        PurchaseOrder $purchaseOrder
+        Inventory $inventory
     ): PurchaseOrderItemResource {
         $this->authorize('create', PurchaseOrderItem::class);
 
@@ -41,7 +41,7 @@ class PurchaseOrderPurchaseOrderItemsController extends Controller
             'noted' => ['required', 'max:255', 'string'],
         ]);
 
-        $purchaseOrderItem = $purchaseOrder
+        $purchaseOrderItem = $inventory
             ->purchaseOrderItems()
             ->create($validated);
 

@@ -35,8 +35,6 @@ class ProductInventoriesController extends Controller
             'location_id' => ['required', 'exists:locations,id'],
             'quantity' => ['nullable', 'numeric'],
             'quantity_on_order' => ['nullable', 'numeric'],
-            'min_qty' => ['nullable', 'numeric'],
-            'max_qty' => ['nullable', 'numeric'],
         ]);
 
         $inventory = $product->inventories()->create($validated);

@@ -66,40 +66,10 @@
                             placeholder="Quantity On Order"
                         ></x-inputs.number>
                     </x-inputs.group>
-
-                    <x-inputs.group class="col-sm-12 col-lg-6">
-                        <x-inputs.number
-                            name="inventory.min_qty"
-                            label="Min Qty"
-                            wire:model="inventory.min_qty"
-                            max="255"
-                            placeholder="Min Qty"
-                        ></x-inputs.number>
-                    </x-inputs.group>
-
-                    <x-inputs.group class="col-sm-12 col-lg-6">
-                        <x-inputs.number
-                            name="inventory.max_qty"
-                            label="Max Qty"
-                            wire:model="inventory.max_qty"
-                            max="255"
-                            placeholder="Max Qty"
-                        ></x-inputs.number>
-                    </x-inputs.group>
                 </div>
             </div>
 
-            @if($editing) @can('view-any', App\Models\InventoryDetail::class)
-            <div class="card mt-4">
-                <div class="card-body">
-                    <h6 class="card-title">Inventory Details</h6>
-
-                    <livewire:inventory-inventory-details-detail
-                        :inventory="$inventory"
-                    />
-                </div>
-            </div>
-            @endcan @endif
+            @if($editing) @endif
 
             <div class="modal-footer">
                 <button
@@ -140,12 +110,6 @@
                     <th class="text-right">
                         @lang('crud.product_inventories.inputs.quantity_on_order')
                     </th>
-                    <th class="text-right">
-                        @lang('crud.product_inventories.inputs.min_qty')
-                    </th>
-                    <th class="text-right">
-                        @lang('crud.product_inventories.inputs.max_qty')
-                    </th>
                     <th></th>
                 </tr>
             </thead>
@@ -168,8 +132,6 @@
                     <td class="text-right">
                         {{ $inventory->quantity_on_order ?? '-' }}
                     </td>
-                    <td class="text-right">{{ $inventory->min_qty ?? '-' }}</td>
-                    <td class="text-right">{{ $inventory->max_qty ?? '-' }}</td>
                     <td class="text-right" style="width: 134px;">
                         <div
                             role="group"
@@ -192,7 +154,7 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="6">{{ $inventories->render() }}</td>
+                    <td colspan="4">{{ $inventories->render() }}</td>
                 </tr>
             </tfoot>
         </table>

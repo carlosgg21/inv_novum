@@ -43,16 +43,6 @@ class Product extends Model
         return $this->belongsTo(Brand::class);
     }
 
-    public function salesOrderItems()
-    {
-        return $this->hasMany(SalesOrderItem::class);
-    }
-
-    public function purchaseOrderItems()
-    {
-        return $this->hasMany(PurchaseOrderItem::class);
-    }
-
     public function inventories()
     {
         return $this->hasMany(Inventory::class);

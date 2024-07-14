@@ -40,20 +40,24 @@
                     <span>{{ optional($invoice->employee)->name ?? '-' }}</span>
                 </div>
                 <div class="mb-4">
-                    <h5>@lang('crud.invoices.inputs.currency_id')</h5>
-                    <span>{{ optional($invoice->currency)->name ?? '-' }}</span>
-                </div>
-                <div class="mb-4">
                     <h5>@lang('crud.invoices.inputs.year')</h5>
                     <span>{{ $invoice->year ?? '-' }}</span>
                 </div>
                 <div class="mb-4">
-                    <h5>@lang('crud.invoices.inputs.mount')</h5>
-                    <span>{{ $invoice->mount ?? '-' }}</span>
+                    <h5>@lang('crud.invoices.inputs.currency_id')</h5>
+                    <span>{{ optional($invoice->currency)->name ?? '-' }}</span>
+                </div>
+                <div class="mb-4">
+                    <h5>@lang('crud.invoices.inputs.month')</h5>
+                    <span>{{ $invoice->month ?? '-' }}</span>
                 </div>
                 <div class="mb-4">
                     <h5>@lang('crud.invoices.inputs.notes')</h5>
                     <span>{{ $invoice->notes ?? '-' }}</span>
+                </div>
+                <div class="mb-4">
+                    <h5>@lang('crud.invoices.inputs.prefix')</h5>
+                    <span>{{ $invoice->prefix ?? '-' }}</span>
                 </div>
             </div>
 

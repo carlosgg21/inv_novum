@@ -26,7 +26,8 @@ class SalesOrderItemFactory extends Factory
             'unit_price'     => $this->faker->randomNumber(2),
             'total_price'    => $this->faker->randomFloat(2, 10, 500),
             'sales_order_id' => \App\Models\SalesOrder::factory(),
-            'product_id'     => $this->faker->randomElement([1, 10]),
+            // 'product_id'     => $this->faker->randomElement([1, 10]),
+              'inventory_id' => \App\Models\Inventory::factory(),
         ];
     }
 }

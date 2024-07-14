@@ -69,6 +69,8 @@ class PurchaseOrderControllerTest extends TestCase
 
         $response = $this->post(route('purchase-orders.store'), $data);
 
+        unset($data['prefix']);
+
         $this->assertDatabaseHas('purchase_orders', $data);
 
         $purchaseOrder = PurchaseOrder::latest('id')->first();
@@ -122,6 +124,7 @@ class PurchaseOrderControllerTest extends TestCase
 
         $data = [
             'number' => $this->faker->text(255),
+            'prefix' => $this->faker->text(255),
             'order_date' => $this->faker->date(),
             'total_amount' => $this->faker->randomNumber(2),
             'status' => 'not entered',
@@ -143,6 +146,8 @@ class PurchaseOrderControllerTest extends TestCase
             route('purchase-orders.update', $purchaseOrder),
             $data
         );
+
+        unset($data['prefix']);
 
         $data['id'] = $purchaseOrder->id;
 

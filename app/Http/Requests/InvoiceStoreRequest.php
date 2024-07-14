@@ -26,10 +26,11 @@ class InvoiceStoreRequest extends FormRequest
             'status' => ['required', 'max:255', 'string'],
             'total_amount' => ['nullable', 'numeric'],
             'employee_id' => ['nullable', 'exists:employees,id'],
-            'currency_id' => ['required', 'exists:currencies,id'],
             'year' => ['nullable', 'max:255', 'string'],
-            'mount' => ['nullable', 'numeric'],
+            'currency_id' => ['required', 'exists:currencies,id'],
+            'month' => ['nullable', 'numeric'],
             'notes' => ['nullable', 'max:255', 'string'],
+            'prefix' => ['nullable', 'max:255', 'string'],
         ];
     }
 }

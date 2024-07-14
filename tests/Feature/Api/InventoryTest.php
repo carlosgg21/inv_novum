@@ -42,7 +42,7 @@ class InventoryTest extends TestCase
 
         $response = $this->getJson(route('api.inventories.index'));
 
-        $response->assertOk()->assertSee($inventories[0]->id);
+        $response->assertOk()->assertSee($inventories[0]->batch_number);
     }
 
     /**
@@ -74,9 +74,9 @@ class InventoryTest extends TestCase
 
         $data = [
             'quantity' => $this->faker->randomNumber(),
-            'min_qty' => $this->faker->randomNumber(0),
-            'max_qty' => $this->faker->randomNumber(0),
+            'batch_number' => $this->faker->text(255),
             'quantity_on_order' => $this->faker->randomNumber(0),
+            'expire_date' => $this->faker->date(),
             'product_id' => $product->id,
             'location_id' => $location->id,
             'supplier_id' => $supplier->id,

@@ -43,31 +43,30 @@
 
     <x-inputs.group class="col-sm-12">
         <x-inputs.number
-            name="min_qty"
-            label="Min Qty"
-            :value="old('min_qty', ($editing ? $inventory->min_qty : ''))"
-            max="255"
-            placeholder="Min Qty"
-        ></x-inputs.number>
-    </x-inputs.group>
-
-    <x-inputs.group class="col-sm-12">
-        <x-inputs.number
-            name="max_qty"
-            label="Max Qty"
-            :value="old('max_qty', ($editing ? $inventory->max_qty : ''))"
-            max="255"
-            placeholder="Max Qty"
-        ></x-inputs.number>
-    </x-inputs.group>
-
-    <x-inputs.group class="col-sm-12">
-        <x-inputs.number
             name="quantity_on_order"
             label="Quantity On Order"
             :value="old('quantity_on_order', ($editing ? $inventory->quantity_on_order : ''))"
             max="255"
             placeholder="Quantity On Order"
         ></x-inputs.number>
+    </x-inputs.group>
+
+    <x-inputs.group class="col-sm-12 col-lg-6">
+        <x-inputs.text
+            name="batch_number"
+            label="Batch Number"
+            :value="old('batch_number', ($editing ? $inventory->batch_number : ''))"
+            maxlength="255"
+            placeholder="Batch Number"
+        ></x-inputs.text>
+    </x-inputs.group>
+
+    <x-inputs.group class="col-sm-12 col-lg-6">
+        <x-inputs.date
+            name="expire_date"
+            label="Expire Date"
+            value="{{ old('expire_date', ($editing ? optional($inventory->expire_date)->format('Y-m-d') : '')) }}"
+            max="255"
+        ></x-inputs.date>
     </x-inputs.group>
 </div>

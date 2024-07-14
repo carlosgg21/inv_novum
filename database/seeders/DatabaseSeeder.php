@@ -62,7 +62,7 @@ $this->call(ProductSeeder::class);
         $this->call(CustomerSeeder::class);
         $this->call(EmployeeSeeder::class);
         $this->call(InventorySeeder::class);
-        $this->call(InventoryDetailSeeder::class);
+       
         $this->call(InvoiceSeeder::class);
  $this->call(PaymentMadeSeeder::class);
         $this->call(PaymentsReceivedSeeder::class);

@@ -36,8 +36,6 @@ class LocationInventoriesController extends Controller
         $validated = $request->validate([
             'quantity' => ['nullable', 'numeric'],
             'quantity_on_order' => ['nullable', 'numeric'],
-            'min_qty' => ['nullable', 'numeric'],
-            'max_qty' => ['nullable', 'numeric'],
         ]);
 
         $inventory = $location->inventories()->create($validated);

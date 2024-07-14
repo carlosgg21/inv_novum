@@ -37,10 +37,11 @@ class EmployeeInvoicesController extends Controller
             'date' => ['required', 'date'],
             'status' => ['required', 'max:255', 'string'],
             'total_amount' => ['nullable', 'numeric'],
-            'currency_id' => ['required', 'exists:currencies,id'],
             'year' => ['nullable', 'max:255', 'string'],
-            'mount' => ['nullable', 'numeric'],
+            'currency_id' => ['required', 'exists:currencies,id'],
+            'month' => ['nullable', 'numeric'],
             'notes' => ['nullable', 'max:255', 'string'],
+            'prefix' => ['nullable', 'max:255', 'string'],
         ]);
 
         $invoice = $employee->invoices()->create($validated);

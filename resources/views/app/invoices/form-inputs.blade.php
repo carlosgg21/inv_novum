@@ -63,6 +63,11 @@
         </x-inputs.select>
     </x-inputs.group>
 
+    <x-inputs.hidden
+        name="year"
+        :value="old('year', ($editing ? $invoice->year : ''))"
+    ></x-inputs.hidden>
+
     <x-inputs.group class="col-sm-12">
         <x-inputs.select name="currency_id" label="Currency" required>
             @php $selected = old('currency_id', ($editing ? $invoice->currency_id : '')) @endphp
@@ -74,13 +79,8 @@
     </x-inputs.group>
 
     <x-inputs.hidden
-        name="year"
-        :value="old('year', ($editing ? $invoice->year : ''))"
-    ></x-inputs.hidden>
-
-    <x-inputs.hidden
-        name="mount"
-        :value="old('mount', ($editing ? $invoice->mount : ''))"
+        name="month"
+        :value="old('month', ($editing ? $invoice->month : ''))"
     ></x-inputs.hidden>
 
     <x-inputs.group class="col-sm-12">
@@ -88,5 +88,15 @@
             >{{ old('notes', ($editing ? $invoice->notes : ''))
             }}</x-inputs.textarea
         >
+    </x-inputs.group>
+
+    <x-inputs.group class="col-sm-12">
+        <x-inputs.text
+            name="prefix"
+            label="Prefix"
+            :value="old('prefix', ($editing ? $invoice->prefix : ''))"
+            maxlength="255"
+            placeholder="Prefix"
+        ></x-inputs.text>
     </x-inputs.group>
 </div>

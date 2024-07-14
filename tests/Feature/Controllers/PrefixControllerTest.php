@@ -141,6 +141,6 @@ class PrefixControllerTest extends TestCase
 
         $response->assertRedirect(route('prefixes.index'));
 
-        $this->assertModelMissing($prefix);
+        $this->assertSoftDeleted($prefix);
     }
 }

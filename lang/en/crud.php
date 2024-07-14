@@ -430,22 +430,6 @@ return [
             'location_id' => 'Location',
             'quantity' => 'Quantity',
             'quantity_on_order' => 'Quantity On Order',
-            'min_qty' => 'Min Qty',
-            'max_qty' => 'Max Qty',
-        ],
-    ],
-
-    'inventory_inventory_details' => [
-        'name' => 'Inventory Inventory Details',
-        'index_title' => 'InventoryDetails List',
-        'new_title' => 'New Inventory detail',
-        'create_title' => 'Create InventoryDetail',
-        'edit_title' => 'Edit InventoryDetail',
-        'show_title' => 'Show InventoryDetail',
-        'inputs' => [
-            'batch_number' => 'Batch Number',
-            'expire_date' => 'Expire Date',
-            'unit_cost' => 'Unit Cost',
         ],
     ],
 
@@ -489,7 +473,6 @@ return [
             'unit_price' => 'Unit Price',
             'total_price' => 'Total Price',
             'notes' => 'Notes',
-            'product_id' => 'Product',
         ],
     ],
 
@@ -528,7 +511,6 @@ return [
         'edit_title' => 'Edit PurchaseOrderItem',
         'show_title' => 'Show PurchaseOrderItem',
         'inputs' => [
-            'product_id' => 'Product',
             'quantity' => 'Quantity',
             'qty_received' => 'Qty Received',
             'unit_price' => 'Unit Price',
@@ -551,10 +533,11 @@ return [
             'status' => 'Status',
             'total_amount' => 'Total Amount',
             'employee_id' => 'Employee',
-            'currency_id' => 'Currency',
             'year' => 'Year',
-            'mount' => 'Mount',
+            'currency_id' => 'Currency',
+            'month' => 'Month',
             'notes' => 'Notes',
+            'prefix' => 'Prefix',
         ],
     ],
 
@@ -627,9 +610,9 @@ return [
             'product_id' => 'Product',
             'location_id' => 'Location',
             'quantity' => 'Quantity',
-            'min_qty' => 'Min Qty',
-            'max_qty' => 'Max Qty',
             'quantity_on_order' => 'Quantity On Order',
+            'batch_number' => 'Batch Number',
+            'expire_date' => 'Expire Date',
         ],
     ],
 

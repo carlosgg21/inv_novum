@@ -117,12 +117,6 @@ class PermissionsSeeder extends Seeder
         Permission::create(['name' => 'update inventories']);
         Permission::create(['name' => 'delete inventories']);
 
-        Permission::create(['name' => 'list inventorydetails']);
-        Permission::create(['name' => 'view inventorydetails']);
-        Permission::create(['name' => 'create inventorydetails']);
-        Permission::create(['name' => 'update inventorydetails']);
-        Permission::create(['name' => 'delete inventorydetails']);
-
         Permission::create(['name' => 'list invoices']);
         Permission::create(['name' => 'view invoices']);
         Permission::create(['name' => 'create invoices']);
