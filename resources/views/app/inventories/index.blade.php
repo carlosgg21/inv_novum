@@ -27,21 +27,21 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse($inventories as $inventory)
-                  
-                            <tr data-toggle="collapse" data-target="#{{ $inventory->code }}" class="accordion-toggle">
-                                <td><button class="btn btn-default btn-xs"><span class="fas fa-angle-right"></span></button></td>
-                           
-                                    <td>{{ $inventory->code ?? '-' }}</td>
-                                    <td>{{ $inventory->name ?? '-' }}</td>
-                                    <td>{{ optional($inventory->category)->name ?? '-' }}</td>
-                                    <td>{{ optional($inventory->brand)->name ?? '-' }}</td>
-                                    <td>{{ $inventory->qty ?? 0 }}</td>
-                                    <td>{{ $inventory->on_order ?? 0 }}</td>
+                        @forelse($inventories as $key=>$inventory)
+                  {{-- @dd($inventory->toArray()) --}}
+                            {{-- <tr data-toggle="collapse" data-target="#{{ $inventory->code }}" class="accordion-toggle"> --}}
+                             <tr data-toggle="collapse" data-target="#{{ $key }}" class="accordion-toggle">
+                                            <td><button class="btn btn-default btn-xs"><span class="fas fa-angle-right"></span></button></td>
+                                            <td>{{ $inventory->first()->product->code ?? '-' }}</td>
+                                            <td>{{ $inventory->first()->product->name ?? '-' }}</td>
+                                            <td>{{ optional($inventory->first()->product->category)->name ?? '-' }}</td>
+                                            <td>{{ optional($inventory->first()->product->brand)->name ?? '-' }}</td>
+                                            <td>{{ $inventory->first()->product->qty ?? 0 }}</td>
+                                            <td>{{ $inventory->first()->product->on_order ?? 0 }}</td>
 
                                     <tr>
                                         <td colspan="7" class="hiddenRow">
-                                       <div id="{{ $inventory->code }}" class="accordian-body collapse collapsed-content">
+                                       <div id="{{ $key }}" class="accordian-body collapse collapsed-content">
                                                 
                                                 <table class="table table-boder table-sm">
                                                        <thead class="thead-dark">
@@ -56,7 +56,8 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        @foreach($inventory->inventories as $details)
+                                                        @foreach($inventory as $details)
+                                                        {{-- @dd($details->toArray()) --}}
                                                         <tr>
                                                             <th scope="row">{{ $loop->index+1 }}</th>                                                    
                                                              <td>{{ optional($details->supplier)->name ?? '-' }}</td>
@@ -107,9 +108,9 @@
                     </tfoot> --}}
                 </table>
             </div>
-            <div class="d-flex justify-content-center">
+            {{-- <div class="d-flex justify-content-center">
                 {{ $inventories->links() }}
-            </div>
+            </div> --}}
         </div>
     </div>
 </div>
