@@ -11,20 +11,22 @@
                     </a>
                 </li>
                 <li>
-                    <a class="waves-effect waves-dark" href="index.html" aria-expanded="false"><i class="ti-truck">
-                        </i><span class="hide-menu">Purchase Orders</span>
+                    <a class="waves-effect waves-dark" href="index.html" aria-expanded="false">
+                        <i class="fas fa-dolly"></i><span class="hide-menu">Purchase Orders</span>
+                        {{-- <i class="ti-truck"></i><span class="hide-menu">Purchase Orders</span> --}}
                     </a>
                 </li>
                 <li>
                     <a class="waves-effect waves-dark" href="index.html" aria-expanded="false"><i
-                            class=" ti-shopping-cart-full">
+                            class="ti-shopping-cart">
+                            {{-- class=" ti-shopping-cart-full"> --}}
                         </i><span class="hide-menu">Sale Orders</span>
                     </a>
                 </li>
 
                 <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i
-                            class=" fas fa-dolly-flatbed"></i><span class="hide-menu">Inventory Manager </span></a>
-                            {{-- class="ti-dropbox"></i><span class="hide-menu">Inventory Manager </span></a> --}}
+                            {{-- class=" fas fa-dolly-flatbed"></i><span class="hide-menu">Inventory Manager </span></a> --}}
+                            class="ti-dropbox"></i><span class="hide-menu">Inventory Manager </span></a>
                     <!-- <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-layers"></i><span class="hide-menu">Inventory Manager </span></a> -->
                     <ul aria-expanded="false" class="collapse">
                         @can('view-any', App\Models\Product::class)
@@ -36,6 +38,7 @@
                     </ul>
                 </li>
                 <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i
+                            {{-- class="ti-credit-card"></i><span class="hide-menu">Accounting</span></a> --}}
                             class="fas fa-donate"></i><span class="hide-menu">Accounting</span></a>
 {{--                            class="ti-wallet"></i><span class="hide-menu">Accounting</span></a>--}}
                     <!-- <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-bookmark-alt"></i><span class="hide-menu">Accounting</span></a> -->
@@ -74,7 +77,7 @@
                         @endcan
                         @can('view-any', App\Models\Country::class)
                             <li><a href="{{ route('countries.index') }}">Countries</a></li>
-                        @endcan\\\\¿
+                        @endcan
                         @can('view-any', App\Models\City::class)
                             <li><a href="{{ route('cities.index') }}">Cities</a></li>
                         @endcan
@@ -93,6 +96,9 @@
                         @can('view-any', App\Models\Bank::class)
                             <li><a href="{{ route('banks.index') }}">Bank</a></li>
                         @endcan
+                      @can('view-any', App\Models\AppDefault::class)
+                            <li><a href="{{ route('app-defaults.index') }}">Default</a></li>
+                        @endcan
 
                     </ul>
                 </li>
@@ -107,7 +113,7 @@
                             class="ti-panel"></i><span class="hide-menu">System</span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="ui-cards.html">Company</a></li>
-                        <li><a href="ui-user-card.html">Defaults</a></li>
+                        <li><a href="ui-user-card.html">App Defaults</a></li>
                         <li><a href="ui-user-card.html">Settings</a></li>
                         <li><a href="ui-user-card.html">Prefixes</a></li>
 

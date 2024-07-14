@@ -111,4 +111,18 @@ class Invoice extends Model
     {
         return $this->status === 'paid';
     }
+
+    // Accessor for prefix
+    public function getPrefixAttribute()
+    {
+        return app_default('invoice.invoice_prefix', '');
+    }
+
+    // Accessor for full_number
+    public function getFullNumberAttribute()
+    {
+        $prefix = $this->prefix;
+
+        return $prefix ? $prefix.' '.$this->number : $this->number;
+    }
 }

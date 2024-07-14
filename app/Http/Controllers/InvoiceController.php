@@ -22,9 +22,7 @@ class InvoiceController extends Controller
         $this->authorize('view-any', Invoice::class);
 
         $search = $request->get('search', '');
-$sst =  setting('invoice.start_with_default_value');
-$df =  app_default('invoice.invoice_number_start');
-dd($sst, $df);
+
         $invoices = Invoice::search($search)
             ->excludeStatuses(['cancelled', 'closed'])
             ->latest()

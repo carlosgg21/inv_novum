@@ -1,48 +1,21 @@
 @extends('layouts.app')
+@section('title', 'Defaults')
+@section('page-title', 'Defaults List')
+@section('breadcrumb')
+<x-breadcrumb route="home" home="Home" title="Defaults List"></x-breadcrumb>
+<x-new-record route="app-defaults.create"></x-new-record>
+@endsection
 
 @section('content')
 <div class="container">
-    <div class="searchbar mt-0 mb-4">
-        <div class="row">
-            <div class="col-md-6">
-                <form>
-                    <div class="input-group">
-                        <input
-                            id="indexSearch"
-                            type="text"
-                            name="search"
-                            placeholder="{{ __('crud.common.search') }}"
-                            value="{{ $search ?? '' }}"
-                            class="form-control"
-                            autocomplete="off"
-                        />
-                        <div class="input-group-append">
-                            <button type="submit" class="btn btn-primary">
-                                <i class="icon ion-md-search"></i>
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="col-md-6 text-right">
-                @can('create', App\Models\AppDefault::class)
-                <a
-                    href="{{ route('app-defaults.create') }}"
-                    class="btn btn-primary"
-                >
-                    <i class="icon ion-md-add"></i> @lang('crud.common.create')
-                </a>
-                @endcan
-            </div>
-        </div>
-    </div>
+    <x-searchbar :search="$search">
+        <a href="{{ route('app-defaults.index') }}" type="button" class="btn btn-primary btn-sm">
+            Clear Search
+        </a>
+    </x-searchbar>
 
     <div class="card">
         <div class="card-body">
-            <div style="display: flex; justify-content: space-between;">
-                <h4 class="card-title">@lang('crud.defaults.index_title')</h4>
-            </div>
-
             <div class="table-responsive">
                 <table class="table table-borderless table-hover">
                     <thead>
@@ -68,58 +41,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse($appDefaults as $appDefault)
+                        @forelse($appDefaults as $default)
                         <tr>
-                            <td>{{ $appDefault->module ?? '-' }}</td>
-                            <td>{{ $appDefault->name ?? '-' }}</td>
-                            <td>{{ $appDefault->display_name ?? '-' }}</td>
-                            <td>{{ $appDefault->value ?? '-' }}</td>
-                            <td>{{ $appDefault->description ?? '-' }}</td>
-                            <td class="text-center" style="width: 134px;">
-                                <div
-                                    role="group"
-                                    aria-label="Row Actions"
-                                    class="btn-group"
-                                >
-                                    @can('update', $appDefault)
-                                    <a
-                                        href="{{ route('app-defaults.edit', $appDefault) }}"
-                                    >
-                                        <button
-                                            type="button"
-                                            class="btn btn-light"
-                                        >
-                                            <i class="icon ion-md-create"></i>
-                                        </button>
-                                    </a>
-                                    @endcan @can('view', $appDefault)
-                                    <a
-                                        href="{{ route('app-defaults.show', $appDefault) }}"
-                                    >
-                                        <button
-                                            type="button"
-                                            class="btn btn-light"
-                                        >
-                                            <i class="icon ion-md-eye"></i>
-                                        </button>
-                                    </a>
-                                    @endcan @can('delete', $appDefault)
-                                    <form
-                                        action="{{ route('app-defaults.destroy', $appDefault) }}"
-                                        method="POST"
-                                        onsubmit="return confirm('{{ __('crud.common.are_you_sure') }}')"
-                                    >
-                                        @csrf @method('DELETE')
-                                        <button
-                                            type="submit"
-                                            class="btn btn-light text-danger"
-                                        >
-                                            <i class="icon ion-md-trash"></i>
-                                        </button>
-                                    </form>
-                                    @endcan
-                                </div>
-                            </td>
+                            <td>{{ $default->module ?? '-' }}</td>
+                            <td>{{ $default->name ?? '-' }}</td>
+                            <td>{{ $default->display_name ?? '-' }}</td>
+                            <td>{{ $default->value ?? '-' }}</td>
+                            <td>{{ $default->description ?? '-' }}</td>
+                            <x-action-buttons :model="$default" routePrefix="app-defaults" />
                         </tr>
                         @empty
                         <tr>

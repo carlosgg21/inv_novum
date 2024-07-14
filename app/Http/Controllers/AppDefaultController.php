@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\View\View;
-use App\Models\AppDefault;
-use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\AppDefaultStoreRequest;
 use App\Http\Requests\AppDefaultUpdateRequest;
+use App\Models\AppDefault;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class AppDefaultController extends Controller
 {
@@ -20,10 +20,11 @@ class AppDefaultController extends Controller
 
         $search = $request->get('search', '');
 
-        $appDefaults = AppDefault::search($search)
-            ->latest()
-            ->paginate(5)
-            ->withQueryString();
+        $appDefaults = AppDefault::notManagedBy()
+             ->search($search)
+             ->latest()
+             ->paginate(5)
+             ->withQueryString();
 
         return view('app.app_defaults.index', compact('appDefaults', 'search'));
     }

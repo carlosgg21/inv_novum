@@ -51,13 +51,14 @@
                     <tbody>
                         @forelse($invoices as $invoice)
                         <tr>
-                            <td>{{ $invoice->number ?? '-' }}</td>
+                            <td>{{ $invoice->_full_number ?? '-' }}</td>
                             <td>{{ $invoice->date ? format_date($invoice->date , 'd/M/Y') : '-'}}</td>
                             <td>
                                 {{ optional($invoice->salesOrder)->number ?? '-'
                                 }}
                             </td>
-                            <td>{{ $invoice->status ?? '-' }}</td>
+                            {{-- <td>{{ $invoice->status ?? '-' }}</td> --}}
+                            <x-table-td-invoice-status :status="$invoice->status" />
                             <td>
                                 <i class="flag-icon {{ $invoice->currency->flag ?? '-' }}"></i>
                                 {{ $invoice->total_amount ? format_money($invoice->total_amount, $invoice->currency->acronym )  : '-' }}
