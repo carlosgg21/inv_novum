@@ -68,7 +68,7 @@
     <div class="row">
         @endif
         @endforeach
-    </div
+    </div>
     </div>
 </div>
 
