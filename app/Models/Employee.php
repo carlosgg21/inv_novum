@@ -39,6 +39,8 @@ class Employee extends Model
         'brithday' => 'date',
     ];
 
+     protected $appends = ['full_name'];
+
      protected static function boot()
     {
         parent::boot();
@@ -104,7 +106,7 @@ class Employee extends Model
         );
     }
 
-     protected $appends = ['full_name'];
+
 
     public function company()
     {

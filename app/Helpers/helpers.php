@@ -104,3 +104,17 @@ if (!function_exists('app_default')) {
         }
     }
 
+    
+if (!function_exists('format_address')) {
+    function format_address($address)
+    {
+
+
+$address_parts = explode(',', $address);
+return  implode('<br>', $address_parts);
+
+
+    }
+}
+
+

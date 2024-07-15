@@ -1,146 +1,76 @@
 @extends('layouts.app')
+@section('title', 'Company')
+@section('page-title', 'Company')
+@section('breadcrumb')
+<x-breadcrumb route="home" home="Home" title="Company"></x-breadcrumb>
+@endsection
 
 @section('content')
-<div class="container">
-    <div class="searchbar mt-0 mb-4">
+<div class="card">
+    <div class="card-body">
+
         <div class="row">
-            <div class="col-md-6">
-                <form>
-                    <div class="input-group">
-                        <input id="indexSearch" type="text" name="search" placeholder="{{ __('crud.common.search') }}"
-                            value="{{ $search ?? '' }}" class="form-control" autocomplete="off" />
-                        <div class="input-group-append">
-                            <button type="submit" class="btn btn-primary">
-                                <i class="icon ion-md-search"></i>
-                            </button>
-                        </div>
-                    </div>
-                </form>
+            <div class="col-sm-2">
+                <div class="sl-left"> <img src="{{ $company->logo ? \Storage::url($company->logo) : '' }}" alt="logo"
+                        class="img-thumbnail" width="50%" height="50%" /> </div>
             </div>
-            <div class="col-md-6 text-right">
-                @can('create', App\Models\Company::class)
-                <a href="{{ route('companies.create') }}" class="btn btn-primary">
-                    <i class="icon ion-md-add"></i> @lang('crud.common.create')
-                </a>
-                @endcan
+            <div class="col-sm-8">
+                <h4 class="font-weight-bold">{{ $company->name }}<br>
+                    <small>"{{ $company->slogan }}"</small>
+                </h4>
+                <address>
+                    {!! $company->address !!} <br>
+        
+                    <i class="fas fa-phone-square"></i> {{ $company->phone }}<br>
+                    <i class="fa fa-envelope"></i> <a href="mailto:{{ $company->email }}">{{ $company->email }}</a><br>
+                    <i class="fas fa-link"></i> <a href="{{ $company->email }}">Sitio web</a>
+        
+                </address>
+        
+            
+        
+            </div>
+            <div class="col-sm-2">
+                <div class="sl-left"> <img src="{{ $company->logo ? \Storage::url($company->qr_code) : '' }}" alt="qr_code"
+                        class="img-thumbnail" width="100%" height="100%" /> </div>
             </div>
         </div>
+        {{-- PARA UPDATE LOS DATOS DE LA COMPANY --}}
+        {{-- @can('update', $company)
+        <a href="{{ route('companies.edit', $company) }}">
+            <button type="button" class="btn btn-light">
+                <i class="fas fa-pencil"></i> Update
+            </button>
+        </a>
+        @endcan --}}
+       <hr>
+        <h4><i class="fa fa-users"></i> Contacts</h4>
+        <hr>
+      <div class="row">
+        @foreach ($company->companyContacts as $index => $contacts)
+        <div class="col-md-4 mb-4">
+            <div class="d-flex no-block comment-row">
+                <div class="comment-text w-100">
+                    <h5 class="font-medium">
+                        <small>
+                            {!! $contacts->boss ? '<span class="badge badge-dark">Boss</span>' : '' !!}
+                        </small>
+                        {{ $contacts->full_name }}
+                    </h5>
+                    <i class="fas fa-phone-square"></i> {{ $contacts->phone }}<br>
+                    <i class="fa fa-envelope"></i> <a href="mailto:{{ $contacts->email }}">{{ $contacts->email }}</a><br>
+                    <span class="badge badge-pill badge-info">{{ $contacts->charge->name }}</span>
+                </div>
+            </div>
+        </div>
+        @if (($index + 1) % 3 == 0)
     </div>
-
-    <div class="card">
-        <div class="card-body">
-            <div style="display: flex; justify-content: space-between;">
-                <h4 class="card-title">@lang('crud.companies.index_title')</h4>
-            </div>
-
-            <div class="table-responsive">
-                <table class="table table-borderless table-hover">
-                    <thead>
-                        <tr>
-                            <th class="text-left">
-                                @lang('crud.companies.inputs.logo')
-                            </th>
-                            <th class="text-left">
-                                @lang('crud.companies.inputs.code')
-                            </th>
-                            <th class="text-left">
-                                @lang('crud.companies.inputs.name')
-                            </th>
-                            <th class="text-left">
-                                @lang('crud.companies.inputs.acronym')
-                            </th>
-                            <th class="text-left">
-                                @lang('crud.companies.inputs.slogan')
-                            </th>
-                            <th class="text-left">
-                                @lang('crud.companies.inputs.phone')
-                            </th>
-                            <th class="text-left">
-                                @lang('crud.companies.inputs.email')
-                            </th>
-                            <th class="text-left">
-                                @lang('crud.companies.inputs.web_site')
-                            </th>
-                            <th class="text-left">
-                                @lang('crud.companies.inputs.social_media')
-                            </th>
-                            <th class="text-left">
-                                @lang('crud.companies.inputs.address')
-                            </th>
-                            <th class="text-left">
-                                @lang('crud.companies.inputs.qr_code')
-                            </th>
-                            <th class="text-center">
-                                @lang('crud.common.actions')
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse($companies as $company)
-                        <tr>
-                            <td>
-                                <x-partials.thumbnail
-                                    src="{{ $company->logo ? \Storage::url($company->logo) : '' }}"
-                                />
-                            </td>
-                            <td>{{ $company->code ?? '-' }}</td>
-                            <td>{{ $company->name ?? '-' }}</td>
-                            <td>{{ $company->acronym ?? '-' }}</td>
-                            <td>{{ $company->slogan ?? '-' }}</td>
-                            <td>{{ $company->phone ?? '-' }}</td>
-                            <td>{{ $company->email ?? '-' }}</td>
-                            <td>{{ $company->web_site ?? '-' }}</td>
-                            <td>
-                                <pre>
-{{ json_encode($company->social_media) ?? '-' }}</pre>
-                            </td>
-                            <td>{{ $company->address ?? '-' }}</td>
-                            <td>
-                                <x-partials.thumbnail
-                                    src="{{ $company->qr_code ? \Storage::url($company->qr_code) : '' }}" />
-                            </td>
-                            <td class="text-center" style="width: 134px;">
-                                <div role="group" aria-label="Row Actions" class="btn-group">
-                                    @can('update', $company)
-                                    <a href="{{ route('companies.edit', $company) }}">
-                                        <button type="button" class="btn btn-light">
-                                            <i class="icon ion-md-create"></i>
-                                        </button>
-                                    </a>
-                                    @endcan @can('view', $company)
-                                    <a href="{{ route('companies.show', $company) }}">
-                                        <button type="button" class="btn btn-light">
-                                            <i class="icon ion-md-eye"></i>
-                                        </button>
-                                    </a>
-                                    @endcan @can('delete', $company)
-                                    <form action="{{ route('companies.destroy', $company) }}" method="POST"
-                                        onsubmit="return confirm('{{ __('crud.common.are_you_sure') }}')">
-                                        @csrf @method('DELETE')
-                                        <button type="submit" class="btn btn-light text-danger">
-                                            <i class="icon ion-md-trash"></i>
-                                        </button>
-                                    </form>
-                                    @endcan
-                                </div>
-                            </td>
-                        </tr>
-                        @empty
-                        <tr>
-                            <td colspan="12">
-                                @lang('crud.common.no_items_found')
-                            </td>
-                        </tr>
-                        @endforelse
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <td colspan="12">{!! $companies->render() !!}</td>
-                        </tr>
-                    </tfoot>
-                </table>
-            </div>
-        </div>
+    <div class="row">
+        @endif
+        @endforeach
+    </div
     </div>
 </div>
+
+
 @endsection

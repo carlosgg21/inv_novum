@@ -2,7 +2,7 @@
 @section('title', 'Locations')
 @section('page-title', 'Locations List')
 @section('breadcrumb')
-<x-breadcrumb route="home" home="Home" title="Locations List"></x-breadcrumb>
+{{-- <x-breadcrumb route="home" home="Home" title="Locations List"></x-breadcrumb> --}}
 <x-new-record route="locations.create"></x-new-record>
 @endsection
 

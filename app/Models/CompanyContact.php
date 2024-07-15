@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use App\Models\Scopes\Searchable;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class CompanyContact extends Model
 {
@@ -26,10 +27,12 @@ class CompanyContact extends Model
     protected $searchableFields = ['*'];
 
     protected $table = 'company_contacts';
-
+    
+    protected $appends = ['full_name'];
+    
     protected $casts = [
         'social_media' => 'array',
-        'boss' => 'boolean',
+        'boss'         => 'boolean',
     ];
 
     public function company()
@@ -40,5 +43,12 @@ class CompanyContact extends Model
     public function charge()
     {
         return $this->belongsTo(Charge::class);
+    }
+
+    protected function fullName(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->name.' '.$this->last_name,
+        );
     }
 }

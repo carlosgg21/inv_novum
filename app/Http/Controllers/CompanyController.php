@@ -32,12 +32,12 @@ $socialMedia = $company->social_media;
 // $facebook = $company->social_media['social_profiles']['facebook'] ?? null;
 
 // dd($facebook);
-        $companies = Company::search($search)
-            ->latest()
-            ->paginate(5)
-            ->withQueryString();
 
-        return view('app.companies.index', compact('companies', 'search'));
+       $company = Company::find(1);
+
+
+
+        return view('app.companies.index', compact('company', 'search'));
     }
 
     /**

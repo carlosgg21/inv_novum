@@ -52,7 +52,7 @@
                         @forelse($invoices as $invoice)
                         <tr>
                             <td>{{ $invoice->_full_number ?? '-' }}</td>
-                            <td>{{ $invoice->date ? format_date($invoice->date , 'd/M/Y') : '-'}}</td>
+                            <td>{{ $invoice->date ? format_date($invoice->date , 'd/m/Y') : '-'}}</td>
                             <td>
                                 {{ optional($invoice->salesOrder)->number ?? '-'
                                 }}
