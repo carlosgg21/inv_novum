@@ -23,7 +23,9 @@
         
                     <i class="fas fa-phone-square"></i> {{ $company->phone }}<br>
                     <i class="fa fa-envelope"></i> <a href="mailto:{{ $company->email }}">{{ $company->email }}</a><br>
-                    <i class="fas fa-link"></i> <a href="{{ $company->email }}">Sitio web</a>
+                    <i class="fas fa-link"></i> <a href="{{ $company->email }}">Sitio web</a><br>
+                    {{-- <i class="fas fa-credit-card"></i> {{ $company->phone }}<br> --}}
+               
         
                 </address>
         
@@ -33,6 +35,7 @@
             <div class="col-sm-2">
                 <div class="sl-left"> <img src="{{ $company->logo ? \Storage::url($company->qr_code) : '' }}" alt="qr_code"
                         class="img-thumbnail" width="100%" height="100%" /> </div>
+                        {{ $company->bankAccounts->first()->masked_number}}
             </div>
         </div>
         {{-- PARA UPDATE LOS DATOS DE LA COMPANY --}}
@@ -44,7 +47,7 @@
         </a>
         @endcan --}}
        <hr>
-        <h4><i class="fa fa-users"></i> Contacts</h4>
+   <h4><i class="fa fa-users"></i> {{ Str::plural('Contact', $company->companyContacts->count()) }}</h4>
         <hr>
       <div class="row">
         @foreach ($company->companyContacts as $index => $contacts)

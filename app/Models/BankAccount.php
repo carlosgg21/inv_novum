@@ -3,9 +3,10 @@
 namespace App\Models;
 
 use App\Models\Scopes\Searchable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Crypt;
 
 class BankAccount extends Model
 {
@@ -31,6 +32,11 @@ class BankAccount extends Model
         'default' => 'boolean',
     ];
 
+    public function getNumberAttribute()
+    {
+        return Crypt::decrypt($this->attributes['number']);
+    }
+
     public function bank()
     {
         return $this->belongsTo(Bank::class);
@@ -44,5 +50,15 @@ class BankAccount extends Model
     public function bank_accountable()
     {
         return $this->morphTo();
+    }
+
+    public function getMaskedNumberAttribute()
+    {
+        $number = Crypt::decrypt($this->attributes['number']);
+
+        $length = strlen($number);
+        $maskedNumber = substr($number, 0, 4).'-'.str_repeat('*', 4).'-'.str_repeat('*', 4).'-'.substr($number, -4);
+
+        return $maskedNumber;
     }
 }

@@ -5,8 +5,6 @@ use App\Models\Setting;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
 
-
-
 if (!function_exists('format_money')) {
     function format_money($value, $currency = 'USD')
     {
@@ -66,8 +64,6 @@ if (!function_exists('setting')) {
     }
 }
 
-
-
 if (!function_exists('app_default')) {
     /**
      * Undocumented function
@@ -89,32 +85,23 @@ if (!function_exists('app_default')) {
         return Cache::rememberForever("app_default{$module}_{$name}", function () use ($module, $name, $defaultValue) {
             $app_default = AppDefault::where('module', $module)->where('name', $name)->first();
 
-            
-
             return $app_default ? $app_default->value : $defaultValue;
         });
     }
 }
 
-
-    if (!function_exists('format_date')) {
-        function format_date($date, $format = 'Y-m-d')
-        {
-            return $date ? date($format, strtotime($date)) : '';
-        }
-    }
-
-    
-if (!function_exists('format_address')) {
-    function format_address($address)
+if (!function_exists('format_date')) {
+    function format_date($date, $format = 'Y-m-d')
     {
-
-
-$address_parts = explode(',', $address);
-return  implode('<br>', $address_parts);
-
-
+        return $date ? date($format, strtotime($date)) : '';
     }
 }
 
+if (!function_exists('format_address')) {
+    function format_address($address)
+    {
+        $address_parts = explode(',', $address);
 
+        return  implode('<br>', $address_parts);
+    }
+}
