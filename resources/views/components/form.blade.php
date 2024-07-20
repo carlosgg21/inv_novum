@@ -1,18 +1,19 @@
 @props([
-    'method' => 'POST',
-    'action',
-    'hasFiles' => false,
-    'model'
+'method' => 'POST',
+'action',
+'hasFiles' => false,
+'model'
 ])
 
 @php
-    $method = strtoupper($method);
+$method = strtoupper($method);
 @endphp
 
-<form method="{{ $method !== 'GET' ? 'POST' : $method }}" action="{{ $action }}" {!! $hasFiles ? 'enctype="multipart/form-data"' : '' !!} {{ $attributes }}>
+<form method="{{ $method !== 'GET' ? 'POST' : $method }}" action="{{ $action }}" {!! $hasFiles
+    ? 'enctype="multipart/form-data"' : '' !!} {{ $attributes }}>
     @csrf
     @if (!in_array($method, ['POST', 'GET']))
-        @method($method)
+    @method($method)
     @endif
     {{ $slot }}
 </form>

@@ -6,7 +6,7 @@
 <meta name="author" content="">
 <!-- assets/favicon icon -->
 
-<link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/images/favicon.png') }}">
 <title>{{ config('app.name') }} - @yield('title')</title>
 <!-- Custom CSS -->
 

@@ -4,6 +4,7 @@
 <head>
     @include('include.head')
     @yield('css')
+
 </head>
 
 <body class="fixed-layout skin-green-dark">
@@ -19,7 +20,7 @@
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
-     {{-- @include('include.preloader') --}}
+    {{-- @include('include.preloader') --}}
     <!-- ============================================================== -->
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
@@ -49,16 +50,16 @@
                 <!-- ============================================================== -->
                 <!-- Bread crumb and right sidebar toggle -->
                 <!-- ============================================================== -->
-<div class="row page-titles">
-    <div class="col-md-5 align-self-center">
-        <h4 class="text-themecolor">@yield('page-title')</h4>
-    </div>
-    <div class="col-md-7 align-self-center text-right">
-        <div class="d-flex justify-content-end align-items-center">
-            @yield('breadcrumb')
-        </div>
-    </div>
-</div>
+                <div class="row page-titles">
+                    <div class="col-md-5 align-self-center">
+                        <h4 class="text-themecolor">@yield('page-title')</h4>
+                    </div>
+                    <div class="col-md-7 align-self-center text-right">
+                        <div class="d-flex justify-content-end align-items-center">
+                            @yield('breadcrumb')
+                        </div>
+                    </div>
+                </div>
                 <!-- ============================================================== -->
                 <!-- End Bread crumb and right sidebar toggle -->
                 <!-- ============================================================== -->
@@ -78,7 +79,7 @@
                 <!-- ============================================================== -->
                 <!-- End PAge Content -->
                 <!-- ============================================================== -->
-       
+
             </div>
             <!-- ============================================================== -->
             <!-- End Container fluid  -->
@@ -107,7 +108,6 @@
     @include('include.script')
     @yield('js')
     <script>
-
         window.setTimeout(function(){
             $(".errorMessage").fadeTo(100,0).slideUp(100,function(){
                 $(this).remove();
@@ -126,7 +126,7 @@
 
 
 
-        </script>
+    </script>
 </body>
 
 </html>

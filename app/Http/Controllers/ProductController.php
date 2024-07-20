@@ -2,18 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Brand;
-use App\Models\Product;
-use App\Models\Category;
-use Illuminate\View\View;
-use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\ProductStoreRequest;
 use App\Http\Requests\ProductUpdateRequest;
+use App\Models\Brand;
+use App\Models\Category;
+use App\Models\Product;
+use App\Repositories\ProductRepository;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\View\View;
 
 class ProductController extends Controller
 {
+    protected $productRepository;
+
+    public function __construct(ProductRepository $productRepository)
+    {
+        $this->productRepository = $productRepository;
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -25,7 +33,7 @@ class ProductController extends Controller
 
         $products = Product::search($search)
             ->latest()
-            ->paginate(5)
+            ->paginate(10)
             ->withQueryString();
 
         return view('app.products.index', compact('products', 'search'));

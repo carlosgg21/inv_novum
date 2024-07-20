@@ -9,7 +9,7 @@
 @endif
 
 <select id="{{ $name }}" name="{{ $name }}" {{ ($required ?? false) ? 'required' : '' }} {{ $attributes->merge(['class'
-    => 'form-control form-control-sm']) }}
+    => 'form-control form-control-sm select2 custom-select']) }}
     autocomplete="off"
     >{{ $slot }}</select>
 

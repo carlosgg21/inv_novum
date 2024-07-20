@@ -5,12 +5,13 @@
         <!-- ============================================================== -->
         <div class="navbar-header">
             <a class="navbar-brand" href="{{ url('home') }}">
-            
-                    <img src="{{ asset('assets/images/logo-icon.png')  }}" alt="homepage" class="dark-logo" width="40" />
-                    <!-- Light Logo icon -->
-                    <img src="{{ asset('assets/images/logo-light-icon.png')  }}" alt="homepage" class="light-logo" width="40" />
 
-  
+                <img src="{{ asset('assets/images/logo-icon.png')  }}" alt="homepage" class="dark-logo" width="40" />
+                <!-- Light Logo icon -->
+                <img src="{{ asset('assets/images/logo-light-icon.png')  }}" alt="homepage" class="light-logo"
+                    width="40" />
+
+
             </a>
         </div>
         <!-- ============================================================== -->
@@ -27,29 +28,30 @@
                 <li class="nav-item"> <a
                         class="nav-link sidebartoggler d-none d-lg-block d-md-block waves-effect waves-dark"
                         href="javascript:void(0)"><i class="icon-menu"></i></a> </li>
-           
+
 
 
             </ul>
             <!-- ============================================================== -->
             <!-- User profile and search -->
             <!-- ============================================================== -->
-            <ul class="navbar-nav my-lg-0">          
 
-
-
-
-             <li class="nav-item dropdown u-pro">
-                    <a class="nav-link dropdown-toggle waves-effect waves-dark profile-pic" href="" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false"><img src="../assets/images/users/1.jpg" alt="user" class=""> <span
-                            class="hidden-md-down">Mark &nbsp;<i class="fa fa-angle-down"></i></span> </a>
+            @auth
+            <ul class="navbar-nav my-lg-0">
+                <li class="nav-item dropdown u-pro">
+                    <a class="nav-link dropdown-toggle waves-effect waves-dark profile-pic" href=""
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
+                            src="{{ \Storage::url('images\generic-people.png') }}" alt="user" class=""> <span
+                            class="hidden-md-down">{{ Auth::user()->name }} &nbsp;<i
+                                class="fa fa-angle-down"></i></span> </a>
                     <div class="dropdown-menu dropdown-menu-right animated flipInY">
                         <!-- text-->
                         <a href="javascript:void(0)" class="dropdown-item"><i class="ti-user"></i> My Profile</a>
                         <!-- text-->
                         <div class="dropdown-divider"></div>
                         <!-- text-->
-                        <a href="javascript:void(0)" class="dropdown-item"><i class="ti-settings"></i> Account Setting</a>
+                        <a href="javascript:void(0)" class="dropdown-item"><i class="ti-settings"></i> Account
+                            Setting</a>
                         <!-- text-->
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ route('logout') }}"
@@ -65,6 +67,8 @@
                     </div>
                 </li>
             </ul>
+            @endauth
+
         </div>
     </nav>
 </header>

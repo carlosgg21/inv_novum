@@ -105,3 +105,10 @@ if (!function_exists('format_address')) {
         return  implode('<br>', $address_parts);
     }
 }
+
+if (!function_exists('format_percentage')) {
+    function format_percentage($value)
+    {
+        return number_format($value).'%';
+    }
+}

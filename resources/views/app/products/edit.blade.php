@@ -1,58 +1,48 @@
 @extends('layouts.app')
+@section('title', 'Product')
+@section('page-title', 'Edit Product')
+@section('breadcrumb')
+<x-breadcrumb route="products.index" home="Products List" title="Edit Product"></x-breadcrumb>
+@endsection
 
 @section('content')
-<div class="container">
-    <div class="card">
-        <div class="card-body">
-            <h4 class="card-title">
-                <a href="{{ route('products.index') }}" class="mr-4"
-                    ><i class="icon ion-md-arrow-back"></i
-                ></a>
-                @lang('crud.products.edit_title')
-            </h4>
+<div class="card">
+    <div class="card-body">
+        <x-form method="PUT" action="{{ route('products.update', $product) }}" has-files class="mt-4">
+            @include('app.products.form-inputs')
 
-            <x-form
-                method="PUT"
-                action="{{ route('products.update', $product) }}"
-                has-files
-                class="mt-4"
-            >
-                @include('app.products.form-inputs')
+            <div class="mt-4">
+                <a href="{{ route('products.index') }}" class="btn btn-light btn-sm">
+                    <i class="icon ion-md-return-left text-primary"></i>
+                    @lang('crud.common.back')
+                </a>
 
-                <div class="mt-4">
-                    <a
-                        href="{{ route('products.index') }}"
-                        class="btn btn-light"
-                    >
-                        <i class="icon ion-md-return-left text-primary"></i>
-                        @lang('crud.common.back')
-                    </a>
+                <a href="{{ route('products.create') }}" class="btn btn-light btn-sm">
+                    <i class="icon ion-md-add text-primary"></i>
+                    @lang('crud.common.create')
+                </a>
 
-                    <a
-                        href="{{ route('products.create') }}"
-                        class="btn btn-light"
-                    >
-                        <i class="icon ion-md-add text-primary"></i>
-                        @lang('crud.common.create')
-                    </a>
-
-                    <button type="submit" class="btn btn-primary float-right">
-                        <i class="icon ion-md-save"></i>
-                        @lang('crud.common.update')
-                    </button>
-                </div>
-            </x-form>
-        </div>
+                <button type="submit" class="btn btn-primary float-right btn-sm">
+                    <i class="icon ion-md-save"></i>
+                    @lang('crud.common.update')
+                </button>
+            </div>
+        </x-form>
     </div>
-
-    @can('view-any', App\Models\Inventory::class)
-    <div class="card mt-4">
-        <div class="card-body">
-            <h4 class="card-title w-100 mb-2">Inventories</h4>
-
-            <livewire:product-inventories-detail :product="$product" />
-        </div>
-    </div>
-    @endcan
 </div>
+@endsection
+
+@section('css')
+<link href="{{ asset('assets/node_modules/select2/dist/css/select2.min.css') }}" rel="stylesheet">
+@endsection
+
+@section('js')
+<script src="{{ asset('assets/node_modules/select2/dist/js/select2.full.min.js') }}"></script>
+<script>
+    $(function () {          
+        // For select 2
+        $(".select2").select2();
+            
+  });
+</script>
 @endsection
