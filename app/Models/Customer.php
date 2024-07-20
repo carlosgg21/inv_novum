@@ -41,4 +41,15 @@ class Customer extends Model
     {
         return $this->morphMany(Address::class, 'addressable');
     }
+    
+     public function getDefaultContact()
+    {
+        return $this->contacts()->where('default', true)->first();
+    }
+
+
+    public function getAllContacts()
+    {
+        return $this->contacts;
+    }
 }

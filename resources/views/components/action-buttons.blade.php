@@ -1,4 +1,4 @@
-@props(['model', 'routePrefix'])
+@props(['model', 'routePrefix','module'=>null])
 
 <td class="text-center" style="width: 134px;">
     <div role="group" aria-label="Row Actions" class="btn-group">
@@ -25,5 +25,14 @@
             </button>
         </form>
         @endcan
+
+        @if($module === 'sales-order')
+        <a href="#">
+            <button type="button" class="btn btn-light">
+    <i class="fab fa-wpforms"></i>
+            </button>
+        </a>
+        @endif
     </div>
+    
 </td>

@@ -16,14 +16,15 @@
                         {{-- <i class="ti-truck"></i><span class="hide-menu">Purchase Orders</span> --}}
                     </a>
                 </li>
-                <li>
-                    <a class="waves-effect waves-dark" href="index.html" aria-expanded="false"><i
-                            class="ti-shopping-cart">
-                            {{-- class=" ti-shopping-cart-full"> --}}
-                        </i><span class="hide-menu">Sale Orders</span>
-                    </a>
-                </li>
-
+                @can('view-any', App\Models\SalesOrder::class)
+                    <li>
+                        <a class="waves-effect waves-dark" href="{{ route('sales-orders.index') }}" aria-expanded="false"><i
+                                class="ti-shopping-cart">
+                                {{-- class=" ti-shopping-cart-full"> --}}
+                            </i><span class="hide-menu">Sale Orders</span>
+                        </a>
+                    </li>
+                @endcan
                 <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i
                             {{-- class=" fas fa-dolly-flatbed"></i><span class="hide-menu">Inventory Manager </span></a> --}}
                             class="ti-dropbox"></i><span class="hide-menu">Inventory Manager </span></a>

@@ -1,55 +1,28 @@
 @extends('layouts.app')
+@section('title', 'Sale Orders')
+@section('page-title', 'Sale Orders')
+@section('breadcrumb')
+<x-breadcrumb route="home" home="Home" title="Sale Orders"></x-breadcrumb>
+@can('create', App\Models\SalesOrder::class)
+<x-new-record route="sales-orders.create"></x-new-record>
+@endcan
+@endsection
 
 @section('content')
 <div class="container">
-    <div class="searchbar mt-0 mb-4">
-        <div class="row">
-            <div class="col-md-6">
-                <form>
-                    <div class="input-group">
-                        <input
-                            id="indexSearch"
-                            type="text"
-                            name="search"
-                            placeholder="{{ __('crud.common.search') }}"
-                            value="{{ $search ?? '' }}"
-                            class="form-control"
-                            autocomplete="off"
-                        />
-                        <div class="input-group-append">
-                            <button type="submit" class="btn btn-primary">
-                                <i class="icon ion-md-search"></i>
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="col-md-6 text-right">
-                @can('create', App\Models\SalesOrder::class)
-                <a
-                    href="{{ route('sales-orders.create') }}"
-                    class="btn btn-primary"
-                >
-                    <i class="icon ion-md-add"></i> @lang('crud.common.create')
-                </a>
-                @endcan
-            </div>
-        </div>
-    </div>
+<x-searchbar :search="$search">
+        <a href="{{ route('sales-orders.index') }}" type="button" class="btn btn-primary btn-sm">
+            Clear Search
+        </a>
+    </x-searchbar>
 
     <div class="card">
         <div class="card-body">
-            <div style="display: flex; justify-content: space-between;">
-                <h4 class="card-title">
-                    @lang('crud.sales_orders.index_title')
-                </h4>
-            </div>
-
             <div class="table-responsive">
-                <table class="table table-borderless table-hover">
-                    <thead>
+              <table class="table table-borderless table-hover table-sm table-striped">
+                    <thead class="table-heard">
                         <tr>
-                            <th class="text-left">
+                            <th class="text-left" >
                                 @lang('crud.sales_orders.inputs.number')
                             </th>
                             <th class="text-left">
@@ -58,47 +31,27 @@
                             <th class="text-left">
                                 @lang('crud.sales_orders.inputs.customer_id')
                             </th>
-                            <th class="text-left">
+                            <th class="text-center">
                                 @lang('crud.sales_orders.inputs.status')
                             </th>
-                            <th class="text-left">
-                                @lang('crud.sales_orders.inputs.prefix')
-                            </th>
+                         
                             <th class="text-left">
                                 @lang('crud.sales_orders.inputs.invoice_date')
                             </th>
-                            <th class="text-right">
-                                @lang('crud.sales_orders.inputs.taxes')
-                            </th>
-                            <th class="text-right">
-                                @lang('crud.sales_orders.inputs.discount')
-                            </th>
-                            <th class="text-right">
-                                @lang('crud.sales_orders.inputs.miscellaneous')
-                            </th>
-                            <th class="text-right">
-                                @lang('crud.sales_orders.inputs.freight')
-                            </th>
+                     
                             <th class="text-right">
                                 @lang('crud.sales_orders.inputs.order_total')
                             </th>
                             <th class="text-left">
                                 @lang('crud.sales_orders.inputs.sold_by')
                             </th>
-                            <th class="text-left">
+                            {{-- <th class="text-left">
                                 @lang('crud.sales_orders.inputs.payment_method_id')
                             </th>
                             <th class="text-left">
                                 @lang('crud.sales_orders.inputs.payment_term_id')
-                            </th>
-                            <th class="text-left">
-                                @lang('crud.sales_orders.inputs.notes')
-                            </th>
-                            <th class="text-left">
-                                @lang('crud.sales_orders.inputs.internal_notes')
-                            </th>
-                            <th class="text-left">
-                                @lang('crud.sales_orders.inputs.approved_by')
+                            </th> --}}
+                      
                             </th>
                             <th class="text-center">
                                 @lang('crud.common.actions')
@@ -108,80 +61,41 @@
                     <tbody>
                         @forelse($salesOrders as $salesOrder)
                         <tr>
-                            <td>{{ $salesOrder->number ?? '-' }}</td>
-                            <td>{{ $salesOrder->order_date ?? '-' }}</td>
+                            <td>{{ $salesOrder->full_number ?? '-' }}</td>
+                            <td>{{ $salesOrder->order_date ? format_date($salesOrder->order_date , 'd/m/Y') : '-' }}</td>
                             <td>
-                                {{ optional($salesOrder->customer)->name ?? '-'
-                                }}
+                                {{ optional($salesOrder->customer)->name ?? '-' }}
                             </td>
-                            <td>{{ $salesOrder->status ?? '-' }}</td>
-                            <td>{{ $salesOrder->prefix ?? '-' }}</td>
-                            <td>{{ $salesOrder->invoice_date ?? '-' }}</td>
-                            <td>{{ $salesOrder->taxes ?? '-' }}</td>
-                            <td>{{ $salesOrder->discount ?? '-' }}</td>
-                            <td>{{ $salesOrder->miscellaneous ?? '-' }}</td>
-                            <td>{{ $salesOrder->freight ?? '-' }}</td>
-                            <td>{{ $salesOrder->order_total ?? '-' }}</td>
+                            {{-- <td>{{ $salesOrder->status ?? '-' }}</td> --}}
+               <td style="text-align: center; vertical-align: middle;">
+                <span class="badge {{ $salesOrder->status == "entered" ? 'badge-primary badge-pill' : 'badge-dark badge-pill' }}">
+                    {{ $salesOrder->status == "entered" ? "Entered" : "Not Entered"}}
+                </span>
+            </td>
+                
+                            <td>{{ $salesOrder->invoice_date ? format_date($salesOrder->invoice_date , 'd/m/Y') : '-' }}</td>
+                        
+                            <td class="text-right">
+                          
+                            {{ $salesOrder->order_total ? format_money($salesOrder->order_total, 'CUP') : '-' }}
+                        </td>
                             <td>
                                 {{ optional($salesOrder->soldBy)->name ?? '-' }}
                             </td>
-                            <td>
+                            {{-- <td>
                                 {{ optional($salesOrder->paymentMethod)->name ??
                                 '-' }}
                             </td>
                             <td>
                                 {{
                                 optional($salesOrder->paymentTerm)->description
-                                ?? '-' }}
+                                ?? '-' }} --}}
                             </td>
-                            <td>{{ $salesOrder->notes ?? '-' }}</td>
+                            {{-- <td>{{ $salesOrder->notes ?? '-' }}</td>
                             <td>{{ $salesOrder->internal_notes ?? '-' }}</td>
-                            <td>{{ $salesOrder->approved_by ?? '-' }}</td>
-                            <td class="text-center" style="width: 134px;">
-                                <div
-                                    role="group"
-                                    aria-label="Row Actions"
-                                    class="btn-group"
-                                >
-                                    @can('update', $salesOrder)
-                                    <a
-                                        href="{{ route('sales-orders.edit', $salesOrder) }}"
-                                    >
-                                        <button
-                                            type="button"
-                                            class="btn btn-light"
-                                        >
-                                            <i class="icon ion-md-create"></i>
-                                        </button>
-                                    </a>
-                                    @endcan @can('view', $salesOrder)
-                                    <a
-                                        href="{{ route('sales-orders.show', $salesOrder) }}"
-                                    >
-                                        <button
-                                            type="button"
-                                            class="btn btn-light"
-                                        >
-                                            <i class="icon ion-md-eye"></i>
-                                        </button>
-                                    </a>
-                                    @endcan @can('delete', $salesOrder)
-                                    <form
-                                        action="{{ route('sales-orders.destroy', $salesOrder) }}"
-                                        method="POST"
-                                        onsubmit="return confirm('{{ __('crud.common.are_you_sure') }}')"
-                                    >
-                                        @csrf @method('DELETE')
-                                        <button
-                                            type="submit"
-                                            class="btn btn-light text-danger"
-                                        >
-                                            <i class="icon ion-md-trash"></i>
-                                        </button>
-                                    </form>
-                                    @endcan
-                                </div>
-                            </td>
+                            <td>{{ $salesOrder->approved_by ?? '-' }}</td> --}}
+                            <x-action-buttons :model="$salesOrder" routePrefix="sales-orders" module="sales-order" />
+                           
                         </tr>
                         @empty
                         <tr>

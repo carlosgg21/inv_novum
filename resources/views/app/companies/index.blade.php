@@ -19,7 +19,10 @@
                     <small>"{{ $company->slogan }}"</small>
                 </h4>
                 <address>
-                    {!! $company->address !!} <br>
+                   <span class="text-capitalize">
+                       {{ $company->addresses->street }}<br>
+                       {{ $company->addresses->city_country }}<br>
+                   </span>
         
                     <i class="fas fa-phone-square"></i> {{ $company->phone }}<br>
                     <i class="fa fa-envelope"></i> <a href="mailto:{{ $company->email }}">{{ $company->email }}</a><br>

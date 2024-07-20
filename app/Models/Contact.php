@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use App\Models\Scopes\Searchable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -35,6 +36,16 @@ class Contact extends Model
         'default' => 'boolean',
     ];
 
+    protected $appends = ['full_name'];
+
+     protected function fullName(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->name . ' ' . $this->last_name,
+        );
+    }
+
+
     public function township()
     {
         return $this->belongsTo(Township::class);
@@ -54,4 +65,6 @@ class Contact extends Model
     {
         return $this->morphTo();
     }
+
+    
 }

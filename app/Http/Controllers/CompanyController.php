@@ -26,14 +26,17 @@ class CompanyController extends Controller
 // Acceder a los datos
 $socialMedia = $company->social_media;
 
-// dump($socialMedia );
+// dump($company->addresses->full_address );
+// dump($company->addresses->street );
+// dump($company->addresses->city_country );
+// dd(format_address($company->addresses->full_address ));
 // dd($facebookData = $socialMedia[0]['facebook']
 //  );
 // $facebook = $company->social_media['social_profiles']['facebook'] ?? null;
 
 // dd($facebook);
 
-       $company = Company::find(1);
+    //    $company = Company::find(1);
 
 
 

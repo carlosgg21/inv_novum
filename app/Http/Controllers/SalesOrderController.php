@@ -26,7 +26,7 @@ class SalesOrderController extends Controller
 
         $salesOrders = SalesOrder::search($search)
             ->latest()
-            ->paginate(5)
+            ->paginate(10)
             ->withQueryString();
 
         return view('app.sales_orders.index', compact('salesOrders', 'search'));
@@ -72,8 +72,13 @@ class SalesOrderController extends Controller
     public function show(Request $request, SalesOrder $salesOrder): View
     {
         $this->authorize('view', $salesOrder);
-
-        return view('app.sales_orders.show', compact('salesOrder'));
+        
+$defaultContact = $salesOrder->customer->getDefaultContact();
+// dump($salesOrder->customer->contacts->toArray());
+// dump($salesOrder->customer->toArray());
+// dd($defaultContact);
+// dd($salesOrder->customer);
+        return view('app.sales_orders.show', compact('salesOrder', 'defaultContact'));
     }
 
     /**

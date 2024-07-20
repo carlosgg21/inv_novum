@@ -74,4 +74,12 @@ class SalesOrder extends Model
     {
         return $this->hasMany(PaymentsReceived::class);
     }
+
+     // Accessor for full_number
+    public function getFullNumberAttribute()
+    {
+        $prefix = $this->prefix;
+
+        return $prefix ? $prefix.' '.$this->number : $this->number;
+    }
 }

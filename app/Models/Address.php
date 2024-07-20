@@ -3,8 +3,9 @@
 namespace App\Models;
 
 use App\Models\Scopes\Searchable;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Address extends Model
 {
@@ -46,5 +47,32 @@ class Address extends Model
     public function addressable()
     {
         return $this->morphTo();
+    }
+
+    public function getFullAddressAttribute()
+    {
+        $address = $this->address;
+        $township = $this->township ? $this->township->name : '';
+        $city = $this->city ? $this->city->name : '';
+        $country = $this->country ? $this->country->name : '';
+
+        return "$address $township, $city, $country";
+    }
+
+    public function getCityCountryAttribute()
+    {
+        $city = $this->city ? $this->city->name : '';
+        $country = $this->country ? $this->country->name : '';
+
+        return Str::title("$city, $country");
+    }
+
+    public function getStreetAttribute()
+    {
+        $address = $this->address;
+        $township = $this->township ? $this->township->name : '';
+
+        return Str::title("$address $township");
+        // return ucwords(strtolower("$address $township"));
     }
 }

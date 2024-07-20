@@ -46,7 +46,7 @@ class Company extends Model
         return $this->morphMany(BankAccount::class, 'bank_accountable');
     }
 
-    public function address()
+    public function addresses()
     {
         return $this->morphOne(Address::class, 'addressable');
     }
