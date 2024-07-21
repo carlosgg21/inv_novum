@@ -26,7 +26,9 @@ return new class extends Migration {
             $table->text('notes')->nullable();
             $table->integer('min_qty')->nullable();
             $table->integer('max_qty')->nullable();
-            $table->integer('on_order')->nullable();
+            $table->integer('on_order')->nullable();            
+            $table->unsignedBigInteger('unit_id')->nullable();
+
 
             $table->timestamps();
             $table->softDeletes();

@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->float('unit_price');
             $table->float('total_price');
             $table->integer('qty_received')->nullable();
-            $table->text('noted');
+            $table->text('notes');
             $table->unsignedBigInteger('inventory_id');
 
             $table->timestamps();

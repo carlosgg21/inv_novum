@@ -21,7 +21,6 @@ class Company extends Model
         'email',
         'web_site',
         'social_media',
-        'address',
         'qr_code',
     ];
 

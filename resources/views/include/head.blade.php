@@ -16,7 +16,7 @@
 
 
 <style>
-  .requiredInput {
+  .required-field {
     color: red;
   }
 

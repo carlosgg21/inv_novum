@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use App\Models\Scopes\Searchable;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class Inventory extends Model
 {
@@ -30,6 +30,11 @@ class Inventory extends Model
     public function product()
     {
         return $this->belongsTo(Product::class);
+    }
+
+    public function unit()
+    {
+        return $this->belongsTo(Unit::class);
     }
 
     public function location()

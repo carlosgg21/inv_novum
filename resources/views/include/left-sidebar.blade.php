@@ -11,9 +11,9 @@
                     </a>
                 </li>
                 <li>
-                    <a class="waves-effect waves-dark" href="index.html" aria-expanded="false">
-                        <i class="fas fa-dolly"></i><span class="hide-menu">Purchase Orders</span>
-                        {{-- <i class="ti-truck"></i><span class="hide-menu">Purchase Orders</span> --}}
+                    <a class="waves-effect waves-dark" href="{{ route('inventories.create') }}" aria-expanded="false">
+                        <i class="fas fa-dolly-flatbed"></i><span class="hide-menu"> Inventory Entry</span>
+                        {{-- <i class="ti-truck"></i><span class="hide-menu">Purchase Orders</span>  Stock--}}
                     </a>
                 </li>
                 @can('view-any', App\Models\SalesOrder::class)

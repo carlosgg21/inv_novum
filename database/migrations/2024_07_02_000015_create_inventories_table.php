@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
     /**
@@ -13,12 +13,22 @@ return new class extends Migration {
         Schema::create('inventories', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('product_id');
-            $table->unsignedBigInteger('location_id');
-            $table->integer('quantity')->nullable();
-            $table->string('batch_number')->nullable();
-            $table->integer('quantity_on_order')->nullable();
             $table->unsignedBigInteger('supplier_id')->nullable();
+            $table->integer('quantity')->nullable();
+            $table->integer('quantity_on_order')->nullable();
+            $table->float('sell_price')->nullable();
+            $table->float('cost_price')->nullable();
+            $table->float('shipping_cost')->nullable();
+            $table->unsignedBigInteger('location_id');
+            $table->string('batch_number')->nullable();
             $table->date('expire_date')->nullable();
+            $table->unsignedBigInteger('payment_method_id')->nullable();
+            $table->unsignedBigInteger('payment_term_id')->nullable();
+            $table->boolean('billable')->default(0); //pagado 0 NO  1 YES
+            $table->date('received_date')->nullable();
+            $table->unsignedBigInteger('created_by')->nullable();
+            $table->unsignedBigInteger('unit_id')->nullable();
+            $table->text('notes')->nullable();
 
             $table->timestamps();
         });

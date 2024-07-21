@@ -7,12 +7,9 @@
 
 @endsection
 @section('content')
-<div class="container">
-
-
-    <div class="card">
+<div class="card">
         <div class="card-body">
-
+    
             <div class="table-responsive">
                 <table class="table table-borderless table-hover table-sm table-striped">
                     <thead class="table-heard">
@@ -41,11 +38,11 @@
                             <td class="text-center">{{ $inventory['inventories']->sum('quantity') ?? 0 }}</td>
                             <td class="text-center">{{ $inventory['inventories']->sum('quantity_on_order') ?? 0 }}</td>
                         </tr>
-
+    
                         <tr>
                             <td colspan="7" class="hiddenRow">
                                 <div id="{{ $key }}" class="accordian-body collapse collapsed-content">
-
+    
                                     <table class="table table-boder table-sm">
                                         <thead class="thead-dark">
                                             <tr>
@@ -68,18 +65,19 @@
                                                 <td>{{ $details->quantity ?? 0 }}</td>
                                                 <td>{{ $details->quantity_on_order ?? 0 }}</td>
                                                 <td>{{ $details->batch_number ?? '-' }}</td>
-                                                
-                                                <td>{{  $details->expire_date ? format_date($details->expire_date, 'd/m/y') : '-' }}</td>
+    
+                                                <td>{{ $details->expire_date ? format_date($details->expire_date, 'd/m/y') :
+                                                    '-' }}</td>
                                                 <td class="text-right">$ 22.00</td>
                                             </tr>
                                             @endforeach
-
+    
                                         </tbody>
                                     </table>
-
+    
                                 </div>
                             </td>
-                        </tr>                       
+                        </tr>
                         @empty
                         <tr>
                             <td colspan="8">
@@ -88,13 +86,12 @@
                         </tr>
                         @endforelse
                     </tbody>
-            
+    
                 </table>
             </div>
-        
+    
         </div>
     </div>
-</div>
 @endsection
 @section('css')
 <style>

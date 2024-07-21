@@ -34,12 +34,11 @@ class CompanySeeder extends Seeder
                      'phone'        => '789963366',
                      'email'        => 'enterpise@novum.com',
                      'web_site'     => 'hhtp://www.enterpise-novum.com',
-                     'social_media' => [],
-                     'address'      => 'Calle Falsa 123, Ciudadela, No. 12345',
+                     'social_media' => [],                     
                      'qr_code'      => 'images/qrcode.png',
              ]);
 
-        $company->address()->create([
+        $company->addresses()->create([
             'address'        => 'Calle Falsa 123',
             'township_id'    => 23,
             'city_id'        => 23,

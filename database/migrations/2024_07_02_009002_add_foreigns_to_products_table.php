@@ -24,6 +24,14 @@ return new class extends Migration {
                 ->on('brands')
                 ->onUpdate('CASCADE')
                 ->onDelete('CASCADE');
+                
+            $table
+              ->foreign('unit_id')
+              ->references('id')
+              ->on('units')
+              ->onUpdate('CASCADE')
+              ->onDelete('CASCADE');
+
         });
     }
 
@@ -35,6 +43,7 @@ return new class extends Migration {
         Schema::table('products', function (Blueprint $table) {
             $table->dropForeign(['category_id']);
             $table->dropForeign(['brand_id']);
+            $table->dropForeign(['unit_id']);
         });
     }
 };

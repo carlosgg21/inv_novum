@@ -18,10 +18,10 @@ return new class extends Migration {
             $table->string('phone')->nullable();
             $table->string('email')->nullable();
             $table->string('image')->nullable();
-            $table->date('hiddeng_date')->nullable();
+            $table->date('hiring_date')->nullable();
             $table->date('discharge_date')->nullable();
             $table->unsignedBigInteger('company_id')->nullable();
-            $table->date('brithday')->nullable();
+            $table->date('birthday')->nullable();
             $table->text('observation')->nullable();
             $table->unsignedBigInteger('charge_id')->nullable();
             $table->string('qr_code')->nullable();
