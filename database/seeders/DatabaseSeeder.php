@@ -39,6 +39,7 @@ $this->call(CitySeeder::class);
         $this->call(ChargeSeeder::class);
 
 $this->call(LocationSeeder::class);
+$this->call(UnitSeeder::class);
 
 $this->call(PaymentTermSeeder::class);
 
