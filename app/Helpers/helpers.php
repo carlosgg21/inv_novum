@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Responses\PDFResponse;
 use App\Models\AppDefault;
 use App\Models\Setting;
 use Illuminate\Support\Carbon;
@@ -110,5 +111,12 @@ if (!function_exists('format_percentage')) {
     function format_percentage($value)
     {
         return number_format($value).'%';
+    }
+}
+
+if (!function_exists('generatePDF')) {
+    function generatePDF($view, $data, $filename)
+    {
+        return new PDFResponse($view, $data, $filename);
     }
 }

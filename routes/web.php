@@ -35,6 +35,9 @@ use App\Http\Controllers\TownshipController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
+require __DIR__.'/report.php';
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -53,6 +56,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+
 
 Route::prefix('/')
     ->middleware('auth')
