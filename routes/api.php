@@ -97,6 +97,8 @@ use App\Http\Controllers\Api\PurchaseOrderPurchaseOrderItemsController;
 |
 */
 
+Route::get('/get-product-details/{productId}', [ProductController::class, 'getProductDetails']);
+
 Route::post('/login', [AuthController::class, 'login'])->name('api.login');
 
 Route::middleware('auth:sanctum')

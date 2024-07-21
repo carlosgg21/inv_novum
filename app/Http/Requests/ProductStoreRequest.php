@@ -20,21 +20,21 @@ class ProductStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'image' => ['nullable', 'image', 'max:1024'],
-            'brand_id' => ['nullable', 'exists:brands,id'],
+            'image'       => ['nullable', 'image', 'max:1024'],
+            'brand_id'    => ['nullable', 'exists:brands,id'],
             'category_id' => ['nullable', 'exists:categories,id'],
-            'code' => ['nullable', 'max:255', 'string'],
-            'name' => ['required', 'max:255', 'string'],
+            'code'        => ['nullable', 'max:255', 'string'],
+            'name'        => ['required', 'max:255', 'string'],
             'description' => ['nullable', 'max:255', 'string'],
-            'qty' => ['nullable', 'numeric'],
-            'on_order' => ['nullable', 'numeric'],
-            'unit' => ['nullable', 'max:255', 'string'],
-            'unit_price' => ['required', 'numeric'],
-            'cost_price' => ['nullable', 'numeric'],
-            'size' => ['nullable', 'max:255', 'string'],
-            'notes' => ['nullable', 'max:255', 'string'],
-            'min_qty' => ['nullable', 'numeric'],
-            'max_qty' => ['nullable', 'numeric'],
+            'qty'         => ['nullable', 'numeric'],
+            'on_order'    => ['nullable', 'numeric'],
+            'unit'        => ['nullable', 'max:255', 'string'],
+            'unit_price'  => ['required', 'numeric'],
+            'cost_price'  => ['nullable', 'numeric'],
+            'size'        => ['nullable', 'max:255', 'string'],
+            'notes'       => ['nullable', 'max:255', 'string'],
+            'min_qty'     => ['nullable', 'numeric'],
+            'max_qty'     => ['nullable', 'numeric'],
         ];
     }
 }

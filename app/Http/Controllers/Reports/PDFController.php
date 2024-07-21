@@ -16,7 +16,7 @@ class PDFController extends Controller
 
         $data = [
 
-            'title' => 'Welcome to ItSolutionStuff.com',
+            'title' => 'We478',
 
             'date' => date('m/d/Y'),
 
@@ -25,7 +25,7 @@ class PDFController extends Controller
         ];
 
        
-return generatePDF('reports.myPDF', $data, 'product_report.pdf');
+        return generatePDF('reports.myPDF', $data, 'product_report.pdf');
 
     }
 }

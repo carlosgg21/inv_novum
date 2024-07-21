@@ -10,8 +10,7 @@
                 <!-- Light Logo icon -->
                 <img src="{{ asset('assets/images/logo-light-icon.png')  }}" alt="homepage" class="light-logo"
                     width="40" />
-
-
+               INV-NOVUM
             </a>
         </div>
         <!-- ============================================================== -->

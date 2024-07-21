@@ -17,16 +17,26 @@ class InventoryStoreRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      */
+
     public function rules(): array
     {
         return [
-            'supplier_id' => ['nullable', 'exists:suppliers,id'],
-            'product_id' => ['required', 'exists:products,id'],
-            'location_id' => ['required', 'exists:locations,id'],
-            'quantity' => ['nullable', 'numeric'],
-            'quantity_on_order' => ['nullable', 'numeric'],
-            'batch_number' => ['nullable', 'max:255', 'string'],
-            'expire_date' => ['nullable', 'date'],
+            'product_id'               => ['required', 'exists:products,id'],
+            'quantity'                 => ['nullable', 'numeric'],
+            'cost_price'               => ['required', 'numeric'],
+            'sell_price'               => ['required', 'numeric'],
+            'quantity_on_order'        => ['nullable', 'numeric'],
+            'supplier_id'              => ['nullable', 'exists:suppliers,id'],
+            'location_id'              => ['nullable', 'exists:locations,id'],
+            'batch_number'             => ['nullable', 'max:255', 'string'],
+            'expire_date'              => ['nullable', 'date'],
+            'shipping_cost'            => ['nullable', 'numeric'],
+            'shipping_tracking_number' => ['nullable', 'max:255', 'string'],
+            'received_date'            => ['nullable', 'date'],
+            'billable'                 => ['nullable'],
+            'payment_method_id'        => ['nullable', 'exists:payment_methods,id'],
+            'payment_term_id'          => ['nullable', 'exists:payment_terms,id'],
+            'notes'                    => ['nullable', 'max:500'],
         ];
     }
 }

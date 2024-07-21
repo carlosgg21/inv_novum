@@ -43,9 +43,22 @@ class ProductController extends Controller
 
     public function show(Request $request, Product $product): ProductResource
     {
-        $this->authorize('view', $product);
+        // $this->authorize('view', $product);
 
         return new ProductResource($product);
+    }
+
+    public function getProductDetails($productId)
+    {
+        $product = Product::findOrFail($productId);
+
+        return response()->json([
+            'data' => [
+                'cost_price' => $product->cost_price,
+                'unit_price' => $product->unit_price,
+                'description' => $product->description
+            ]
+        ]);
     }
 
     public function update(

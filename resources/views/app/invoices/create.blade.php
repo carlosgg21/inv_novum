@@ -5,24 +5,15 @@
     <div class="card">
         <div class="card-body">
             <h4 class="card-title">
-                <a href="{{ route('invoices.index') }}" class="mr-4"
-                    ><i class="icon ion-md-arrow-back"></i
-                ></a>
+                <a href="{{ route('invoices.index') }}" class="mr-4"><i class="icon ion-md-arrow-back"></i></a>
                 @lang('crud.invoices.create_title')
             </h4>
 
-            <x-form
-                method="POST"
-                action="{{ route('invoices.store') }}"
-                class="mt-4"
-            >
+            <x-form method="POST" action="{{ route('invoices.store') }}" class="mt-4">
                 @include('app.invoices.form-inputs')
 
                 <div class="mt-4">
-                    <a
-                        href="{{ route('invoices.index') }}"
-                        class="btn btn-light"
-                    >
+                    <a href="{{ route('invoices.index') }}" class="btn btn-light">
                         <i class="icon ion-md-return-left text-primary"></i>
                         @lang('crud.common.back')
                     </a>

@@ -1,58 +1,63 @@
-!DOCTYPE html>
+@extends('layouts.report')
 
-<html>
-
-<head>
-
-    <title>Laravel 10 Generate PDF Example - ItSolutionStuff.com</title>
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-</head>
-
-<body>
-
-    <h1>{{ $title }}</h1>
-
-    <p>{{ $date }}</p>
-
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-
-        tempor incididunt ut labore et dolore magna aliqua.</p>
+@section('content')
+<h1>{{ $title }}</h1>
+<p>{{ $date }}</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmodtempor incididunt ut labore et dolore magna aliqua.</p>
 
 
 
-    <table class="table table-bordered">
+<table class="table table-bordered table-sm">
 
-        <tr>
+    <tr>
 
-            <th>ID</th>
+        <th>ID</th>
 
-            <th>Name</th>
+        <th>Name</th>
 
-            <th>Email</th>
+        <th>Email</th>
 
-        </tr>
+    </tr>
 
-        @foreach($users as $user)
+    @foreach($users as $product)
 
-        <tr>
+    <tr>
 
-            <td>{{ $user->id }}</td>
+     <td>{{ $product->code ?? '-' }}</td>
+    
+    
+    <td>
+        {{-- <span class="text-muted"><small> {{ $product->category->name }} </small></span><br>
+        <span class="font-weight-bold"> {{ $product->name ?? '-' }}</span><br>
+        <span class="text-primary"> {{ $product->brand?->name }}</span> --}}
+    
+    
+        <span class="font-weight-bold"> {{ $product->name ?? '-' }}</span><br>
+        <span class="text-muted"><small> {{ $product->category->name }} </small></span> <span class="text-primary"> {{
+            $product->brand?->name }}</span>
+    
+    </td>
+    <td class="text-center font-weight-bold"> {{ $product->qty ?? 0 }}<br>
+        {{-- <span class="text-muted"><small> {{ $product->min_qty ?? 0 }} - {{
+                $product->max_qty ?? 0 }} </small></span> --}}
+    
+    </td>
+    
+    <td>{{ $product->unit ?? '-' }}<br>
+        <span class="text-muted"><small> {{ $product->size ?? '-' }}</small></span>
+    
+    
+    </td>
+    <td class="text-right">{{ $product->unit_price ? format_money($product->unit_price): '0.00'}}</td>
+    <td class="text-right">{{ $product->cost_price ? format_money($product->cost_price): '0.00'}}</td>
+    
+    <td class=" text-center {{ $product->average_margin < 10 ? 'text-danger' : '' }}">
+        {{ $product->average_margin != 0 ? format_percentage($product->average_margin) : '-' }}
+    </td>
 
-            <td>{{ $user->name }}</td>
+    </tr>
 
-            <td>{{ $user->email }}</td>
+    @endforeach
 
-        </tr>
-
-        @endforeach
-
-    </table>
-
-
-
-</body>
-
-</html>
+</table>
+@endsection

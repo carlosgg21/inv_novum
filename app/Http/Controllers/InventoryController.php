@@ -6,6 +6,8 @@ use App\Http\Requests\InventoryStoreRequest;
 use App\Http\Requests\InventoryUpdateRequest;
 use App\Models\Inventory;
 use App\Models\Location;
+use App\Models\PaymentMethod;
+use App\Models\PaymentTerm;
 use App\Models\Product;
 use App\Models\Supplier;
 use App\Repositories\InventoryRepository;
@@ -29,23 +31,24 @@ class InventoryController extends Controller
         $this->authorize('view-any', Inventory::class);
 
         $search = $request->get('search', '');
-       $data = $this->inventoryRepository->getInventories();
-       $inventories = $data->map(function ($items, $productId) {
-        $productDetails = $items->first()->product;
-        return [
-            'product' => $productDetails,
-            'inventories' => $items,
-        ];
-    });
-// dd($groupedInventories);
-// dd($data->get()->groupBy('product_id')->toArray());
+        $data = $this->inventoryRepository->getInventories();
+        $inventories = $data->map(function ($items, $productId) {
+            $productDetails = $items->first()->product;
+
+            return [
+                'product'     => $productDetails,
+                'inventories' => $items,
+            ];
+        });
+        // dd($groupedInventories);
+        // dd($data->get()->groupBy('product_id')->toArray());
         // $inventories = $this->inventoryRepository->getInventories()->paginate(5);
         // $inventories = $this->inventoryRepository->getInventories()->get()->groupBy('product_id');
-//  dd($inventories->toArray());
-//Inventory::search($search)
-//             ->latest()
-//             ->paginate(5)
-//             ->withQueryString();
+        //  dd($inventories->toArray());
+        //Inventory::search($search)
+        //             ->latest()
+        //             ->paginate(5)
+        //             ->withQueryString();
 
         return view('app.inventories.index', compact('inventories', 'search'));
     }
@@ -58,12 +61,17 @@ class InventoryController extends Controller
         $this->authorize('create', Inventory::class);
 
         $suppliers = Supplier::pluck('name', 'id');
-        $products = Product::pluck('name', 'id');
+        $products = Product::all()->pluck('name', 'id')->map(function ($name, $id) {
+            $product = Product::find($id);
+            return $product->code.' - '.$name; 
+        });
         $locations = Location::pluck('name', 'id');
+        $paymentMethod = PaymentMethod::pluck('name', 'id');
+        $paymentTerm = PaymentTerm::pluck('code', 'id');
 
         return view(
             'app.inventories.create',
-            compact('suppliers', 'products', 'locations')
+            compact('suppliers', 'products', 'locations', 'paymentMethod', 'paymentTerm')
         );
     }
 
@@ -74,8 +82,12 @@ class InventoryController extends Controller
     {
         $this->authorize('create', Inventory::class);
 
-        $validated = $request->validated();
+        // dd($request->input());
 
+        $validated = $request->validated();
+//  dd($validated);
+       $this->inventoryRepository->entryInventory($validated);
+       dd('dasd');
         $inventory = Inventory::create($validated);
 
         return redirect()
@@ -101,12 +113,17 @@ class InventoryController extends Controller
         $this->authorize('update', $inventory);
 
         $suppliers = Supplier::pluck('name', 'id');
-        $products = Product::pluck('name', 'id');
+        $products = Product::all()->pluck('name', 'id')->map(function ($name, $id) {
+            $product = Product::find($id);
+            return $product->code.' - '.$name; 
+        });
         $locations = Location::pluck('name', 'id');
+        $paymentMethod = PaymentMethod::pluck('name', 'id');
+        $paymentTerm = PaymentTerm::pluck('code', 'id');
 
         return view(
             'app.inventories.edit',
-            compact('inventory', 'suppliers', 'products', 'locations')
+            compact('inventory', 'suppliers', 'products', 'locations', 'paymentMethod', 'paymentTerm')
         );
     }
 

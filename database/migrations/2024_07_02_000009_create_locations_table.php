@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->bigIncrements('id');
             $table->string('name');
             $table->text('description')->nullable();
+            $table->boolean('default')->default(1);
 
             $table->timestamps();
             $table->softDeletes();

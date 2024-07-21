@@ -52,13 +52,7 @@ return new class extends Migration {
                  ->on('employees')
                  ->onUpdate('CASCADE')
                  ->onDelete('CASCADE');
-           
-             $table
-                 ->foreign('unit_id')
-                 ->references('id')
-                 ->on('units')
-                 ->onUpdate('CASCADE')
-                 ->onDelete('CASCADE');
+
         });
     }
 
@@ -74,7 +68,7 @@ return new class extends Migration {
             $table->dropForeign(['payment_method_id']);
             $table->dropForeign(['payment_term_id']);
             $table->dropForeign(['created_by']);            
-            $table->dropForeign(['unit_id']);
+            
 
         });
     }

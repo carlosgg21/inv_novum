@@ -73,4 +73,26 @@
     background-color: #B80000 !important;
     color: white;
   }
+
+
+
+  /* Quitar los spinners de los campos de tipo number */
+  input[type="number"] {
+  -moz-appearance: textfield; /* Firefox */
+  }
+  
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none; /* Chrome, Safari, Edge */
+  margin: 0; /* Eliminar margen */
+  }
+  
+  /* Hacer que los inputs tengan esquinas cuadradas */
+  .form-control,
+  .custom-select {
+  border-radius: 0 !important; /* Establecer radio de borde a 0 para esquinas cuadradas */
+  }
+  .select2-selection{
+    border-radius: 0 !important; /* Establecer radio de borde a 0 para esquinas cuadradas */
+  }
 </style>

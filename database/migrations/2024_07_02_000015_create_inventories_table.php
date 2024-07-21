@@ -18,16 +18,16 @@ return new class extends Migration {
             $table->integer('quantity_on_order')->nullable();
             $table->float('sell_price')->nullable();
             $table->float('cost_price')->nullable();
-            $table->float('shipping_cost')->nullable();
             $table->unsignedBigInteger('location_id');
             $table->string('batch_number')->nullable();
             $table->date('expire_date')->nullable();
+            $table->float('shipping_cost')->nullable();
+            $table->string('shipping_tracking_number')->nullable();                        
+            $table->date('received_date')->nullable();
+            $table->boolean('billable')->default(0); //pagado 0 NO  1 YES
             $table->unsignedBigInteger('payment_method_id')->nullable();
             $table->unsignedBigInteger('payment_term_id')->nullable();
-            $table->boolean('billable')->default(0); //pagado 0 NO  1 YES
-            $table->date('received_date')->nullable();
-            $table->unsignedBigInteger('created_by')->nullable();
-            $table->unsignedBigInteger('unit_id')->nullable();
+            $table->unsignedBigInteger('created_by')->nullable();            
             $table->text('notes')->nullable();
 
             $table->timestamps();
