@@ -32,7 +32,7 @@ class InventoryController extends Controller
 
         $search = $request->get('search', '');
         $data = $this->inventoryRepository->getInventories();
-        $inventories = $data->map(function ($items, $productId) {
+        $inventories = $data->map(function ($items) {
             $productDetails = $items->first()->product;
 
             return [
@@ -40,6 +40,7 @@ class InventoryController extends Controller
                 'inventories' => $items,
             ];
         });
+        // dd($inventories->toArray());
         // dd($groupedInventories);
         // dd($data->get()->groupBy('product_id')->toArray());
         // $inventories = $this->inventoryRepository->getInventories()->paginate(5);
@@ -63,7 +64,8 @@ class InventoryController extends Controller
         $suppliers = Supplier::pluck('name', 'id');
         $products = Product::all()->pluck('name', 'id')->map(function ($name, $id) {
             $product = Product::find($id);
-            return $product->code.' - '.$name; 
+
+            return $product->code.' - '.$name;
         });
         $locations = Location::pluck('name', 'id');
         $paymentMethod = PaymentMethod::pluck('name', 'id');
@@ -82,17 +84,19 @@ class InventoryController extends Controller
     {
         $this->authorize('create', Inventory::class);
 
-        // dd($request->input());
-
         $validated = $request->validated();
-//  dd($validated);
-       $this->inventoryRepository->entryInventory($validated);
-       dd('dasd');
-        $inventory = Inventory::create($validated);
 
-        return redirect()
-            ->route('inventories.edit', $inventory)
-            ->withSuccess(__('crud.common.created'));
+        try {
+            $inventory = $this->inventoryRepository->entryInventory($validated);
+
+            return redirect()
+                ->route('inventories.edit', $inventory)
+                ->withSuccess(__('crud.common.created'));
+        } catch (\Exception $e) {
+            return redirect()
+                ->route('inventories.index')
+                ->withErrors(__('crud.common.error').': '.$e->getMessage());
+        }
     }
 
     /**
@@ -115,7 +119,8 @@ class InventoryController extends Controller
         $suppliers = Supplier::pluck('name', 'id');
         $products = Product::all()->pluck('name', 'id')->map(function ($name, $id) {
             $product = Product::find($id);
-            return $product->code.' - '.$name; 
+
+            return $product->code.' - '.$name;
         });
         $locations = Location::pluck('name', 'id');
         $paymentMethod = PaymentMethod::pluck('name', 'id');

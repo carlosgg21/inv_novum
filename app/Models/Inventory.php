@@ -58,10 +58,9 @@ class Inventory extends Model
 
      private static function updateNotes($currentNotes)
     {
-        $userName = Auth::user()->name; // Obtener el nombre del usuario autenticado
-        $timestamp = now()->format('Y-m-d H:i:s'); // Formato de la marca de tiempo
+        $userName = Auth::user() ? Auth::user()->name : ''; 
+        $timestamp = now()->format('Y-m-d H:i:s'); 
 
-        // Actualizar el campo notes con el texto actual, nombre y marca de tiempo
         return trim($currentNotes) . "\n[$timestamp] $userName: " . $currentNotes;
     }
 

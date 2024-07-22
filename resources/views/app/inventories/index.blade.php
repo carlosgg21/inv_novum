@@ -35,7 +35,7 @@
                             <td>{{ $inventory['product']->name ?? '-' }}</td>
                             <td>{{ optional($inventory['product']->category)->name ?? '-' }}</td>
                             <td>{{ optional($inventory['product']->brand)->name ?? '-' }}</td>
-                            <td class="text-center">{{ $inventory['inventories']->sum('quantity') ?? 0 }}</td>
+                            <td class="text-center">{{ $inventory['product']->qty ?? 0 }}</td>
                             <td class="text-center">{{ $inventory['inventories']->sum('quantity_on_order') ?? 0 }}</td>
                         </tr>
     

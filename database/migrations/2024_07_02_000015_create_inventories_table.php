@@ -18,7 +18,7 @@ return new class extends Migration {
             $table->integer('quantity_on_order')->nullable();
             $table->float('sell_price')->nullable();
             $table->float('cost_price')->nullable();
-            $table->unsignedBigInteger('location_id');
+            $table->unsignedBigInteger('location_id')->nullable();
             $table->string('batch_number')->nullable();
             $table->date('expire_date')->nullable();
             $table->float('shipping_cost')->nullable();

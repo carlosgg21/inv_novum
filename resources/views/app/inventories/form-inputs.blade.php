@@ -1,6 +1,6 @@
 @php $editing = isset($inventory) @endphp
 
-<div class="row" style="background-color: #b7ebde">
+<div class="row border border-primary">
 
     <x-inputs.group class="col-sm-12 m-t-5">
         <label for="Product">Product<span class="required-field">* </span> </label>
@@ -41,7 +41,7 @@
 </div>
 
 <hr>
-<h5 class="box-title">Entry Details</h5>
+<h5 class="box-title font-weight-bold">Entry Details</h5>
 <hr>
 <div class="row m-t-5">
     <x-inputs.group class="col-sm-12">
@@ -88,7 +88,7 @@
     </x-inputs.group>
 </div>
 <hr>
-<h5 class="box-title">Shipping Information</h5>
+<h5 class="box-title font-weight-bold">Shipping Information</h5>
 <hr>
 <div class="row m-t-5">
 
