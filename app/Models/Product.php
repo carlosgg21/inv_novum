@@ -18,12 +18,12 @@ class Product extends Model
         'image',
         'name',
         'description',
-        'unit',
         'unit_price',
         'cost_price',
         'size',
         'category_id',
         'brand_id',
+        'unit_id',
         'qty',
         'notes',
         'min_qty',
@@ -37,7 +37,7 @@ class Product extends Model
     {
         return $this->belongsTo(Category::class);
     }
-   
+
     public function unit()
     {
         return $this->belongsTo(Unit::class);
@@ -57,7 +57,7 @@ class Product extends Model
     {
         return $query->where('category_id', $categoryId);
     }
-    
+
     public function scopeByBrand($query, $categoryId)
     {
         return $query->where('category_id', $categoryId);
@@ -65,7 +65,16 @@ class Product extends Model
 
     public function scopeAvailable($query)
     {
-        return $query->where('qty', '>', 0);
+        return $query->where('qty', '>', 0)
+                        ->whereNotNull('qty');
+    }
+
+    public function scopeUnavailable($query)
+    {
+        return $query->where(function ($query) {
+            $query->where('qty', '<=', 0)
+                ->orWhereNull('qty');
+        });
     }
 
     public function scopeBelowMinQty($query)
@@ -78,8 +87,7 @@ class Product extends Model
         return $query->whereColumn('qty', '>', 'max_qty');
     }
 
-
-     // Accesor para total_revenue
+    // Accesor para total_revenue
     public function getTotalRevenueAttribute()
     {
         return $this->unit_price * $this->qty;
@@ -89,6 +97,12 @@ class Product extends Model
     public function getTotalCostAttribute()
     {
         return $this->cost_price * $this->qty;
+    }
+
+    // Accesor para total price
+    public function getTotalPriceAttribute()
+    {
+        return $this->unit_price * $this->qty;
     }
 
     // Accesor para average_margin

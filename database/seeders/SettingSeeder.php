@@ -27,6 +27,14 @@ class SettingSeeder extends Seeder
                 'description' => 'Use default number start for the invoice in the system',
                 'manager_by' => 1,
             ],
+            [
+                'group' => 'global',
+                'name' => 'company_currency',
+                'value' => 'CUP',
+                'type' => 'string',
+                'description' => 'Default bussiness currency operations',
+                'manager_by' => 1,
+            ],
 
         ];
 

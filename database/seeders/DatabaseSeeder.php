@@ -28,6 +28,8 @@ class DatabaseSeeder extends Seeder
         $this->call(SettingSeeder::class);
         $this->call(CountrySeeder::class);
 
+$this->call(UnitSeeder::class);
+
 $this->call(CitySeeder::class);
 
         // $this->call(AddressSeeder::class);
@@ -39,7 +41,7 @@ $this->call(CitySeeder::class);
         $this->call(ChargeSeeder::class);
 
 $this->call(LocationSeeder::class);
-$this->call(UnitSeeder::class);
+
 
 $this->call(PaymentTermSeeder::class);
 

@@ -17,6 +17,7 @@
             <p class="loader__label">inNOVUM</p>
         </div>
     </div>
+
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
@@ -68,6 +69,23 @@
                 <!-- ============================================================== -->
                 <div class="row">
                     <div class="col-12">
+                        <div class="container text-right">
+                            @if (session('success'))
+                            <div class="alert alert-success js-alert">
+                                {{ session('success') }}
+                            </div>
+                            @endif
+
+                            @if ($errors->any())
+                            <div class="alert alert-danger js-alert">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            @endif
+                        </div>
                         @yield('content')
                         {{-- <div class="card">
                             <div class="card-body">
@@ -108,24 +126,21 @@
     @include('include.script')
     @yield('js')
     <script>
-        window.setTimeout(function(){
-            $(".errorMessage").fadeTo(100,0).slideUp(100,function(){
-                $(this).remove();
+        window.addEventListener('load', function() {
+            var alerts = document.querySelectorAll('.js-alert');
+            alerts.forEach(function(alert) {
+                setTimeout(function() {
+                    alert.style.opacity = 0;
+                    alert.style.transition = 'opacity 0.5s, visibility 0.5s';
+                    alert.style.visibility = 'hidden';
+
+             
+                    setTimeout(function() {
+                        alert.remove(); 
+                    }, 500); 
+                }, 3000);
             });
-        },3000);
-        window.setTimeout(function(){
-            $(".successMessage").fadeTo(100,0).slideUp(100,function(){
-                $(this).remove();
-            });
-        },3000);
-
-// $('input[type="number"]').on('input', function () {
-//     console.log(this.value)
-// this.value= this.value.replace(/[^\D]/g,'');
-// });
-
-
-
+        });
     </script>
 </body>
 

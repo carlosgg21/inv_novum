@@ -8,11 +8,33 @@
 
 @section('content')
 <div class="container">
-    <x-searchbar :search="$search">
-        <a href="{{ route('products.index') }}" type="button" class="btn btn-primary btn-sm">
-            Clear Search
-        </a>
-    </x-searchbar>
+    <div class="searchbar mt-0 mb-4">
+        <div class="row">
+            <x-table-bar :search="$search">
+                <a href="{{ route('products.index') }}" type="button" class="btn btn-primary btn-sm">
+                    Clear Search
+                </a>
+
+            </x-table-bar>
+            <div class="col-sm-6 mt-0 mb-4">
+                <div class="float-right">
+                    <div class="dropdown ">
+                        <button class="btn btn-primary dropdown-toggle btn-sm" type="button" data-toggle="dropdown"
+                            aria-expanded="false">
+                       <span class="fas fa-file-alt"></span> Reports
+                        </button>
+                        <div class="dropdown-menu">                
+                            <a class="dropdown-item" href="{{ route('reports.products', ['stock' => 1]) }}" target="_blank">Products With Stok</a>
+                            <a class="dropdown-item" href="{{ route('reports.products', ['stock' => 0]) }}" target="_blank">Products Out Of Stock</a>
+                            <a class="dropdown-item" href="{{ route('reports.products') }}" target="_blank">Products List</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
 
     <div class="card">
         <div class="card-body">
@@ -54,7 +76,7 @@
                             </th>
 
                             <th class="text-center">
-                             Average Margin
+                                Average Margin
                             </th>
                             <th class="text-center">
                                 @lang('crud.common.actions')
@@ -86,16 +108,18 @@
 
                             </td>
 
-                            <td>{{ $product->unit ?? '-' }}<br>
+                            <td>{{ $product->unit->name ?? '-' }}<br>
                                 <span class="text-muted"><small> {{ $product->size ?? '-' }}</small></span>
 
 
                             </td>
-                            <td class="text-right">{{ $product->unit_price ? format_money($product->unit_price): '0.00'}}</td>
-                            <td class="text-right">{{ $product->cost_price ? format_money($product->cost_price): '0.00'}}</td>
-                         
-                                <td class=" text-center {{ $product->average_margin < 10 ? 'text-danger' : '' }}">
-                                    {{ $product->average_margin != 0 ? format_percentage($product->average_margin) : '-' }}
+                            <td class="text-right">{{ $product->unit_price ? format_money($product->unit_price):
+                                '0.00'}}</td>
+                            <td class="text-right">{{ $product->cost_price ? format_money($product->cost_price):
+                                '0.00'}}</td>
+
+                            <td class=" text-center {{ $product->average_margin < 10 ? 'text-danger' : '' }}">
+                                {{ $product->average_margin != 0 ? format_percentage($product->average_margin) : '-' }}
                             </td>
 
 

@@ -63,6 +63,7 @@ class InventoryRepository
                ])
                ->where('quantity', '>', 0)
                ->orWhere('quantity_on_order', '>', 0)
+               ->orderBy('updated_at', 'desc')
                ->get()
                ->groupBy('product_id');
 
@@ -82,7 +83,6 @@ class InventoryRepository
                 $updatedCostPrice = $this->calculateNewCost($product, $data);
                 $product->cost_price = $updatedCostPrice;
             }
-          
 
             $entrySellPrice = isset($data['sell_price']) ? (float) $data['sell_price'] : 0.0;
             $currentUnitPrice = $product->unit_price;
@@ -99,13 +99,10 @@ class InventoryRepository
 
                 return Inventory::create($data);
             });
-          
-        return  Inventory::latest()->first();
 
+            return  Inventory::latest()->first();
         } catch (\Exception $e) {
-           
-throw new \Exception($e->getMessage());
-
+            throw new \Exception($e->getMessage());
         }
     }
 

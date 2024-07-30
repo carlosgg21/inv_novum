@@ -15,9 +15,6 @@
 
 <div class="card">
     <div class="card-body">
-        <div style="display: flex; justify-content: space-between;">
-            <h4 class="card-title">@lang('crud.locations.index_title')</h4>
-        </div>
 
         <div class="table-responsive">
             <table class="table table-borderless table-hover table-sm table-striped">

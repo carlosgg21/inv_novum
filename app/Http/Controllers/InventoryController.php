@@ -40,17 +40,7 @@ class InventoryController extends Controller
                 'inventories' => $items,
             ];
         });
-        // dd($inventories->toArray());
-        // dd($groupedInventories);
-        // dd($data->get()->groupBy('product_id')->toArray());
-        // $inventories = $this->inventoryRepository->getInventories()->paginate(5);
-        // $inventories = $this->inventoryRepository->getInventories()->get()->groupBy('product_id');
-        //  dd($inventories->toArray());
-        //Inventory::search($search)
-        //             ->latest()
-        //             ->paginate(5)
-        //             ->withQueryString();
-
+    //    dd($inventories->toArray());
         return view('app.inventories.index', compact('inventories', 'search'));
     }
 

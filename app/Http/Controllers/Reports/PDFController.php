@@ -15,11 +15,8 @@ class PDFController extends Controller
         $products = Product::get();
 
         $data = [
-
             'title' => 'We478',
-
             'date' => date('m/d/Y'),
-
             'users' => $products,
 
         ];

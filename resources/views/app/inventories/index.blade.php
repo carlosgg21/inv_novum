@@ -20,27 +20,37 @@
                             <th class="text-left"> Category</th>
                             <th class="text-left"> Brand</th>
                             <th class="text-center"> Qty </th>
-                            <th class="text-center"> On Order</th>
+                            <th class="text-right"> Unit Price</th>
+                            <th class="text-right"> Total Price</th>
+                            <th class="text-right"> Cost Price</th>
+                            <th class="text-right"> Total Cost</th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse($inventories as $key=>$inventory)
-                        {{-- @dd($inventory->toArray()) --}}
-                        {{-- <tr data-toggle="collapse" data-target="#{{ $inventory->code }}" class="accordion-toggle">
-                            --}}
+                      
                         <tr data-toggle="collapse" data-target="#{{ $key }}" class="accordion-toggle">
                             <td><button class="btn btn-default btn-xs"><span class="fas fa-angle-right"></span></button>
                             </td>
-                            <td>{{ $inventory['product']->code ?? '-' }}</td>
+                            <td>
+
+                                <a href="{{ route('products.index', ['search' => $inventory['product']->code]) }}" target="_blank">
+                                    {{ $inventory['product']->code ?? '-' }}
+                                </a>
+                            </td>
                             <td>{{ $inventory['product']->name ?? '-' }}</td>
                             <td>{{ optional($inventory['product']->category)->name ?? '-' }}</td>
                             <td>{{ optional($inventory['product']->brand)->name ?? '-' }}</td>
                             <td class="text-center">{{ $inventory['product']->qty ?? 0 }}</td>
-                            <td class="text-center">{{ $inventory['inventories']->sum('quantity_on_order') ?? 0 }}</td>
+                            <td class="text-right">{{ $inventory['product']->unit_price ?? 0 }}</td>
+                            <td class="text-right">{{  format_money($inventory['product']->total_price, setting('global.company_currency') )}}</td>
+                            <td class="text-right">{{ $inventory['product']->cost_price ?? 0 }}</td>
+                            <td class="text-right">{{  format_money($inventory['product']->total_cost, setting('global.company_currency') )}}</td>
+                    
                         </tr>
     
                         <tr>
-                            <td colspan="7" class="hiddenRow">
+                            <td colspan="11" class="hiddenRow">
                                 <div id="{{ $key }}" class="accordian-body collapse collapsed-content">
     
                                     <table class="table table-boder table-sm">
@@ -50,10 +60,12 @@
                                                 <th scope="col">Supplier</th>
                                                 <th scope="col">Location</th>
                                                 <th scope="col">Qty</th>
-                                                <th scope="col">On Qty</th>
+                                                <th scope="col">Unit Price</th>
+                                                <th scope="col">Cost Price</th>
+                                    
                                                 <th scope="col">Batch Number</th>
                                                 <th scope="col">Expire Date</th>
-                                                <th class="text-rigth" scope="col">Cost</th>
+                                      
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -63,12 +75,13 @@
                                                 <td>{{ optional($details->supplier)->name ?? '-' }}</td>
                                                 <td>{{ optional($details->location)->name ?? '-' }}</td>
                                                 <td>{{ $details->quantity ?? 0 }}</td>
-                                                <td>{{ $details->quantity_on_order ?? 0 }}</td>
+                                                <td>{{ $details->sell_price ?? 0 }}</td>
+                                                <td>{{ $details->cost_price ?? 0 }}</td>
                                                 <td>{{ $details->batch_number ?? '-' }}</td>
     
                                                 <td>{{ $details->expire_date ? format_date($details->expire_date, 'd/m/y') :
                                                     '-' }}</td>
-                                                <td class="text-right">$ 22.00</td>
+                                       
                                             </tr>
                                             @endforeach
     
@@ -110,14 +123,6 @@
 
 
 
-
-
-
-
-
-
-
-
     .accordian-body {
         transition: all 0.3s ease;
     }
@@ -137,7 +142,6 @@
     $('.accordion-toggle').on('click', function() {
     var target = $(this).data('target');
     var icon = $(this).find('.fas');
-    console.log('dsds')
     
     $(target).on('show.bs.collapse', function() {
     icon.removeClass('fa-angle-right').addClass('fa-angle-down');

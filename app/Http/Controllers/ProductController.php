@@ -30,7 +30,7 @@ class ProductController extends Controller
         $this->authorize('view-any', Product::class);
 
         $search = $request->get('search', '');
-
+// dd($request->input());
         $products = Product::search($search)
             ->latest()
             ->paginate(10)

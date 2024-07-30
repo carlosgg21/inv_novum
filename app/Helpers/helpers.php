@@ -2,9 +2,17 @@
 
 use App\Http\Responses\PDFResponse;
 use App\Models\AppDefault;
+use App\Models\Company;
 use App\Models\Setting;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
+
+if (!function_exists('company')) {
+    function company()
+    {
+        return Company::with(['companyContacts', 'employees', 'bankAccounts', 'addresses'])->first();
+    }
+}
 
 if (!function_exists('format_money')) {
     function format_money($value, $currency = 'USD')

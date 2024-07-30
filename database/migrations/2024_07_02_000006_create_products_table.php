@@ -16,7 +16,9 @@ return new class extends Migration {
             $table->string('image')->nullable();
             $table->string('name');
             $table->text('description')->nullable();
-            $table->string('unit')->nullable();
+     
+$table->unsignedBigInteger('unit_id')->nullable();
+
             $table->float('unit_price');
             $table->float('cost_price')->nullable();
             $table->string('size')->nullable();
@@ -27,7 +29,7 @@ return new class extends Migration {
             $table->integer('min_qty')->nullable();
             $table->integer('max_qty')->nullable();
             $table->integer('on_order')->nullable();            
-            $table->unsignedBigInteger('unit_id')->nullable();
+     
 
 
             $table->timestamps();

@@ -51,19 +51,21 @@ class Inventory extends Model
         static::updating(function ($inventory) {
             $inventory->created_by = Auth::id();
 
-           $inventory->notes = self::updateNotes($inventory->notes);
+            $inventory->notes = self::updateNotes($inventory->notes);
         });
     }
 
-
-     private static function updateNotes($currentNotes)
+    private static function updateNotes($currentNotes)
     {
-        $userName = Auth::user() ? Auth::user()->name : ''; 
-        $timestamp = now()->format('Y-m-d H:i:s'); 
+        if (trim($currentNotes) === '') {
+            return $currentNotes; // Devuelve el valor original si está vacío
+        }
 
-        return trim($currentNotes) . "\n[$timestamp] $userName: " . $currentNotes;
+        $userName = Auth::user() ? Auth::user()->name : '';
+        $timestamp = now()->format('Y-m-d H:i:s');
+
+        return trim($currentNotes)."\n[$timestamp] $userName: ".$currentNotes;
     }
-
 
     public function product()
     {
