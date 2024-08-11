@@ -24,6 +24,7 @@
                             <th class="text-right"> Total Price</th>
                             <th class="text-right"> Cost Price</th>
                             <th class="text-right"> Total Cost</th>
+                            <th class="text-center">Average Margin</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -46,6 +47,9 @@
                             <td class="text-right">{{  format_money($inventory['product']->total_price, setting('global.company_currency') )}}</td>
                             <td class="text-right">{{ $inventory['product']->cost_price ?? 0 }}</td>
                             <td class="text-right">{{  format_money($inventory['product']->total_cost, setting('global.company_currency') )}}</td>
+                            <td class="text-center {{ $inventory['product']->average_margin < 10 ? 'text-danger' : '' }}">
+                                {{ $inventory['product']->average_margin != 0 ? format_percentage($inventory['product']->average_margin) : '-' }}
+                            </td>
                     
                         </tr>
     

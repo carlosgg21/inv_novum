@@ -69,7 +69,7 @@
                 <!-- ============================================================== -->
                 <div class="row">
                     <div class="col-12">
-                        <div class="container text-right">
+                        <div class="text-right">
                             @if (session('success'))
                             <div class="alert alert-success js-alert">
                                 {{ session('success') }}

@@ -37,6 +37,7 @@ class Inventory extends Model
     protected $casts = [
         'expire_date'   => 'date',
         'received_date' => 'date',
+        'date_at' => 'date',
     ];
 
     protected static function boot()
@@ -45,6 +46,7 @@ class Inventory extends Model
 
         static::creating(function ($inventory) {
             $inventory->created_by = Auth::id();
+            $inventory->date_at = now();
             $inventory->notes = self::updateNotes($inventory->notes);
         });
 

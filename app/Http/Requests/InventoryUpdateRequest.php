@@ -20,13 +20,13 @@ class InventoryUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'supplier_id' => ['nullable', 'exists:suppliers,id'],
-            'product_id' => ['required', 'exists:products,id'],
-            'location_id' => ['required', 'exists:locations,id'],
-            'quantity' => ['nullable', 'numeric'],
+            'supplier_id'       => ['nullable', 'exists:suppliers,id'],
+            'product_id'        => ['nullable', 'exists:products,id'],
+            'location_id'       => ['nullable', 'exists:locations,id'],
+            'quantity'          => ['nullable', 'numeric'],
             'quantity_on_order' => ['nullable', 'numeric'],
-            'batch_number' => ['nullable', 'max:255', 'string'],
-            'expire_date' => ['nullable', 'date'],
+            'batch_number'      => ['nullable', 'max:255', 'string'],
+            'expire_date'       => ['nullable', 'date'],
         ];
     }
 }

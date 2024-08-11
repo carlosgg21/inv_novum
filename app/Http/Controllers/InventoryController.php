@@ -40,7 +40,8 @@ class InventoryController extends Controller
                 'inventories' => $items,
             ];
         });
-    //    dd($inventories->toArray());
+
+        //    dd($inventories->toArray());
         return view('app.inventories.index', compact('inventories', 'search'));
     }
 
@@ -112,6 +113,11 @@ class InventoryController extends Controller
 
             return $product->code.' - '.$name;
         });
+
+        // $product = Product::find($inventory->product_id);
+
+// dd($product->toArray());
+// dd($inventory->toArray());
         $locations = Location::pluck('name', 'id');
         $paymentMethod = PaymentMethod::pluck('name', 'id');
         $paymentTerm = PaymentTerm::pluck('code', 'id');
