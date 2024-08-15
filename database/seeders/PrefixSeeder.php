@@ -22,7 +22,7 @@ class PrefixSeeder extends Seeder
         $faker = Faker::create();
 
         $modules = ['invoice', 'sales_order', 'purchase_order', 'customer', 'employee'];
-        $shortNames = ['INV', 'PO', 'SO', 'CUS', 'EMP', 'SUP', 'PROD', 'INV'];
+        $shortNames = ['INV', 'SO', 'PO', 'CUS', 'EMP', 'SUP', 'PROD', 'INV'];
 
         // Iterar sobre los módulos para crear un registro por cada uno
         foreach ($modules as $key => $module) {

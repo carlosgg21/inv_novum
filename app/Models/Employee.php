@@ -142,6 +142,12 @@ class Employee extends Model
     {
         return $this->morphOne(Address::class, 'addressable');
     }
+
+    public function scopeWithSpecificCharges(Builder $query, array $chargeIds): Builder
+    {
+        return $query->whereIn('charge_id', $chargeIds);
+    }
+
 }
 /*
 Estas modificaciones agregan:

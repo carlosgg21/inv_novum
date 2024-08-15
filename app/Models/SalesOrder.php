@@ -40,6 +40,18 @@ class SalesOrder extends Model
         'invoice_date' => 'date',
     ];
 
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($salesOrder) {
+            // Generar el número de orden
+            $salesOrder->number = self::generateOrderNumber();
+            $salesOrder->prefix = self::getOrderPrefix();
+        });
+    }
+
     public function customer()
     {
         return $this->belongsTo(Customer::class);
@@ -75,11 +87,45 @@ class SalesOrder extends Model
         return $this->hasMany(PaymentsReceived::class);
     }
 
-     // Accessor for full_number
+    // Accessor for full_number
     public function getFullNumberAttribute()
     {
         $prefix = $this->prefix;
 
-        return $prefix ? $prefix.' '.$this->number : $this->number;
+        return $prefix ? $prefix . ' ' . $this->number : $this->number;
+    }
+
+
+    private static function generateOrderNumber()
+    {
+
+        // $prefix = 'SO'; // Prefijo de la orden
+        $date = now()->format('Ymd'); // Fecha actual en formato YYYYMMDD
+
+        // Obtener el último número de orden del mismo día
+        $lastOrder = self::whereDate('created_at', now())->orderBy('created_at', 'desc')->first();
+
+        // Si no hay órdenes del mismo día, iniciar con 1
+        $sequence = $lastOrder ? (int) substr($lastOrder->number, -4) + 1 : 1;
+
+        // Si se alcanza el límite de 9999, puedes manejarlo como prefieras (reiniciar, lanzar un error, etc.)
+        if ($sequence > 9999) {
+            throw new \Exception('Se ha alcanzado el límite máximo de órdenes para el día.');
+        }
+
+        // Formatear el número de orden
+        return "{$date}-" . str_pad($sequence, 4, '0', STR_PAD_LEFT);
+        // return "{$prefix}-{$date}-" . str_pad($sequence, 4, '0', STR_PAD_LEFT);
+    }
+
+    private static function getOrderPrefix()
+    {
+        if (!setting('sales_order.used_prefix')) {
+            return ''; // Retorna vacío si el ajuste no está activo
+        }
+
+        $prefix = Prefix::where('used_in', 'sales_order')->first();
+
+        return $prefix ? $prefix->display : ''; // Retorna el prefijo o vacío si no se encuentra
     }
 }

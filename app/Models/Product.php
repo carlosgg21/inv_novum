@@ -66,7 +66,7 @@ class Product extends Model
     public function scopeAvailable($query)
     {
         return $query->where('qty', '>', 0)
-                        ->whereNotNull('qty');
+                     ->whereNotNull('qty');
     }
 
     public function scopeUnavailable($query)

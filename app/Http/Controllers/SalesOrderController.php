@@ -7,6 +7,7 @@ use App\Models\Employee;
 use Illuminate\View\View;
 use App\Models\SalesOrder;
 use App\Models\PaymentTerm;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Models\PaymentMethod;
 use Illuminate\Http\RedirectResponse;
@@ -39,22 +40,29 @@ class SalesOrderController extends Controller
     {
         $this->authorize('create', SalesOrder::class);
 
-        $customers = Customer::pluck('name', 'id');
-        $employees = Employee::pluck('name', 'id');
+        $customers = Customer::orderBy('name')->pluck('name', 'id');
+        $employees = Employee::orderBy('name')->pluck('name', 'id');
         $paymentMethods = PaymentMethod::pluck('name', 'id');
         $paymentTerms = PaymentTerm::pluck('description', 'id');
-
+        $products = Product::available()->get(['id', 'name', 'description', 'unit_price', 'qty']);
+        $uthorized = app_default('sales_order.so_authorized_approve') ;
+        
+        $authorizedEmployee = $uthorized ? Employee::withSpecificCharges(json_decode($uthorized, true))->pluck('name', 'id')
+                                                : Employee::orderBy('name')->pluck('name', 'id');
+       
         return view(
             'app.sales_orders.create',
-            compact('customers', 'employees', 'paymentMethods', 'paymentTerms')
+            compact('customers', 'employees', 'paymentMethods', 'paymentTerms', 'products', 'authorizedEmployee')
         );
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(SalesOrderStoreRequest $request): RedirectResponse
+    public function store(Request $request): RedirectResponse
+    // public function store(SalesOrderStoreRequest $request): RedirectResponse
     {
+        dd($request->input());
         $this->authorize('create', SalesOrder::class);
 
         $validated = $request->validated();
@@ -72,12 +80,12 @@ class SalesOrderController extends Controller
     public function show(Request $request, SalesOrder $salesOrder): View
     {
         $this->authorize('view', $salesOrder);
-        
-$defaultContact = $salesOrder->customer->getDefaultContact();
-// dump($salesOrder->customer->contacts->toArray());
-// dump($salesOrder->customer->toArray());
-// dd($defaultContact);
-// dd($salesOrder->customer);
+
+        $defaultContact = $salesOrder->customer->getDefaultContact();
+        // dump($salesOrder->customer->contacts->toArray());
+        // dump($salesOrder->customer->toArray());
+        // dd($defaultContact);
+        // dd($salesOrder->customer);
         return view('app.sales_orders.show', compact('salesOrder', 'defaultContact'));
     }
 

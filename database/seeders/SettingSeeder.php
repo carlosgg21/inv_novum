@@ -35,6 +35,14 @@ class SettingSeeder extends Seeder
                 'description' => 'Default bussiness currency operations',
                 'manager_by' => 1,
             ],
+            [
+                'group' => 'sales_order',
+                'name' => 'used_prefix',
+                'value' => '1',
+                'type' => 'boolean',
+                'description' => 'Use prefix in Sales Order Number',
+                'manager_by' => 1,
+            ],
 
         ];
 
