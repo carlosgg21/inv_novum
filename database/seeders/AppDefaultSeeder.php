@@ -19,6 +19,14 @@ class AppDefaultSeeder extends Seeder
 
         $settings = [
             [
+                'module'       => 'sales_order',
+                'name'         => 'so_authorized_approve',
+                'display_name' => 'Authorized Approvet',
+                'value'        => '[1.2]',
+                'description'  => 'Personal autorizado aprobar las sales orde',
+                'manager_by'   => 0,
+            ],
+            [
                 'module'       => 'invoice',
                 'name'         => 'invoice_number_start',
                 'display_name' => 'Invoice Number Start',

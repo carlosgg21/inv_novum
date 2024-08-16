@@ -16,6 +16,8 @@ return new class extends Migration {
             $table->string('phone');
             $table->string('email');
             $table->text('address');
+            $table->unsignedBigInteger('payment_method_id')->nullable();
+            $table->unsignedBigInteger('payment_term_id')->nullable();
 
             $table->timestamps();
             $table->softDeletes();

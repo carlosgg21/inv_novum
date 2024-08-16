@@ -27,30 +27,41 @@ class CustomerSeeder extends Seeder
                 'phone'   => '555-1234',
                 'email'   => 'info@acmecorp.com',
                 'address' => '123 Main St, Anytown USA',
+                'payment_method_id' => '4',
+                'payment_term_id' => '1',
+
             ],
             [
                 'name'    => 'Global Tech Solutions',
                 'phone'   => '555-5678',
                 'email'   => 'sales@globaltechsolutions.com',
                 'address' => '456 Oak Rd, Somewhere City',
+                'payment_method_id' => '4',
+                'payment_term_id' => '5',
             ],
             [
                 'name'    => 'Innovative Enterprises',
                 'phone'   => '555-9012',
                 'email'   => 'contact@innovativeenterprises.com',
                 'address' => '789 Elm St, Othertown',
+                'payment_method_id' => '3',
+                'payment_term_id' => '4',
             ],
             [
                 'name'    => 'Synergy Consulting Group',
                 'phone'   => '555-3456',
                 'email'   => 'info@synergyconsulting.com',
                 'address' => '321 Pine Ave, Somewhere Else',
+                'payment_method_id' => '3',
+                'payment_term_id' => '4',
             ],
             [
                 'name'    => 'Apex Manufacturing',
                 'phone'   => '555-7890',
                 'email'   => 'orders@apexmanufacturing.com',
                 'address' => '654 Oak St, Anyplace',
+                'payment_method_id' => '1',
+                'payment_term_id' => '3',
             ],
         ];
 
@@ -61,29 +72,29 @@ class CustomerSeeder extends Seeder
                 'address'        => $faker->address(),
                 'township_id'    => null,
                 'city_id'        => null,
-                'country_id'     => rand(1, 100) ,
+                'country_id'     => rand(1, 100),
                 'zip_code'       => $faker->numerify('#######'),
                 'default'        => 1,
 
             ]);
 
             $customer->contacts()->create([
-                 'identification'           => $faker->unique()->regexify('[0-9]{11}'),
+                'identification'           => $faker->unique()->regexify('[0-9]{11}'),
                 'name'                      => $faker->name(),
                 'last_name'                 => $faker->lastName(),
                 'phone'                     => $faker->phoneNumber(),
                 'email'                     => $faker->email(),
-                           'address'        => $faker->address(),
+                'address'        => $faker->address(),
             ]);
 
             $customer->bankAccounts()->create([
-                   'number'          => Crypt::encrypt('0542-3454-5678-9810'),
-                   'type'            => null,
-                   'bank_id'         => rand(1, 6),
-                   'currency_id'     => rand(1, 22),
-                   'default'         => 1,
+                'number'          => Crypt::encrypt('0542-3454-5678-9810'),
+                'type'            => null,
+                'bank_id'         => rand(1, 6),
+                'currency_id'     => rand(1, 22),
+                'default'         => 1,
 
-               ]);
+            ]);
         }
     }
 }
