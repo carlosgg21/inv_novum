@@ -40,13 +40,15 @@ class SalesOrderController extends Controller
     {
         $this->authorize('create', SalesOrder::class);
 
-        $customers = Customer::orderBy('name')->pluck('name', 'id');
+        $customers = Customer::orderBy('name')->get(['id', 'name', 'payment_method_id', 'payment_term_id']);
+        // dd($customers->toArray());
+        // $customers = Customer::orderBy('name')->pluck('name', 'id');
         $employees = Employee::orderBy('name')->pluck('name', 'id');
         $paymentMethods = PaymentMethod::pluck('name', 'id');
         $paymentTerms = PaymentTerm::pluck('description', 'id');
         $products = Product::available()->get(['id', 'name', 'description', 'unit_price', 'qty']);
-        $uthorized = app_default('sales_order.so_authorized_approve') ;
-        
+
+        $uthorized = app_default('sales_order.so_authorized_approve') ?? '';     
         $authorizedEmployee = $uthorized ? Employee::withSpecificCharges(json_decode($uthorized, true))->pluck('name', 'id')
                                                 : Employee::orderBy('name')->pluck('name', 'id');
        

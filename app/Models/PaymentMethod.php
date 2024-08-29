@@ -19,6 +19,16 @@ class PaymentMethod extends Model
 
     protected $table = 'payment_methods';
 
+    public function customers()
+    {
+        return $this->belongsTo(Customer::class);
+    }
+
+    public function paymentTerm()
+    {
+        return $this->belongsTo(PaymentTerm::class);
+    }
+
     public function purchaseOrders()
     {
         return $this->hasMany(PurchaseOrder::class);

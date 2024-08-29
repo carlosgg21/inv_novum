@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use App\Models\Scopes\Searchable;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class SalesOrder extends Model
 {
@@ -36,10 +36,9 @@ class SalesOrder extends Model
     protected $table = 'sales_orders';
 
     protected $casts = [
-        'order_date' => 'date',
+        'order_date'   => 'date',
         'invoice_date' => 'date',
     ];
-
 
     protected static function boot()
     {
@@ -92,13 +91,11 @@ class SalesOrder extends Model
     {
         $prefix = $this->prefix;
 
-        return $prefix ? $prefix . ' ' . $this->number : $this->number;
+        return $prefix ? $prefix.' '.$this->number : $this->number;
     }
-
 
     private static function generateOrderNumber()
     {
-
         // $prefix = 'SO'; // Prefijo de la orden
         $date = now()->format('Ymd'); // Fecha actual en formato YYYYMMDD
 
@@ -114,7 +111,7 @@ class SalesOrder extends Model
         }
 
         // Formatear el número de orden
-        return "{$date}-" . str_pad($sequence, 4, '0', STR_PAD_LEFT);
+        return "{$date}-".str_pad($sequence, 4, '0', STR_PAD_LEFT);
         // return "{$prefix}-{$date}-" . str_pad($sequence, 4, '0', STR_PAD_LEFT);
     }
 
@@ -127,5 +124,25 @@ class SalesOrder extends Model
         $prefix = Prefix::where('used_in', 'sales_order')->first();
 
         return $prefix ? $prefix->display : ''; // Retorna el prefijo o vacío si no se encuentra
+    }
+
+    public function getConditionAttribute()
+    {
+        return $this->invoice_date ? 'invoiced' : 'pending';
+    }
+
+    public function getIsInvoicedAttribute()
+    {
+        return !is_null($this->invoice_date);
+    }
+
+    public function scopeInvoiced($query)
+    {
+        return $query->whereNotNull('invoice_date');
+    }
+
+    public function scopePending($query)
+    {
+        return $query->whereNull('invoice_date');
     }
 }

@@ -18,6 +18,7 @@ return new class extends Migration {
                 ->nullable();
             $table->decimal('total_amount')->nullable();
             $table->date('date');
+            $table->date('due_date')->nullable();
             $table->unsignedBigInteger('sales_order_id');
             $table->string('prefix')->nullable();
             $table->string('status');

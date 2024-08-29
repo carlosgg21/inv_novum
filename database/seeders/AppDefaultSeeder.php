@@ -22,7 +22,7 @@ class AppDefaultSeeder extends Seeder
                 'module'       => 'sales_order',
                 'name'         => 'so_authorized_approve',
                 'display_name' => 'Authorized Approvet',
-                'value'        => '[1.2]',
+                'value'        => '[1,2]',
                 'description'  => 'Personal autorizado aprobar las sales orde',
                 'manager_by'   => 0,
             ],

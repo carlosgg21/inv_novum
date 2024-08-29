@@ -22,6 +22,16 @@ class Customer extends Model
         return $this->hasMany(SalesOrder::class);
     }
 
+    public function paymentMethod()
+    {
+        return $this->belongsTo(PaymentMethod::class);
+    }
+
+    public function paymentTerm()
+    {
+        return $this->belongsTo(PaymentTerm::class);
+    }
+
     public function paymentsReceiveds()
     {
         return $this->hasMany(PaymentsReceived::class);

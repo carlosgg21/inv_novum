@@ -19,6 +19,11 @@ class PaymentTerm extends Model
 
     protected $table = 'payment_terms';
 
+    public function customers()
+    {
+        return $this->belongsTo(Customer::class);
+    }
+    
     public function purchaseOrders()
     {
         return $this->hasMany(PurchaseOrder::class);

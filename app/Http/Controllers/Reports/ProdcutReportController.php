@@ -10,8 +10,8 @@ class ProdcutReportController extends Controller
 {
     /**
      * retornoa el lsitado de productos
-     * si stock true : devule solo el lsitadod e productos con stock
-     *si stock false :devulve los prodcutos csin stock
+     * si stock true : devule solo el listado  de productos con stock
+     *si stock false :devuelve los prodcutos csin stock
      * si es null devuelve todos los productos
      * @param [type] $stok
      * @return void
