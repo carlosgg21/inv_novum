@@ -7,7 +7,6 @@
 @endsection
 
 @section('content')
-<div class="container">
     <x-searchbar :search="$search">
         <a href="{{ route('customers.index') }}" type="button" class="btn btn-primary btn-sm">
             Clear Search
@@ -17,7 +16,7 @@
     <div class="card">
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-borderless table-hover">
+                <table class="table table-borderless table-hover table-sm">
                     <thead>
                         <tr>
                             <th class="text-left">
@@ -44,7 +43,9 @@
                             <td>{{ $customer->phone ?? '-' }}</td>
                             <td>{{ $customer->email ?? '-' }}</td>
                             {{-- <td>{{ $customer->address ?? '-' }}</td> --}}
-                          <x-action-buttons :model="$customers" routePrefix="customers" />
+                          {{-- <x-action-buttons :model="$customer" routePrefix="customers" /> --}}
+                          <x-table-action :model="$customer" routePrefix="customers" />
+                        
                         </tr>
                         @empty
                         <tr>
@@ -63,5 +64,4 @@
             </div>
         </div>
     </div>
-</div>
 @endsection

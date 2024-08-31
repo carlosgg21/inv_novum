@@ -65,4 +65,10 @@ class TownshipController extends Controller
 
         return response()->noContent();
     }
+
+    public function TownshipsByCity($cityId) {
+        $townships = Township::where('city_id', $cityId)->pluck('name', 'id'); 
+
+        return response()->json($townships);
+    }
 }

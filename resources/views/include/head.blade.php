@@ -95,4 +95,9 @@
   .select2-selection{
     border-radius: 0 !important; /* Establecer radio de borde a 0 para esquinas cuadradas */
   }
+
+  .column-separator {
+  border-bottom: 2px solid #00C292; /* Línea azul a la derecha */
+
+  }
 </style>

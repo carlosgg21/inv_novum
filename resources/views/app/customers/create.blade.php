@@ -1,28 +1,21 @@
 @extends('layouts.app')
+@section('title', 'Customers')
+@section('page-title', 'Create Customers')
+@section('breadcrumb')
+<x-breadcrumb route="customers.index" home="Customer" title="Create List"></x-breadcrumb>
+@endsection
 
 @section('content')
-<div class="container">
+
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">
-                <a href="{{ route('customers.index') }}" class="mr-4"
-                    ><i class="icon ion-md-arrow-back"></i
-                ></a>
-                @lang('crud.customers.create_title')
-            </h4>
+           
 
-            <x-form
-                method="POST"
-                action="{{ route('customers.store') }}"
-                class="mt-4"
-            >
+            <x-form method="POST" action="{{ route('customers.store') }}" class="mt-4">
                 @include('app.customers.form-inputs')
 
                 <div class="mt-4">
-                    <a
-                        href="{{ route('customers.index') }}"
-                        class="btn btn-light"
-                    >
+                    <a href="{{ route('customers.index') }}" class="btn btn-light">
                         <i class="icon ion-md-return-left text-primary"></i>
                         @lang('crud.common.back')
                     </a>
@@ -35,5 +28,5 @@
             </x-form>
         </div>
     </div>
-</div>
+
 @endsection

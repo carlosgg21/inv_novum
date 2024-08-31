@@ -39,4 +39,6 @@ class CityTownshipsController extends Controller
 
         return new TownshipResource($township);
     }
+
+   
 }

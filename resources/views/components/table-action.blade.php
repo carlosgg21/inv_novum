@@ -2,7 +2,7 @@
 @php
 $route = $routeName ?? $model->getTable();
 @endphp
-<td class="cell-center" style="width: 20px">
+<td class="text-center" style="width: 20px;">
     <div class="dropdown">
         <span class="cell-center" type="button" id="{{ $model->id }}_dropdownMenu" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">

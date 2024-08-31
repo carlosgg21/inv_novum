@@ -23,7 +23,7 @@ class CustomerUpdateRequest extends FormRequest
             'name' => ['required', 'max:255', 'string'],
             'phone' => ['required', 'max:255', 'string'],
             'email' => ['required', 'email'],
-            'address' => ['required', 'max:255', 'string'],
+            // 'address' => ['required', 'max:255', 'string'],
         ];
     }
 }

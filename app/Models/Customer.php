@@ -2,18 +2,21 @@
 
 namespace App\Models;
 
+use App\Traits\HasAddresses; 
 use App\Models\Scopes\Searchable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 
 class Customer extends Model
 {
     use HasFactory;
     use Searchable;
     use SoftDeletes;
+    use HasAddresses;
 
-    protected $fillable = ['name', 'phone', 'email', 'address'];
+    protected $fillable = ['name', 'phone', 'email', 'notes'];
 
     protected $searchableFields = ['*'];
 
@@ -57,9 +60,19 @@ class Customer extends Model
         return $this->contacts()->where('default', true)->first();
     }
 
-
     public function getAllContacts()
     {
         return $this->contacts;
+    }
+    
+    public function getDefaultAddress()
+    {
+        return $this->addresses()->first(); 
+    }
+
+   
+    public function getAllAddresses()
+    {
+        return $this->addresses; 
     }
 }

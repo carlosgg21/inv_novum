@@ -2,15 +2,31 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Customer;
-use Illuminate\View\View;
-use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\CustomerStoreRequest;
 use App\Http\Requests\CustomerUpdateRequest;
+use App\Models\Bank;
+use App\Models\Currency;
+use App\Models\Country;
+use App\Models\City;
+use App\Models\Township;
+use App\Models\Customer;
+use App\Models\PaymentMethod;
+use App\Models\PaymentTerm;
+use App\Repositories\CustomerRepository;
+use Database\Factories\PaymentTermFactory;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class CustomerController extends Controller
 {
+    protected $customerRepository;
+
+    public function __construct(CustomerRepository $customerRepository)
+    {
+        $this->customerRepository = $customerRepository;
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -22,7 +38,7 @@ class CustomerController extends Controller
 
         $customers = Customer::search($search)
             ->latest()
-            ->paginate(5)
+            ->paginate(10)
             ->withQueryString();
 
         return view('app.customers.index', compact('customers', 'search'));
@@ -35,7 +51,27 @@ class CustomerController extends Controller
     {
         $this->authorize('create', Customer::class);
 
-        return view('app.customers.create');
+        $currencies = Currency::pluck('acronym', 'id');
+        $banks = Bank::pluck('name', 'id');
+        
+        $countries = Country::pluck('name', 'id');;
+        $townships = Township::pluck('name', 'id');
+        $cities = City::pluck('name', 'code');
+        $paymentTerms = PaymentTerm::get(['id', 'description', 'day']);
+        $paymentMethods = PaymentMethod::pluck('name', 'id');
+
+        return view('app.customers.create', compact(
+            
+            'currencies',
+            'banks',
+            'countries',
+            'townships',
+            'cities',
+            'paymentTerms',
+            'paymentMethods'
+        ));
+
+        
     }
 
     /**
@@ -70,8 +106,25 @@ class CustomerController extends Controller
     public function edit(Request $request, Customer $customer): View
     {
         $this->authorize('update', $customer);
-
-        return view('app.customers.edit', compact('customer'));
+        $currencies = Currency::pluck('acronym', 'id');
+        $banks = Bank::pluck('name', 'id');
+        $customer = $this->customerRepository->findCustomer($customer->id);
+        $countries = Country::pluck('name', 'id');;
+        $townships = Township::pluck('name', 'id');
+        $cities = City::pluck('name', 'code');
+        $paymentTerms = PaymentTerm::get(['id', 'description', 'day']);
+        $paymentMethods = PaymentMethod::pluck('name', 'id');
+    //   dd($customer->getDefaultAddress()->city->name);
+        return view('app.customers.edit', compact(
+                                                  'customer', 
+                                                  'currencies', 
+                                                  'banks',
+                                                  'countries',
+                                                  'townships',
+                                                  'cities',
+                                                  'paymentTerms',
+                                                  'paymentMethods'
+                                                    ));
     }
 
     /**
@@ -83,6 +136,7 @@ class CustomerController extends Controller
     ): RedirectResponse {
         $this->authorize('update', $customer);
 
+        dd($request->input());
         $validated = $request->validated();
 
         $customer->update($validated);
