@@ -20,10 +20,12 @@ class CustomerStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'max:255', 'string'],
-            'phone' => ['required', 'max:255', 'string'],
-            'email' => ['required', 'email'],
-            
+            'name'              => ['required', 'max:255', 'string'],
+            'phone'             => ['required', 'max:255', 'string'],
+            'email'             => ['required', 'email'],
+            'payment_method_id' => ['required'],
+            'payment_term_id'   => ['required'],
+            'notes'             => ['nullable', 'string'],
         ];
     }
 }

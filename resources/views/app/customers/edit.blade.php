@@ -125,33 +125,43 @@
                     <div class="col-sm-4">
                         <label for="select1">Country</label>
                         <div>
-                            <select id="countries" name="countries" class="form-control form-control-sm">
+                            <select id="countries" name="country_id" class="form-control form-control-sm">
                                 @foreach ($countries as $key => $country)
                                 @if(!($customer->getDefaultAddress()))
                                      <option value="{{ $key }}" {{ $key==53 ? 'selected' : '' }}> {{ $country }}</option>
                                    @else
-                                   <option value="{{ $key }}"> {{ $country }}</option>
+                                   <option value="{{ $key }}" {{ $customer->getDefaultAddress()->country_id == $key ? 'selected' : '' }}> {{ $country }}</option>
+                                   {{-- <option value="{{ $key }}"> {{ $country }}</option> --}}
                                  @endif                                
                                 @endforeach
                             </select>
                         </div>
                     </div>
                     <div class="col-sm-4">
-                        <label for="select1">City</label>
+                        <label for="select1">City </label>
                         <div>
-                            <select id="cities" name="cities" class="form-control form-control-sm">
-                                <option>--Select city--</option>
+                            <select id="cities" name="city_id" class="form-control form-control-sm">
+                                <option value="">--Select city--</option>
                                 @foreach ($cities as $key => $city)
-                                <option value="{{ $key }}"> {{ $city }}</option>                                
+                                {{-- <option value="{{ $key }}"> {{ $city }}</option>           --}}
+                                <option value="{{ $key }}" {{ $customer->getDefaultAddress()?->city_id == $key ? 'selected' : '' }}> {{ $city }}
+                                </option>                      
                                 @endforeach
                             </select>
                         </div>
                     </div>
                     <div class="col-sm-4">
-                        <label for="select1">Township</label>
+                        <label for="select1">Township </label>
                         <div>
-                            <select id="townships" name="townships" class="form-control form-control-sm" disabled>
-                                <option>--Select city--</option>
+                            <select id="townships" name="township_id" class="form-control form-control-sm" {{ !$customer->getDefaultAddress()?->township_id ? 'disabled' : '' }}>
+                                @if(!$customer->getDefaultAddress()?->township_id)
+                                    <option>--Select city--</option>
+                                 @else    
+                                    @foreach($townships as $key => $township)
+                                     <option value="{{ $key }}" {{ $customer->getDefaultAddress()->township_id == $key ? 'selected' : '' }}> {{ $township }}
+                                        
+                                    @endforeach
+                                @endif
                               
                             </select>
                         </div>
@@ -161,83 +171,172 @@
                    </div>
                    <div class="row mt-2">
                         <div class="col-sm-8">
-                            <label for="text">Address</label>
-                            <input id="text" name="address" type="text" class="form-control form-control-sm">
+                            <label for="address">Address</label>
+                            <input id="address" name="address" type="text" value="{{ $customer->getDefaultAddress()?->address ?? ''  }}" class="form-control form-control-sm">
+                            <input id="address" name="address_id" type="text" value="{{ $customer->getDefaultAddress()?->id ?? ''  }}" class="form-control form-control-sm" hidden>
                         </div>
 
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label for="text">Zip Code</label>
-                                <input id="text" name="zip_code" type="text" class="form-control form-control-sm">
+                                <input id="zip_code" name="zip_code" type="text" class="form-control form-control-sm">
                             </div>
                         </div>
                    </div>
 
                 </div>
                 <div class="tab-pane p-20" id="messages2" role="tabpanel">
-                    <div class="column-separator" style="padding-bottom: 2%; margin-bottom: 1">
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <label for="text">Identification No.</label>
-                                <input id="text" name="identifications[]" type="text" class="form-control form-control-sm">
-                            </div>
-                            <div class="col-sm-4">
-                                <label for="text">Name</label>
-                                <input id="text" name="names[]" type="text" class="form-control form-control-sm">
-                            </div>
-                            <div class="col-sm-4">
-                                <label for="text">Last Name</label>
-                                <input id="text" name="lasts_name[]" type="text" class="form-control form-control-sm">
-                            </div>
+                 
+{{-- @dd($customer->getCustomerContacts()->count()) --}}
+                    @if($customer->getCustomerContacts()->count() != 0)
+                        @foreach($customer->getCustomerContacts() as $contact)
+                        {{-- @dd($loop) --}}
+                            @if($loop->first)
+
+                                <div class="column-separator" style="padding-bottom: 2%; margin-bottom: 1">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label for="text">Identification No.</label>
+                                            <input id="text" name="identifications[]" type="text" class="form-control form-control-sm">
+                                            <input id="text" name="contact_id[]" type="text" value="{{ $contact->id }}" class="form-control form-control-sm">
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label for="text">Name</label>
+                                            <input id="text" name="names[]" type="text" class="form-control form-control-sm">
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label for="text">Last Name</label>
+                                            <input id="text" name="lasts_name[]" type="text" class="form-control form-control-sm">
+                                        </div>
+                                
+                                    </div>
+                                    <div class="row">
+                                
+                                        <div class="col-sm-4">
+                                            <label for="text">Charge</label>
+                                            <input id="text" name="charges[]" type="text" class="form-control form-control-sm">
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label for="text">Phone</label>
+                                            <input id="text" name="phones[]" type="text" class="form-control form-control-sm">
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label for="text">Email</label>
+                                            <input id="email" name="emails[]" type="text" class="form-control form-control-sm">
+                                        </div>
+                                    </div>
+                                </div>
+                            @else
                         
-                        </div>
-                        <div class="row">
-                        
-                            <div class="col-sm-4">
-                                <label for="text">Charge</label>
-                                <input id="text" name="charges[]" type="text" class="form-control form-control-sm">
-                            </div>
-                            <div class="col-sm-4">
-                                <label for="text">Phone</label>
-                                <input id="text" name="phones[]" type="text" class="form-control form-control-sm">
-                            </div>
-                            <div class="col-sm-4">
-                                <label for="text">Email</label>
-                                <input id="email" name="emails[]" type="text" class="form-control form-control-sm">
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <label for="text">Identification No.</label>
-                                <input id="text" name="identifications[]" type="text" class="form-control form-control-sm">
-                            </div>
-                            <div class="col-sm-4">
-                                <label for="text">Name</label>
-                                <input id="text" name="names[]" type="text" class="form-control form-control-sm">
-                            </div>
-                            <div class="col-sm-4">
-                                <label for="text">Last Name</label>
-                                <input id="text" name="lasts_name[]" type="text" class="form-control form-control-sm">
-                            </div>
-                        
-                        </div>
-                        <div class="row ">                        
-                            <div class="col-sm-4">
-                                <label for="text">Charge</label>
-                                <input id="text" name="charges[]" type="text" class="form-control form-control-sm">
-                            </div>
-                            <div class="col-sm-4">
-                                <label for="text">Phone</label>
-                                <input id="text" name="phones[]" type="text" class="form-control form-control-sm">
-                            </div>
-                            <div class="col-sm-4">
-                                <label for="text">Email</label>
-                                <input id="email" name="emails[]" type="text" class="form-control form-control-sm">
-                            </div>
-                        </div>
-                    </div>
+                            <div>
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label for="text">Identification No.</label>
+                                            <input id="text" name="identifications[]" type="text" class="form-control form-control-sm">
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label for="text">Name</label>
+                                            <input id="text" name="names[]" type="text" class="form-control form-control-sm">
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label for="text">Last Name</label>
+                                            <input id="text" name="lasts_name[]" type="text" class="form-control form-control-sm">
+                                        </div>
+                                
+                                    </div>
+                                    <div class="row ">
+                                        <div class="col-sm-4">
+                                            <label for="text">Charge</label>
+                                            <input id="text" name="charges[]" type="text" class="form-control form-control-sm">
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label for="text">Phone</label>
+                                            <input id="text" name="phones[]" type="text" class="form-control form-control-sm">
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label for="text">Email</label>
+                                            <input id="email" name="emails[]" type="text" class="form-control form-control-sm">
+                                        </div>
+                                    </div>
+                                </div>
+                                @endif
+                        @endforeach
+                        @else
+<div class="column-separator" style="padding-bottom: 2%; margin-bottom: 1">
+    <div class="row">
+        <div class="col-sm-4">
+            <label for="text">Identification No.</label>
+            <input id="text" name="identifications[]" type="text" class="form-control form-control-sm">
+            <input id="text" name="contact_id[]" type="text" 
+                class="form-control form-control-sm">
+        </div>
+        <div class="col-sm-4">
+            <label for="text">Name</label>
+            <input id="text" name="names[]" type="text" class="form-control form-control-sm">
+        </div>
+        <div class="col-sm-4">
+            <label for="text">Last Name</label>
+            <input id="text" name="lasts_name[]" type="text" class="form-control form-control-sm">
+        </div>
+
+    </div>
+    <div class="row">
+
+        <div class="col-sm-4">
+            <label for="text">Charge</label>
+            <input id="text" name="charges[]" type="text" class="form-control form-control-sm">
+        </div>
+        <div class="col-sm-4">
+            <label for="text">Phone</label>
+            <input id="text" name="phones[]" type="text" class="form-control form-control-sm">
+        </div>
+        <div class="col-sm-4">
+            <label for="text">Email</label>
+            <input id="email" name="emails[]" type="text" class="form-control form-control-sm">
+        </div>
+    </div>
+</div>
+
+<div>
+    <div class="row">
+        <div class="col-sm-4">
+            <label for="text">Identification No.</label>
+            <input id="text" name="identifications[]" type="text" class="form-control form-control-sm">
+        </div>
+        <div class="col-sm-4">
+            <label for="text">Name</label>
+            <input id="text" name="names[]" type="text" class="form-control form-control-sm">
+        </div>
+        <div class="col-sm-4">
+            <label for="text">Last Name</label>
+            <input id="text" name="lasts_name[]" type="text" class="form-control form-control-sm">
+        </div>
+
+    </div>
+    <div class="row ">
+        <div class="col-sm-4">
+            <label for="text">Charge</label>
+            <input id="text" name="charges[]" type="text" class="form-control form-control-sm">
+        </div>
+        <div class="col-sm-4">
+            <label for="text">Phone</label>
+            <input id="text" name="phones[]" type="text" class="form-control form-control-sm">
+        </div>
+        <div class="col-sm-4">
+            <label for="text">Email</label>
+            <input id="email" name="emails[]" type="text" class="form-control form-control-sm">
+        </div>
+    </div>
+</div>
+                     
+                    @endif
+
+
+                 
+
+
+
+              
                  
       
                 </div>
@@ -269,20 +368,31 @@
 @section('js')
 <script>
     $(document).ready(function() {
+
+if ($('#countries').val() !== '53') {
+// Si no tiene el valor 53 seleccionado, deshabilita el select de ciudades
+$('#cities').prop('disabled', true);
+}
+
         $('#countries').change(function() {
          var selectedValue = $(this).val();
           if (selectedValue != 53) {
-            $('#cities').prop('disabled', true); // Deshabilitar el select de ciudades
-            } else {
-            $('#cities').prop('disabled', false); // Habilitar el select de ciudades
-            }
+                $('#cities').prop('disabled', true); // Deshabilitar el select de ciudades
+                $('#cities').val('');
+                $('#townships').prop('disabled', true); // Deshabilitar el select de ciudades
+                $('#townships').empty();
+                $('#townships').append('<option value="">--Select township--</option>');
+                
+                } else {
+                $('#cities').prop('disabled', false); // Habilitar el select de ciudades
+                $('#townships').prop('disabled', false); // Habilitar el select de ciudades
+                }
             });
 
 
             $('#cities').change(function() {
             var cityId = $(this).val();
-            console.log('Ciudad seleccionada: ' + cityId);
-
+            $('#zip_code').val('');
             if (cityId) {
             // Habilitar el select de townships
             $('#townships').prop('disabled', false);
@@ -293,13 +403,13 @@
 
             // Realizar la solicitud AJAX para obtener los townships
             $.ajax({
-            url: '{{ url("api/get-townships-by-city") }}/' + cityId,
+            url: route('api.get-townships-by-city',cityId),
             type: 'GET',
             dataType: 'json',
-            success: function(data) {
+          success: function(data) {
             // Agregar las opciones de townships al select
             $.each(data, function(key, value) {
-            $('#townships').append('<option value="' + key + '">' + value + '</option>');
+            $('#townships').append('<option value="' + key + '" data-zip-code="' + value.zip_code + '">' + value.name + '</option>');
             });
             },
             error: function(xhr, status, error) {
@@ -312,6 +422,14 @@
             $('#townships').empty();
             $('#townships').append('<option value="">--Select township--</option>');
             }
+            });
+
+            $('#townships').change(function() {
+                $('#zip_code').val('');
+            var selectedOption = $(this).find('option:selected');
+            var zipCode = selectedOption.data('zip-code');            
+            
+            $('#zip_code').val(zipCode);
             });
 
     });

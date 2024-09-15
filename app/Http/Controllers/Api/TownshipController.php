@@ -67,7 +67,15 @@ class TownshipController extends Controller
     }
 
     public function TownshipsByCity($cityId) {
-        $townships = Township::where('city_id', $cityId)->pluck('name', 'id'); 
+        $townships = Township::where('city_id', $cityId)
+        ->select('id', 'name', 'zip_code')
+        ->get()
+        ->mapWithKeys(function ($township) {
+            return [$township->id => [
+                'name' => $township->name,
+                'zip_code' => $township->zip_code,
+            ]];
+        });
 
         return response()->json($townships);
     }

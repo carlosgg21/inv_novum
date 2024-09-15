@@ -20,10 +20,10 @@
     </x-inputs.group>
 
     <div class="col-sm-12 col-lg-2 ">
-        <label for="payemntType">Payment Method </label>
+        <label for="payemntType">Payment Method <span class="required-field">*</span></label>
         <div>
-            <select id="paymentMethod" name="payment_method_id" class="form-control form-control-sm">
-                <option >--Select Option--</option>
+            <select id="paymentMethod" name="payment_method_id" class="form-control form-control-sm" required>
+                <option value="">--Select Option--</option>
                 @foreach ($paymentMethods as $key => $paymentMethod)
                  <option value="{{ $key }}" {{ $editing ? ($customer->payment_method_id == $key ? 'selected' : '') : '' }}> {{ $paymentMethod }}</option>
                 @endforeach
@@ -31,10 +31,10 @@
         </div>
     </div>
     <div class="col-sm-12 col-lg-3 ">
-            <label for="payemntType">Payment Term </label>
+            <label for="payemntType">Payment Term <span class="required-field">*</span></label>
             <div>
-                <select id="paymentTerm" name="payment_term_id" class="form-control form-control-sm">
-                    <option>--Select Option--</option>
+                <select id="paymentTerm" name="payment_term_id" class="form-control form-control-sm" required>
+                    <option value="">--Select Option--</option>
                     @foreach ($paymentTerms as $paymentTerm)             
                     <option value="{{ $paymentTerm->id }}" {{ $editing ?($customer->payment_term_id == $paymentTerm->id ? 'selected' : ''): '' }}> {{ $paymentTerm->description }}
                     </option>

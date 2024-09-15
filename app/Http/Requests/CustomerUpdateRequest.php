@@ -23,6 +23,11 @@ class CustomerUpdateRequest extends FormRequest
             'name' => ['required', 'max:255', 'string'],
             'phone' => ['required', 'max:255', 'string'],
             'email' => ['required', 'email'],
+            'payment_method_id' => ['required'],
+            'payment_term_id'   => ['required'],
+            'notes'             => ['nullable', 'string'],
+            // 'payment_method_id' => 'exists:payment_methods,id',
+            // 'payment_term_id' => 'exists:payment_terms,id'
             // 'address' => ['required', 'max:255', 'string'],
         ];
     }

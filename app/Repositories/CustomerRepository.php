@@ -3,14 +3,19 @@
 namespace App\Repositories;
 
 use App\Models\Customer;
+use App\Repositories\AddressRepository;
+use Illuminate\Support\Facades\DB;
+
 
 class CustomerRepository
 {
 	protected $customer;
+	protected $addressRepository;
 
-
-	public function __construct(Customer $customer) {
+	public function __construct(Customer $customer, AddressRepository $addressRepository)
+	{
 		$this->customer = $customer;
+		$this->addressRepository = $addressRepository;
 	}
 
 
@@ -33,37 +38,29 @@ class CustomerRepository
 	}
 
 
-	public function entryCustomer($data)
+	public function entryCustomer($customer, $request)
 	{
+		// dd($request->input());
+		// dump($request->only(['name', 'phone', 'email', 'payment_method_id', 'payment_term_id', 'notes']));
+		$accounts[] = $request->only(['banks', 'currencies', 'number', 'default']);
+		$contacs[] = $request->only(['contact_id', 'identifications','names', 'lasts_name', 'charges', 'phones', 'emails']);
+
+		dd($contacs);
+	
 		try {
-			$productId = $data['product_id'];
-			$product = Product::findOrFail($productId);
 
-			$entryCostPrice = isset($data['cost_price']) ? (float) $data['cost_price'] : 0.0;
-			$currentCostPrice = $product->cost_price;
-
-			if ($currentCostPrice !== $entryCostPrice) {
-				$updatedCostPrice = $this->calculateNewCost($product, $data);
-				$product->cost_price = $updatedCostPrice;
-			}
-
-			$entrySellPrice = isset($data['sell_price']) ? (float) $data['sell_price'] : 0.0;
-			$currentUnitPrice = $product->unit_price;
-
-			if ($currentUnitPrice !== $entrySellPrice) {
-				$updatedUnitPrice = $this->calculateNewUnitPrice($product, $data);
-				$product->unit_price = $updatedUnitPrice;
-			}
-
-			// Inicia la transacción
-			DB::transaction(function () use ($product, $data) {
-				$product->qty = $this->calculateUpdatedQuantity($product, $data);
-				$product->save();
-
-				return Inventory::create($data);
+			DB::transaction(function () use ($customer, $request) {
+				//insert in customer
+				$customer->update($request->only(['name', 'phone', 'email', 'payment_method_id', 'payment_term_id', 'notes']));
+				//insert in address polimofic table 
+				$addresData[] = $request->only(['country_id', 'city_id', 'township_id', 'address', 'zip_code', 'address_id']);
+				$this->addressRepository->updateOrCreate($addresData ?? [], $customer);
+                
+				
+			
 			});
 
-			return  Inventory::latest()->first();
+// 			// return  Inventory::latest()->first();
 		} catch (\Exception $e) {
 			throw new \Exception($e->getMessage());
 		}

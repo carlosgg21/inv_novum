@@ -80,7 +80,7 @@ class CustomerController extends Controller
     public function store(CustomerStoreRequest $request): RedirectResponse
     {
         $this->authorize('create', Customer::class);
-
+    
         $validated = $request->validated();
 
         $customer = Customer::create($validated);
@@ -110,11 +110,12 @@ class CustomerController extends Controller
         $banks = Bank::pluck('name', 'id');
         $customer = $this->customerRepository->findCustomer($customer->id);
         $countries = Country::pluck('name', 'id');;
-        $townships = Township::pluck('name', 'id');
+        $townships = $customer->getDefaultAddress()?->city_id ? Township::where('city_id', $customer->getDefaultAddress()->city_id)->pluck('name', 'id') : [];
         $cities = City::pluck('name', 'code');
         $paymentTerms = PaymentTerm::get(['id', 'description', 'day']);
         $paymentMethods = PaymentMethod::pluck('name', 'id');
-    //   dd($customer->getDefaultAddress()->city->name);
+    //   dd($customer->getCustomerContacts());
+
         return view('app.customers.edit', compact(
                                                   'customer', 
                                                   'currencies', 
@@ -130,14 +131,15 @@ class CustomerController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(
-        CustomerUpdateRequest $request,
-        Customer $customer
-    ): RedirectResponse {
+    public function update(CustomerUpdateRequest $request,Customer $customer): RedirectResponse {
         $this->authorize('update', $customer);
 
-        dd($request->input());
+        // dd($request->input());
         $validated = $request->validated();
+        // dd($validated);
+             $this->customerRepository->entryCustomer($customer, $request);
+        dd('here');
+
 
         $customer->update($validated);
 

@@ -16,7 +16,7 @@ class Customer extends Model
     use SoftDeletes;
     use HasAddresses;
 
-    protected $fillable = ['name', 'phone', 'email', 'notes'];
+    protected $fillable = ['name', 'phone', 'email', 'notes', 'payment_term_id', 'payment_method_id'];
 
     protected $searchableFields = ['*'];
 
@@ -60,14 +60,18 @@ class Customer extends Model
         return $this->contacts()->where('default', true)->first();
     }
 
-    public function getAllContacts()
+    public function getCustomerContacts()
     {
         return $this->contacts;
     }
     
     public function getDefaultAddress()
     {
-        return $this->addresses()->first(); 
+        $defaultAddress = $this->addresses()->first();
+        if ($defaultAddress) {
+            $defaultAddress->load(['country', 'city', 'township']); 
+        }
+        return $defaultAddress;
     }
 
    

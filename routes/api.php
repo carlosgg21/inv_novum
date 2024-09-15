@@ -98,7 +98,8 @@ use App\Http\Controllers\Api\PurchaseOrderPurchaseOrderItemsController;
 */
 
 Route::get('/get-product-details/{productId}', [ProductController::class, 'getProductDetails']);
-Route::get('/get-townships-by-city/{cityId}', [TownshipController::class, 'TownshipsByCity']);
+Route::get('/get-townships-by-city/{cityId}', [TownshipController::class, 'TownshipsByCity'])
+->name('api.get-townships-by-city');
 
 Route::post('/login', [AuthController::class, 'login'])->name('api.login');
 
